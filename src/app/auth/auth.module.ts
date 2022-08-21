@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BlockUIModule } from 'ng-block-ui';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,10 @@ import { SignupComponent } from './signup/signup.component';
   ],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BlockUIModule.forRoot()
   ]
 })
 export class AuthModule { }

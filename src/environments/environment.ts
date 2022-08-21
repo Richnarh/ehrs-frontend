@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseApi: 'api/v1',
+  endpoint: 'http://localhost:8080/ehrs/api/v1',
+  lookupEndpoint: 'http://localhost:8080/ehrs/api/v1/data'
 };
 
 /*

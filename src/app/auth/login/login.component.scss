@@ -5,7 +5,9 @@
     // background-color: #e9ecef;
     font-family: "Asap", sans-serif;
   }
-  
+  .block-ui__element {
+    position: inherit !important;
+}
   .login {
     overflow: hidden;
     background-color: white;

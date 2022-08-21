@@ -1,7 +1,21 @@
 <div class="body">
-    <form class="login">
-            <input type="text" required="true" placeholder="Email"/>
-            <input type="password" required="true" placeholder="Password"/>
+    <form [formGroup]="signupForm" class="login" (ngSubmit)="signup()">
+        <h5 class="mb-3">Sign up here! - EHRS</h5>
+            <input class="form-control" type="text" formControlName="emailAddress" required="true" placeholder="Email Address"/>
+            <small class="text-danger font-weight-bold">{{emailValidator()}}</small>
+
+            <input class="form-control mt-3" type="text" formControlName="phoneNumber" required="true" placeholder="Phone Number"/>
+            <small class="text-danger font-weight-bold">{{phoneNumberValidator()}}</small>
+            
+            <p class="text-muted">Title</p>
+            <select class="form-control" formControlName="title">
+                <option *ngFor="let title of titleList" value="{{title?.id}}">{{title?.itemName}}</option>
+            </select>
+            <small class="text-danger font-weight-bold">{{titleValidator()}}</small>
+
+            <input class="form-control my-3" type="password" formControlName="password" required="true" placeholder="Password"/>
+            <small class="text-danger font-weight-bold">{{passwordValidator()}}</small>
+
             <button>Sign Up</button>
     </form>
 </div>

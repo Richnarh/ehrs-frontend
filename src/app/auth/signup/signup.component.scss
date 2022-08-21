@@ -4,6 +4,7 @@
     font-family: "Asap", sans-serif;
   }
   
+  
   .login {
     overflow: hidden;
     background-color: white;
@@ -50,17 +51,17 @@
     -moz-animation: wawes 7s infinite;
     animation: wawes 7s infinite;
   }
-  .login > input {
-    font-family: "Asap", sans-serif;
-    display: block;
-    border-radius: 5px;
-    font-size: 16px;
-    background: white;
-    width: 100%;
-    border: 0;
-    padding: 10px 10px;
-    margin: 15px -10px;
-  }
+  // .login > input {
+  //   font-family: "Asap", sans-serif;
+  //   display: block;
+  //   border-radius: 5px;
+  //   font-size: 16px;
+  //   background: white;
+  //   width: 100%;
+  //   // border: 0;
+  //   padding: 10px 10px;
+  //   margin: 15px -10px;
+  // }
   .login > button {
     font-family: "Asap", sans-serif;
     cursor: pointer;
