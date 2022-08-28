@@ -5,17 +5,20 @@
             <small class="text-danger font-weight-bold">{{emailValidator()}}</small>
 
             <input class="form-control mt-3" type="text" formControlName="phoneNumber" required="true" placeholder="Phone Number"/>
-            <small class="text-danger font-weight-bold">{{phoneNumberValidator()}}</small>
+            <small class="text-danger">{{phoneNumberValidator()}}</small>
             
-            <p class="text-muted">Title</p>
+            <label class="text-muted">Title</label>
             <select class="form-control" formControlName="title">
+                <option selected="" disabled="true">Choose...</option>
                 <option *ngFor="let title of titleList" value="{{title?.id}}">{{title?.itemName}}</option>
             </select>
-            <small class="text-danger font-weight-bold">{{titleValidator()}}</small>
+            <small class="text-danger">{{titleValidator()}}</small>
 
             <input class="form-control my-3" type="password" formControlName="password" required="true" placeholder="Password"/>
-            <small class="text-danger font-weight-bold">{{passwordValidator()}}</small>
+            <small class="text-danger">{{passwordValidator()}}</small>
 
             <button>Sign Up</button>
+
+            <a class="btn btn-sm btn-primary" routerLink="/auth/login">Login</a>
     </form>
 </div>

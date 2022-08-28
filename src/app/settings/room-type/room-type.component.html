@@ -1,0 +1,31 @@
+<form [formGroup]="roomTypeForm" (ngSubmit)="saveRoomType()">
+    <div class="row mb-3">
+        <label for="inputText" class="col-sm-4 col-form-label">Room Name</label>
+        <div class="col-sm-8">
+            <input formControlName="roomName" type="text" class="form-control">
+        </div>
+    </div>
+      <button type="submit" class="btn btn-success btn-sm mx-2">Save Changes</button>
+      <button type="button" class="btn btn-light btn-sm" (click)="resetForm()">Clear Form</button>
+</form>
+<hr>
+<div class="row py-2">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Room Name</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let roomType of roomTypeList; let i = index">
+          <td scope="row">{{i+1}}</td>
+          <td>{{roomType.roomName}}</td>
+          <td>
+            <button class="btn btn-primary btn-sm mx-2" (click)="editRoomType(roomType)">Edit</button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteRoomType(roomType.id)">Delete</button>
+          </td>
+        </tr>
+    </table>
+  </div>

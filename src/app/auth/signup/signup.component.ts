@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { LookupItem } from 'src/app/payload/LookupItem';
+import { LookupItem } from 'src/app/payload/lookupItem';
 import { LookupService } from 'src/app/services/lookup.service';
 import { ToastService } from 'src/app/utils/toast-service';
 import { AuthService } from '../services/auth.service';
@@ -14,8 +14,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class SignupComponent implements OnInit {
 
-  jobRoleList:LookupItem[] | undefined;
-  titleList:LookupItem[] | undefined;
+  jobRoleList:LookupItem[];
+  titleList:LookupItem[];
   signupForm:FormGroup;
 
   constructor(private router:Router, private authService:AuthService, private toast:ToastService, private lookupService:LookupService, private fb:FormBuilder) { }

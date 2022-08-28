@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BlockUIModule } from 'ng-block-ui';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { BlockUIModule } from 'ng-block-ui';
     AuthRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     BlockUIModule.forRoot()
   ]
 })

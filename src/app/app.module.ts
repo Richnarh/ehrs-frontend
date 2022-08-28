@@ -10,13 +10,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AuthModule } from './auth/auth.module';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './services/auth.guard';
-import { AuthInterceptor } from './services/auth.interceptor';
-import { BlockUIModule } from 'ng-block-ui';
+import { RequestInterceptor } from './services/request.interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +26,7 @@ import { BlockUIModule } from 'ng-block-ui';
     AuthModule,
     ToastrModule.forRoot(), 
   ],
-  providers: [AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true}],
+  providers: [AuthGuard, {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

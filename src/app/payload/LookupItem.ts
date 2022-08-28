@@ -1,4 +1,4 @@
-export interface LookupItem{
+export class LookupItem{
     id:string;
     itemName:string;
 }

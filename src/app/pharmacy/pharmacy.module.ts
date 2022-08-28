@@ -5,12 +5,14 @@ import { PharmacyRoutingModule } from './pharmacy-routing.module';
 import { CustomerComponent } from './customer/customer.component';
 import { StockReceiptComponent } from './stock-receipt/stock-receipt.component';
 import { SharedModule } from '../shared/shared.module';
+import { PharmacyLayoutComponent } from '../layouts/pharmacy-layout/pharmacy-layout.component';
 
 
 @NgModule({
   declarations: [
     CustomerComponent,
-    StockReceiptComponent
+    StockReceiptComponent,
+    PharmacyLayoutComponent
   ],
   imports: [
     CommonModule,

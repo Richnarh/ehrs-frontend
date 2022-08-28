@@ -1,1 +1,158 @@
-<p>employee works!</p>
+<div class="col-md-12">
+  <div *ngIf="pageView.listView">
+    <div class="card">
+
+      <div class="card-body">
+
+        <div class="clearfix">
+          <div class="float-end mb-2" style="padding: 5px; border: 1px solid;">
+            <add-new-button (click)="initEmployee()" label="New Employee"></add-new-button>
+          </div>
+        </div>
+
+        <div class="row py-2">
+          <table class="tabe datatable">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Old Price</th>
+                <th scope="col">New Price</th>
+                <th scope="col">jobRoleId</th>
+                <th scope="col">Status</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let emp of employeeList; let i = index">
+                <td scope="row">{{i+1}}</td>
+                <td>{{emp.firstname}}</td>
+                <td>{{emp.lastname}}</td>
+                <td>{{4}}</td>
+                <td>{{5}}</td>
+                <td>{{6}}</td>
+                <td>{{7}}</td>
+                <td>{{8}}</td>
+                <td>{{9}}</td>
+                <td>{{10}}</td>
+
+                <td>
+                  <button class="btn btn-primary btn-sm mx-2">Edit</button>
+                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                </td>
+              </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="pageView.createView">
+    <div class="card">
+      <div class="card-body p-5">
+        <form class="row g-2" [formGroup]="employeeForm" (ngSubmit)="saveEmpoyee()">
+          <div class="col-md-4">
+            <label class="form-label">First Name <span class="text-danger">*</span></label>
+            <input formControlName="firstname" id="firstname" type="text" class="form-control">
+            <small *ngIf="field.firstname.invalid && field.firstname.touched" class="text-danger font-weight-bold"> * This field is required</small>
+          </div>
+
+          <div class="col-md-4">
+            <label>Middle Name</label>
+            <input formControlName="middlename" type="text" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label>Last Name <span class="text-danger">*</span></label>
+            <input formControlName="lastname" id="lastname" type="text" class="form-control">
+            <small class="text-danger" *ngIf="field.lastname.invalid && field.lastname.touched">
+               * This field is required
+            </small>
+          </div>
+
+          <div class="col-md-4">
+            <label>Job role <span class="text-danger">*</span></label>
+            <select class="form-control" formControlName='jobRoleId'>
+              <option selected disabled>Choose...</option>
+              <option *ngFor="let jobrole of jobRoleList " [value]="jobrole.id">{{jobrole.itemName}}</option>
+            </select>
+            <small class="text-danger" *ngIf="field.jobRoleId.invalid && field.jobRoleId.touched">
+               * This field is required
+            </small>
+          </div>
+
+          <div class="col-md-4">
+            <label for="title">Title<span class="text-danger">*</span></label>
+            <select class="form-control" formControlName="title" id="title">
+              <option *ngFor="let title of titleList" value="{{title?.id}}">{{title?.itemName}}</option>
+            </select>
+            <small class="text-danger" *ngIf="field.title.invalid && field.title.touched">
+               * This field is required
+            </small>
+          </div>
+
+          <div class="col-md-4">
+            <label>Department<span class="text-danger">*</span></label>
+            <select class="form-control" formControlName="departmentId">
+              <option *ngFor="let dept of departmentList" value="{{dept?.id}}">{{dept?.itemName}}</option>
+            </select>
+            <small class="text-danger" *ngIf="field.departmentId.invalid && field.departmentId.touched">
+               * This field is required
+            </small>
+          </div>
+          <div class="col-md-4">
+            <label>Id type<span class="text-danger">*</span></label>
+            <select class="form-control" formControlName="idType">
+              <option *ngFor="let idType of idTypeList" value="{{idType?.id}}">{{idType?.itemName}}</option>
+            </select>
+            <small class="text-danger" *ngIf="field.idType.invalid && field.idType.touched">
+               * This field is required
+            </small>
+          </div>
+          <div class="col-md-4">
+            <label>Id No.</label>
+            <input formControlName="idNumber" type="text" class="form-control">
+            <small class="text-danger" *ngIf="field.idNumber.invalid && field.idNumber.touched">
+              * This field is required
+           </small>
+          </div>
+          <div class="col-md-4">
+            <label>Email Address</label>
+            <input formControlName="emailAddress" type="text" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Phone Number <span class="text-danger">*</span></label>
+            <input formControlName="phoneNumber" id="phoneNumber" type="tel" class="form-control">
+            <small class="text-danger"
+              *ngIf="field.phoneNumber.invalid && field.phoneNumber.touched">
+               * This field is required
+            </small>
+          </div>
+
+          <div class="col-md-4">
+            <label>Address</label>
+            <input formControlName="address" type="text" class="form-control">
+          </div>
+
+          <div class="col-md-4">
+            <label>SSNIT No.</label>
+            <input formControlName="ssnitNo" type="text" class="form-control">
+          </div>
+          <div class="justify-content-center">
+            <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+          </div>
+
+        </form>
+
+        <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>

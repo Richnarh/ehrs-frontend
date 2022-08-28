@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
 import { LocalKeys } from 'src/app/utils/LocalKeys';
-import { AuthResponse } from '../payload/AuthResponse';
 
 @Injectable({
   providedIn: 'root'
