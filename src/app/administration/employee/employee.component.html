@@ -1,6 +1,6 @@
 <div class="col-md-12">
   <div *ngIf="pageView.listView">
-    <div class="card">
+    <div class="card card-height">
 
       <div class="card-body">
 
@@ -11,39 +11,50 @@
         </div>
 
         <div class="row py-2">
-          <table class="tabe datatable">
+          <table class="table table-bordered">
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Old Price</th>
-                <th scope="col">New Price</th>
-                <th scope="col">jobRoleId</th>
-                <th scope="col">Status</th>
-                <th scope="col">Start Date</th>
-                <th scope="col">End Date</th>
-                <th scope="col">Start Time</th>
-                <th scope="col">End Time</th>
-                <th scope="col">Description</th>
-                <th scope="col">Image</th>
+                <th scope="col">Title</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Middle Name</th>
+                <th scope="col">Other Name</th>
+                <th scope="col">Email Addres</th>
+                <th scope="col">Phone No.</th>
+                <th scope="col">Address</th>
+                <th scope="col">Id Type</th>
+                <th scope="col">Id No.</th>
+                <th scope="col">SSNIT No.</th>
+                <th scope="col">Dept.</th>
+                <th scope="col">Role</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let emp of employeeList; let i = index">
                 <td scope="row">{{i+1}}</td>
+                <td>{{emp.title}}</td>
                 <td>{{emp.firstname}}</td>
                 <td>{{emp.lastname}}</td>
-                <td>{{4}}</td>
-                <td>{{5}}</td>
-                <td>{{6}}</td>
-                <td>{{7}}</td>
-                <td>{{8}}</td>
-                <td>{{9}}</td>
-                <td>{{10}}</td>
-
+                <td>{{emp.middlename}}</td>
+                <td>{{emp.emailAddress}}</td>
+                <td>{{emp.phoneNumber}}</td>
+                <td>{{emp.address}}</td>
+                <td>{{emp.idType}}</td>
+                <td>{{emp.idNumber}}</td>
+                <td>{{emp.ssnitNo}}</td>
+                <td>{{emp.departmentName}}</td>
+                <td>{{emp.jobRole}}</td>
                 <td>
-                  <button class="btn btn-primary btn-sm mx-2">Edit</button>
-                  <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                  <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Choose...
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" type="button" (click)="editEmployee(emp)">Edit</a></li>
+                      <li><a class="dropdown-item text-danger" type="button" (click)="deleteEmployee(emp.id)">Delete</a></li>
+                    </ul>
+                  </div>
                 </td>
               </tr>
           </table>

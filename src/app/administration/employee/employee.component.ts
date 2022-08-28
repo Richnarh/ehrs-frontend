@@ -4,6 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
 import { LookupService } from 'src/app/services/lookup.service';
 import { PageView } from 'src/app/utils/page-view';
+import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 import { Employee } from '../payload/Employee';
 import { AdminService } from '../services/admin.service';
@@ -58,6 +59,24 @@ export class EmployeeComponent implements OnInit {
   async fetEmployees(){
     const result = await firstValueFrom(this.adminService.loadEmployees());
     this.employeeList = result.data;
+  }
+
+  editEmployee(empData:Employee){
+    this.employeeForm.patchValue({});
+    this.employeeForm.patchValue(empData);
+    this.pageView.resetToCreateView();
+  }
+
+  async deleteEmployee(employeeId:string){
+    const confirm = await SweetMessage.deleteConfirm();
+    if (!confirm.value) return;
+    const result = await firstValueFrom(this.adminService.deleteEmployee(employeeId));
+    if(result.success){
+      this.toast.success(result.message);
+      this.fetEmployees();
+    }else{
+      this.toast.error(result.message);
+    }
   }
 
   async initLookups(){
