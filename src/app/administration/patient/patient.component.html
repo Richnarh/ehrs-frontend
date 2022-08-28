@@ -1,1 +1,143 @@
-<p>patient works!</p>
+<div class="col-md-12">
+    <div *ngIf="pageView.listView">
+      <div class="card card-height">
+  
+        <div class="card-body">
+  
+          <div class="clearfix">
+            <div class="float-end mb-2" style="padding: 5px; border: 1px solid;">
+              <add-new-button (click)="initPatient()" label="New Patient"></add-new-button>
+            </div>
+          </div>
+  
+          <div class="row py-2">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">OPD Number</th>
+                  <th scope="col">Gender</th>
+                  <th scope="col">Patient Category</th>
+                  <th scope="col">Age</th>
+                  <th scope="col">Id Type</th>
+                  <th scope="col">Id No.</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let patient of patientList; let i = index">
+                  <td scope="row">{{i+1}}</td>
+                  <td>{{patient.fullname}}</td>
+                  <td>{{patient.opdNumber}}</td>
+                  <td>{{patient.gender}}</td>
+                  <td>{{patient.patientCategory}}</td>
+                  <td>{{patient.age}}</td>
+                  <td>{{patient.idType}}</td>
+                  <td>{{patient.idNumber}}</td>
+                  <td>{{patient.address}}</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Choose...
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" type="button" (click)="editPatient(patient)">Edit</a></li>
+                        <li><a class="dropdown-item text-danger" type="button" (click)="deletePatient(patient.id)">Delete</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="pageView.createView">
+      <div class="card">
+        <div class="card-body p-5">
+          <form class="row g-2" [formGroup]="patientForm" (ngSubmit)="savePatient()">
+            <div class="col-md-4">
+              <label class="form-label">Full Name<span class="text-danger">*</span></label>
+              <input formControlName="fullname" id="fullname" type="text" class="form-control">
+              <small *ngIf="field.fullname.invalid && field.fullname.touched" class="text-danger font-weight-bold"> * This field is required</small>
+            </div>
+  
+            <div class="col-md-4">
+              <label>OPD No.<span class="text-danger">*</span></label>
+              <input formControlName="opdNumber" type="text" class="form-control">
+              <small *ngIf="field.opdNumber.invalid && field.opdNumber.touched" class="text-danger font-weight-bold"> * This field is required</small>
+            </div>
+  
+            <div class="col-md-4">
+              <label>Age<span class="text-danger">*</span></label>
+              <input formControlName="age" id="gender" type="text" class="form-control">
+              <small class="text-danger" *ngIf="field.age.invalid && field.age.touched">
+                 * This field is required
+              </small>
+            </div>
+  
+            <div class="col-md-4">
+              <label>Phone No.<span class="text-danger">*</span></label>
+              <input formControlName="phoneNumber" id="phoneNumber" type="text" class="form-control">
+              <small class="text-danger" *ngIf="field.phoneNumber.invalid && field.phoneNumber.touched">
+                 * This field is required
+              </small>
+            </div>
+  
+            <div class="col-md-4">
+              <label for="gender">Gender<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="gender" id="gender">
+                <option *ngFor="let gender of genderList" value="{{gender?.id}}">{{gender?.itemName}}</option>
+              </select>
+              <small class="text-danger" *ngIf="field.gender.invalid && field.gender.touched">
+                 * This field is required
+              </small>
+            </div>
+  
+            <div class="col-md-4">
+              <label for="gender">Patient Category<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="patientCategory" id="gender">
+                <option *ngFor="let pc of patientCategoryList" value="{{pc?.id}}">{{pc?.itemName}}</option>
+              </select>
+              <small class="text-danger" *ngIf="field.patientCategory.invalid && field.patientCategory.touched">
+                 * This field is required
+              </small>
+            </div>
+
+            <div class="col-md-4">
+              <label>Id type<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="idType">
+                <option *ngFor="let idType of idTypeList" value="{{idType?.id}}">{{idType?.itemName}}</option>
+              </select>
+              <small class="text-danger" *ngIf="field.idType.invalid && field.idType.touched">
+                 * This field is required
+              </small>
+            </div>
+            <div class="col-md-4">
+              <label>Id No.<span class="text-danger">*</span></label>
+              <input formControlName="idNumber" type="text" class="form-control">
+              <small class="text-danger" *ngIf="field.idNumber.invalid && field.idNumber.touched">
+                * This field is required
+             </small>
+            </div>
+  
+            <div class="col-md-4">
+              <label>Address</label>
+              <input formControlName="address" type="text" class="form-control">
+            </div>
+
+            <div class="justify-content-center">
+              <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+            </div>
+  
+          </form>
+  
+          <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
+        </div>
+      </div>
+  
+    </div>
+  
+  </div>

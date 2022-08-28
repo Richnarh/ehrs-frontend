@@ -16,3 +16,14 @@ export class Employee extends Base{
     departmentName:string;
     departmentId:string;
 }
+
+export class Patient extends Base{
+    fullname:string;
+    opdNumber:string;
+    gender:string;
+    patientCategory:string;
+    age:number;
+    idType:string;
+    idNumber:string;
+    address:string;
+}

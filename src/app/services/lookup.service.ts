@@ -33,4 +33,10 @@ export class LookupService {
   idType():Observable<any>{
     return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/id-type`,)
   }
+  gender():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/gender`,)
+  }
+  patientCategory():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/patient-category`,)
+  }
 }

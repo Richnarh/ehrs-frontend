@@ -6,7 +6,7 @@ import { LookupService } from 'src/app/services/lookup.service';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
-import { Employee } from '../payload/Employee';
+import { Employee } from '../payload/adminstration';
 import { AdminService } from '../services/admin.service';
 
 @Component({
@@ -91,8 +91,7 @@ export class EmployeeComponent implements OnInit {
     this.titleList = title.data;
   }
 
-  setupEmployeeForm()
-  {
+  setupEmployeeForm(){
     this.employeeForm = this.fb.group({
       id:null,
       title:[null, Validators.required],
