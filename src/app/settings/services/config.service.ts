@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Department, JobRole, Lab, Room, RoomType } from 'src/app/payload/config';
+import { Department, JobRole, Lab, LeaveType, Room, RoomType } from 'src/app/payload/config';
 import { ApiResponse } from 'src/app/utils/apiResponse';
 import { environment as env } from 'src/environments/environment';
 
@@ -66,6 +66,20 @@ export class ConfigService {
   }
   deleteRoomType(roomTypeId:string):Observable<any>{
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/room-type/${roomTypeId}`)
+  }
+
+  // Leave Type
+  saveLeaveType(leaveType: LeaveType):Observable<any>{
+    if(!leaveType.id)
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/leave-type`,leaveType);
+    else
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/leave-type`,leaveType);
+  }
+  loadLeaveType():Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/leave-type/list`);
+  }
+  deleteLeaveType(leaveTypeId:string):Observable<any>{
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/leave-type/${leaveTypeId}`)
   }
 
   // Room

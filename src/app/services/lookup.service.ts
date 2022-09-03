@@ -25,18 +25,39 @@ export class LookupService {
   roomType():Observable<any>{
     return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/room-type`,);
   }
+  room():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/room`,);
+  }
+  lab():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/lab`,);
+  }
+  labTest():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/labtest`,);
+  }
+  patient():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/patient`,);
+  }
+  clientType():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/client-type`,);
+  }
+  leaveType():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/leave-type`,);
+  }
 
   // ENUMS
   title():Observable<any>{
-    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/title`,)
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/title`,);
   }
   idType():Observable<any>{
-    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/id-type`,)
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/id-type`,);
   }
   gender():Observable<any>{
-    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/gender`,)
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/gender`,);
   }
   patientCategory():Observable<any>{
-    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/patient-category`,)
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/patient-category`,);
+  }
+  leaveStatus():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/leave-status`,);
   }
 }

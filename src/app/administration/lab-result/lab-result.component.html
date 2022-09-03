@@ -1,1 +1,89 @@
-<p>lab-result works!</p>
+<div class="col-md-12">
+    <div *ngIf="pageView.listView">
+      <div class="card card-height">
+  
+        <div class="card-body">
+  
+          <div class="clearfix">
+            <div class="float-end mb-2" style="padding: 5px; border: 1px solid;">
+              <add-new-button (click)="initiateLabResult()" label="New Lab Result"></add-new-button>
+            </div>
+          </div>
+  
+          <div class="row py-2">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Patient</th>
+                  <th scope="col">Lab Test</th>
+                  <th scope="col">Test Result</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let labResult of labResultList; let i = index">
+                  <td scope="row">{{i+1}}</td>
+                  <td>{{labResult.patientName}}</td>
+                  <td>{{labResult.labTest}}</td>
+                  <td>{{labResult.testResult}}</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Choose...
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" type="button" (click)="editLabResult(labResult)">Edit</a></li>
+                        <li><a class="dropdown-item text-danger" type="button" (click)="deleteLabResult(labResult.id)">Delete</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="pageView.createView">
+      <div class="card">
+        <div class="card-body p-5">
+          <form class="row g-2" [formGroup]="labResultForm" (ngSubmit)="saveLabResult()">
+                  
+            <div class="col-md-4">
+              <label for="patientId">Patient<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="patientId" id="patientId">
+                <option *ngFor="let patient of patientList" value="{{patient?.id}}">{{patient?.itemName}}</option>
+              </select>
+              <small class="text-danger" *ngIf="field.patientId.invalid && field.patientId.touched">
+                 * This field is required
+              </small>
+            </div>
+  
+            <div class="col-md-4">
+              <label for="labTestId">Lab Test<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="labTestId" id="labTestId">
+                <option *ngFor="let labTest of labTestList" value="{{labTest?.id}}">{{labTest?.itemName}}</option>
+              </select>
+              <small class="text-danger" *ngIf="field.labTestId.invalid && field.labTestId.touched">
+                 * This field is required
+              </small>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Test Result</label>
+                <textarea formControlName="testResult" class="form-control"></textarea>
+              </div>
+            <div class="justify-content-center">
+              <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+            </div>
+  
+          </form>
+  
+          <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
+        </div>
+      </div>
+  
+    </div>
+  
+  </div>

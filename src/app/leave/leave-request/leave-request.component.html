@@ -1,1 +1,123 @@
-<p>leave-request works!</p>
+<div class="col-md-12">
+    <div *ngIf="pageView.listView">
+      <div class="card card-height">
+  
+        <div class="card-body">
+  
+          <div class="clearfix">
+            <div class="float-end mb-2" style="padding: 5px; border: 1px solid;">
+              <add-new-button (click)="initiateLeaveReq()" label="New Leave Request"></add-new-button>
+            </div>
+          </div>
+  
+          <div class="row py-2">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Leave Type</th>
+                  <th scope="col">Department</th>
+                  <th scope="col">From</th>
+                  <th scope="col">To</th>
+                  <th scope="col">Leave Status</th>
+                  <th scope="col">Days</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let leaveRequest of leaveRequestList; let i = index">
+                  <td scope="row">{{i+1}}</td>
+                  <td>{{leaveRequest.leaveTypeName}}</td>
+                  <td>{{leaveRequest.departmentName}}</td>
+                  <td>{{leaveRequest.periodFrom}}</td>
+                  <td>{{leaveRequest.periodTo}}</td>
+                  <td>{{leaveRequest.leaveStatus}}</td>
+                  <td>{{leaveRequest.totalLeaveDays}}</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Choose...
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" type="button" (click)="editLeaveRequest(leaveRequest)">Edit</a></li>
+                        <li><a class="dropdown-item text-danger" type="button" (click)="deleteLeaveRequest(leaveRequest.id)">Delete</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="pageView.createView">
+      <div class="card">
+        <div class="card-body p-5">
+          <form class="row g-2" [formGroup]="leaveRequestForm" (ngSubmit)="saveLeaveRequest()">
+                  
+            <div class="col-md-4">
+              <label for="leaveTypeId">Leave type<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="leaveTypeId" id="leaveTypeId">
+                <option *ngFor="let leaveType of leaveTypeList" value="{{leaveType?.id}}">{{leaveType?.itemName}}</option>
+              </select>
+              <small class="text-danger" *ngIf="field.leaveTypeId.invalid && field.leaveTypeId.touched">
+                 * This field is required
+              </small>
+            </div>
+            <div class="col-md-4">
+              <label for="leaveStatus">Leave status<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="leaveStatus" id="leaveStatus">
+                <option *ngFor="let status of leaveStatusList" value="{{status?.id}}">{{status?.itemName}}</option>
+              </select>
+              <small class="text-danger" *ngIf="field.leaveStatus.invalid && field.leaveStatus.touched">
+                 * This field is required
+              </small>
+            </div>
+                  
+            <div class="col-md-4">
+              <label for="departmentId">Dept.<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="departmentId" id="departmentId">
+                <option *ngFor="let dept of departmentList" value="{{dept?.id}}">{{dept?.itemName}}</option>
+              </select>
+              <small class="text-danger" *ngIf="field.departmentId.invalid && field.departmentId.touched">
+                 * This field is required
+              </small>
+            </div>
+  
+            <div class="col-md-4">
+              <label>Period from<span class="text-danger">*</span></label>
+              <input type="date" class="form-control" formControlName="periodFrom">
+              <small class="text-danger" *ngIf="field.periodFrom.invalid && field.periodFrom.touched">
+                * This field is required
+             </small>
+            </div>
+            <div class="col-md-4">
+              <label>Period to<span class="text-danger">*</span></label>
+              <input type="date" class="form-control" formControlName="periodTo">
+              <small class="text-danger" *ngIf="field.periodTo.invalid && field.periodTo.touched">
+                * This field is required
+             </small>
+            </div>
+
+            <div class="col-md-4">
+                <label>No. of days</label>
+                <input type="text" class="form-control" formControlName="totalLeaveDays">
+              </div>
+            <div class="col-md-4">
+                <label>Comment</label>
+                <textarea class="form-control" formControlName="comment"></textarea>
+              </div>
+            <div class="justify-content-center">
+              <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+            </div>
+  
+          </form>
+  
+          <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
+        </div>
+      </div>
+  
+    </div>
+  
+  </div>

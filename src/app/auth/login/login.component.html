@@ -1,6 +1,7 @@
 <div class="mx-auto">
     <div class="login-body" *blockUI="'loading'">
         <form [formGroup]="loginForm" class="login" (ngSubmit)="loginSubmit()">
+            <h5 class="mb-3">Sign in here! - EHRS</h5>
             <input type="text" formControlName="emailAddress" required="true" placeholder="Email"/>
             <small class="text-danger font-weight-bold">{{emailValidator()}}</small>
             

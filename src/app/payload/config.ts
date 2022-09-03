@@ -1,4 +1,4 @@
-import { Base } from "./Base";
+import { Base } from "./base";
 
 export class Department extends Base{
     departmentCode:string;
@@ -24,4 +24,8 @@ export class Room extends Base{
    roomTypeName:string;
    roomTypeId:string;
    description:string;
+}
+export class LeaveType extends Base{
+    leaveName:string;
+    description:string;
 }

@@ -18,7 +18,7 @@ export class RequestInterceptor implements HttpInterceptor{
     {
         const token = this.storage.getLocalObject(LocalKeys.SessionId);
         let requestClone = req.clone();
-        console.log('token: ', token);
+        // console.log('token: ', token);
         if(token){
             const currentUser = this.storage.getLocalObject(LocalKeys.CurrenUser);
 
