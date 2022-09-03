@@ -1,1 +1,105 @@
-<p>special-leave works!</p>
+<div class="col-md-12">
+    <div *ngIf="pageView.listView">
+      <div class="card card-height">
+  
+        <div class="card-body">
+  
+          <div class="clearfix">
+            <div class="float-end mb-2" style="padding: 5px; border: 1px solid;">
+              <add-new-button (click)="initiateSpecialLeave()" label="New Special Leave"></add-new-button>
+            </div>
+          </div>
+  
+          <div class="row py-2">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Days</th>
+                  <th scope="col">Leave type</th>
+                  <th scope="col">Purpose</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let special of specialLeaveList; let i = index">
+                  <td scope="row">{{i+1}}</td>
+                  <td>{{special.employeeName}}</td>
+                  <td>{{special.maxNumberOfDays}}</td>
+                  <td>{{special.leaveTypeName}}</td>
+                  <td>{{special.purpose}}</td>
+                  <td>{{special.description}}</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Choose...
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" type="button" (click)="editSpecialLeave(special)">Edit</a></li>
+                        <li><a class="dropdown-item text-danger" type="button" (click)="deleteSpecialLeave(special.id)">Delete</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="pageView.createView">
+      <div class="card">
+        <div class="card-body p-5">
+          <form class="row g-2" [formGroup]="specialLeaveForm" (ngSubmit)="saveSpecialLeave()">
+                  
+            <div class="col-md-4">
+              <label for="employeeId">Employee<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="employeeId" id="employeeId">
+                <option *ngFor="let emp of employeeList" value="{{emp?.id}}">{{emp?.itemName}}</option>
+              </select>
+              <small class="text-danger" *ngIf="field.employeeId.invalid && field.employeeId.touched">
+                 * This field is required
+              </small>
+            </div>
+            <div class="col-md-4">
+              <label for="leaveTypeId">Leave type<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="leaveTypeId" id="leaveTypeId">
+                <option *ngFor="let type of leaveTypeList" value="{{type?.id}}">{{type?.itemName}}</option>
+              </select>
+              <small class="text-danger" *ngIf="field.leaveTypeId.invalid && field.leaveTypeId.touched">
+                 * This field is required
+              </small>
+            </div>
+  
+            <div class="col-md-4">
+              <label>No. of days<span class="text-danger">*</span></label>
+              <input type="text" class="form-control" formControlName="maxNumberOfDays">
+              <small class="text-danger" *ngIf="field.maxNumberOfDays.invalid && field.maxNumberOfDays.touched">
+                * This field is required
+             </small>
+            </div>
+            
+            <div class="col-md-4">
+                <label>Purpose</label>
+                <textarea class="form-control" formControlName="purpose"></textarea>
+            </div>
+            
+            <div class="col-md-4">
+                <label>Description</label>
+                <textarea class="form-control" formControlName="description"></textarea>
+            </div>
+            <div class="justify-content-center">
+              <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+            </div>
+  
+          </form>
+  
+          <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
+        </div>
+      </div>
+  
+    </div>
+  
+  </div>

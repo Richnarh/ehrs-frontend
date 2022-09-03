@@ -11,3 +11,12 @@ export class LeaveRequest extends Base{
     totalLeaveDays:number;
     leaveStatus:string;
 }
+export class SpecialLeave extends Base{
+    employeeName:string;
+    employeeId:string;
+    maxNumberOfDays:number;
+    leaveTypeName:string;
+    leaveTypeId:string;
+    purpose:string;
+    description:string;
+}
