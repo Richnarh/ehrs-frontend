@@ -1,0 +1,52 @@
+<div class="modal fade" id="assignDr" tabindex="-1" data-bs-backdrop="false" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Assign {{selectedPatient?.fullname}} to Dr</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="assignDrForm">
+        <div class="modal-body">
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">Select Dr</label>
+              <div class="col-sm-8">
+                <select class="form-select" aria-label="Dr Select" formControlName="hodId">
+                  <option selected="" disabled="true">Choose...</option>
+                  <option *ngFor="let emp of employeeList" value="{{emp?.id}}">{{emp?.itemName}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label class="col-sm-4 col-form-label">Noted</label>
+              <div class="col-sm-8">
+                <textarea formControlName="note" id="note" type="text" class="form-control"></textarea>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-success mx-3">Save Changes</button>
+        </form>
+        <hr>
+        <table class="table pt-3">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Date</th>
+              <th scope="col">Doctor</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dr of assignDrList; let i = index">
+              <td scope="row">{{i+1}}</td>
+              <td>{{dr.valueDate}}</td>
+              <td>{{dr.doctor}}</td>
+              <td>{{dr.note}}</td>
+              <td>
+                <button class="btn btn-primary btn-sm mx-2" (click)="editAssignDr(dr)">Edit</button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="deleteAssignDr(dr.id)">Delete</button>
+              </td>
+            </tr>
+        </table>
+      </div>
+    </div>
+  </div>

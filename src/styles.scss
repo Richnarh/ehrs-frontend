@@ -1,3 +1,12 @@
 *{
     font-size: 12px;
 }
+
+.dropdown-menu .dropdown-item {
+    font-size: 14px;
+    padding-top: 3px !important;
+    padding-right: 8px !important;
+    padding-bottom: 3px !important;
+    padding-left: 8px !important;
+    transition: 0.3s;
+}

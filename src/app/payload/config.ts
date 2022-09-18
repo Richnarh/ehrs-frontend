@@ -17,15 +17,27 @@ export class Lab extends Base{
     unitHeadId:string;
 }
 export class RoomType extends Base{
-    roomName:string;
+    wardName:string;
 }
 export class Room extends Base{
-   roomNo:string;
-   roomTypeName:string;
-   roomTypeId:string;
+   wardNo:string;
+   wardTypeName:string;
+   wardTypeId:string;
    description:string;
 }
 export class LeaveType extends Base{
     leaveName:string;
     description:string;
+}
+
+export class PatientVital extends Base{
+    patientName:string;
+    patientId:string;
+    vitalDate:string;
+    bp:string
+    temp:string
+    pulse:string
+    sp02:string;
+    weight:string;
+    comment:string;
 }

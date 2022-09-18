@@ -17,11 +17,13 @@
                   <th scope="col">#</th>
                   <th scope="col">Full Name</th>
                   <th scope="col">OPD Number</th>
+                  <th scope="col">Phone No.</th>
                   <th scope="col">Gender</th>
-                  <th scope="col">Patient Category</th>
+                  <th scope="col">Category</th>
                   <th scope="col">Age</th>
                   <th scope="col">Id Type</th>
                   <th scope="col">Id No.</th>
+                  <th scope="col">Address</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
@@ -30,6 +32,7 @@
                   <td scope="row">{{i+1}}</td>
                   <td>{{patient.fullname}}</td>
                   <td>{{patient.opdNumber}}</td>
+                  <td>{{patient.phoneNumber}}</td>
                   <td>{{patient.gender}}</td>
                   <td>{{patient.patientCategory}}</td>
                   <td>{{patient.age}}</td>
@@ -42,8 +45,10 @@
                         Choose...
                       </button>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" type="button" (click)="editPatient(patient)">Edit</a></li>
-                        <li><a class="dropdown-item text-danger" type="button" (click)="deletePatient(patient.id)">Delete</a></li>
+                        <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editPatient(patient)">Edit</a></li>
+                        <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="takeVitals(patient)">Vitals</a></li>
+                        <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="assignDr(patient)" data-bs-toggle="modal" data-bs-target="#assignDr">Assign to Dr</a></li>
+                        <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deletePatient(patient.id)">Delete</a></li>
                       </ul>
                     </div>
                   </td>
@@ -127,6 +132,10 @@
               <label>Address</label>
               <input formControlName="address" type="text" class="form-control">
             </div>
+            <div class="col-md-4">
+              <label>Occupation</label>
+              <input formControlName="occupation" type="text" class="form-control">
+            </div>
 
             <div class="justify-content-center">
               <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
@@ -140,4 +149,14 @@
   
     </div>
   
+    <div *ngIf="pageView.detailView">
+      <div class="card card-height">
+        <div class="card-body">
+          <app-patient-vital [selectedPatient]="selectedPatient" [vitalList]="vitalList"></app-patient-vital>
+          <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
+        </div>
+      </div>
+    </div>
+
+    <app-assign-dr [selectedPatient]="selectedPatient" [assignDrList]="assignDrList"></app-assign-dr>
   </div>

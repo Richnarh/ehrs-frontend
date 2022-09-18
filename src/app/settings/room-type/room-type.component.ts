@@ -67,7 +67,7 @@ export class RoomTypeComponent implements OnInit {
   setupRoomTypeForm(){
     this.roomTypeForm = this.fb.group({
       id:null,
-      roomName:[null, Validators.required],
+      wardName:[null, Validators.required],
     });
   }
   get field(){

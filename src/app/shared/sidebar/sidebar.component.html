@@ -20,16 +20,6 @@
             </a>
           </li>
           <li>
-            <a href="#" routerLink="/admin/patient">
-              <i class="bi bi-circle"></i><span>Patient</span>
-            </a>
-          </li>
-          <li>
-            <a href="#" routerLink="/admin/patient-adminission">
-              <i class="bi bi-circle"></i><span>Patient Admission</span>
-            </a>
-          </li>
-          <li>
             <a routerLink="/admin/lab">
               <i class="bi bi-circle"></i><span>Lab</span>
             </a>
@@ -40,6 +30,29 @@
             </a>
           </li>
          
+        </ul>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#patient-nav" data-bs-toggle="collapse" href="javascript:void(0)">
+          <i class="bi bi-menu-button-wide"></i><span>Patients</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="patient-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="#" routerLink="/patient/patient">
+              <i class="bi bi-circle"></i><span>Patient</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" routerLink="/patient/admission">
+              <i class="bi bi-circle"></i><span>Patient Admission</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="/patient/prescription">
+              <i class="bi bi-circle"></i><span>Prescription</span>
+            </a>
+          </li>         
         </ul>
       </li>
 

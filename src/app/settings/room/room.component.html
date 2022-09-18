@@ -1,20 +1,20 @@
 <form [formGroup]="roomForm" (ngSubmit)="saveRoom()">
     <div class="row mb-3">
-        <label for="inputText" class="col-sm-4 col-form-label">Room No. <span class="text-danger">*</span></label>
+        <label for="inputText" class="col-sm-4 col-form-label">Ward No. <span class="text-danger">*</span></label>
         <div class="col-sm-8">
-            <input formControlName="roomNo" type="text" class="form-control">
-            <small *ngIf="field.roomNo.invalid && field.roomNo.touched" class="text-danger font-weight-bold"> * This field is required</small>
+            <input formControlName="wardNo" type="text" class="form-control">
+            <small *ngIf="field.wardNo.invalid && field.wardNo.touched" class="text-danger font-weight-bold"> * This field is required</small>
         </div>
     </div>
     
     <div class="row mb-3">
-        <label class="col-sm-4 col-form-label">Select Room Type <span class="text-danger">*</span></label>
+        <label class="col-sm-4 col-form-label">Select Ward Type <span class="text-danger">*</span></label>
         <div class="col-sm-8">
-          <select class="form-select" aria-label="Employee Select" formControlName="roomTypeId">
+          <select class="form-select" aria-label="Ward Select" formControlName="wardTypeId">
             <option selected="" disabled="true">Choose...</option>
             <option *ngFor="let roomType of roomTypeList" value="{{roomType?.id}}">{{roomType?.itemName}}</option>
           </select>
-          <small *ngIf="field.roomTypeId.invalid && field.roomTypeId.touched" class="text-danger font-weight-bold"> * This field is required</small>
+          <small *ngIf="field.wardTypeId.invalid && field.wardTypeId.touched" class="text-danger font-weight-bold"> * This field is required</small>
         </div>
       </div>
       <div class="row mb-3">
@@ -32,8 +32,8 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Room No.</th>
-          <th scope="col">Room Type</th>
+          <th scope="col">Ward No.</th>
+          <th scope="col">Ward Type</th>
           <th scope="col">Description</th>
           <th scope="col">Action</th>
         </tr>
@@ -41,8 +41,8 @@
       <tbody>
         <tr *ngFor="let room of roomList; let i = index">
           <td scope="row">{{i+1}}</td>
-          <td>{{room.roomNo}}</td>
-          <td>{{room.roomTypeName}}</td>
+          <td>{{room.wardNo}}</td>
+          <td>{{room.wardTypeName}}</td>
           <td>{{room.description}}</td>
           <td>
             <button class="btn btn-primary btn-sm mx-2" (click)="editRoom(room)">Edit</button>

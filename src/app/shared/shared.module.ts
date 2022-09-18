@@ -7,6 +7,14 @@ import { RouterModule } from '@angular/router';
 import { AddNewButtonComponent } from './add-new-button/add-new-button.component';
 import { SaveButtonComponent } from './save-button/save-button.component';
 import { CloseButtonComponent } from './close-button/close-button.component';
+import { PatientVitalComponent } from './patient-vital/patient-vital.component';
+import { PatientSearchComponent } from './patient-search/patient-search.component';
+import { HistoryComponent } from './history/history.component';
+import { DiagnosisComponent } from './diagnosis/diagnosis.component';
+import { DispensaryComponent } from './dispensary/dispensary.component';
+import { IpdComponent } from './ipd/ipd.component';
+import { LabComponent } from './lab/lab.component';
+import { BillingComponent } from './billing/billing.component';
 
 
 
@@ -16,7 +24,15 @@ import { CloseButtonComponent } from './close-button/close-button.component';
     HeaderComponent,
     AddNewButtonComponent,
     SaveButtonComponent,
-    CloseButtonComponent
+    CloseButtonComponent,
+    PatientVitalComponent,
+    PatientSearchComponent,
+    HistoryComponent,
+    DiagnosisComponent,
+    DispensaryComponent,
+    IpdComponent,
+    LabComponent,
+    BillingComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +46,8 @@ import { CloseButtonComponent } from './close-button/close-button.component';
     AddNewButtonComponent,
     SaveButtonComponent,
     CloseButtonComponent,
+    PatientVitalComponent,
+    PatientSearchComponent,
     FormsModule,
     ReactiveFormsModule
   ]

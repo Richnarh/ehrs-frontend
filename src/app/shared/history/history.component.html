@@ -1,0 +1,43 @@
+<div>
+    <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">History</h5>
+    
+          <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100 active" id="diagnosis-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-diagnosis" type="button" role="tab" aria-controls="diagnosis" aria-selected="true">Diagnosis history</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="dispensary-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-dispensary" type="button" role="tab" aria-controls="dispensary" aria-selected="false">Dispensary history</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="IPD-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-IPD" type="button" role="tab" aria-controls="IPD" aria-selected="false">IPD history</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="lab-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-lab" type="button" role="lab" aria-controls="lab" aria-selected="false">Lab history</button>
+            </li>
+            <li class="nav-item flex-fill" role="presentation">
+              <button class="nav-link w-100" id="billing-tab" data-bs-toggle="tab" data-bs-target="#bordered-justified-billing" type="button" role="billing" aria-controls="billing" aria-selected="false">Billing History</button>
+            </li>
+          </ul>
+          <div class="tab-content pt-2" id="borderedTabJustifiedContent">
+            <div class="tab-pane fade active show" id="bordered-justified-diagnosis" role="tabpanel" aria-labelledby="diagnosis-tab">
+              <app-diagnosis></app-diagnosis>
+            </div>
+            <div class="tab-pane fade" id="bordered-justified-dispensary" role="tabpanel" aria-labelledby="dispensary-tab">
+              <app-dispensary></app-dispensary>
+            </div>
+            <div class="tab-pane fade" id="bordered-justified-IPD" role="tabpanel" aria-labelledby="IPD-tab">
+              <app-ipd></app-ipd>
+            </div>
+            <div class="tab-pane fade" id="bordered-justified-lab" role="tabpanel" aria-labelledby="lab-tab">
+              <app-lab></app-lab>
+            </div>
+            <div class="tab-pane fade" id="bordered-justified-billing" role="tabpanel" aria-labelledby="billing-tab">
+              <app-billing></app-billing>
+            </div>
+          </div>
+    
+        </div>
+      </div>
+</div>

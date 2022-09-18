@@ -1,0 +1,56 @@
+<div class="modal fade" id="patient-search" tabindex="-1" data-bs-backdrop="false" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Patient full history</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="pb-3 col-md-4">
+                <div class="search-bar">
+                    <div class="search-form d-flex align-items-center">
+                      <input type="text" [(ngModel)]="opdSearchField" name="query" placeholder="Search OPD Number">
+                      <button type="button" (click)="searchPatient()" title="Search"><i class="bi bi-search"></i></button>
+                    </div>
+                  </div>
+            </div>
+
+            <table class="table pt-3" *ngIf="patientSearchList.length > 0">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Occupation</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Address</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr (click)="loadPatientData(search)" class="table-row" *ngFor="let search of patientSearchList; let i = index">
+                    <td scope="row">{{i+1}}</td>
+                    <td>{{search.valueDate}}</td>
+                    <td>{{search.fullname  != '' ? search.fullname : '-'}}</td>
+                    <td>{{search.phoneNumber != '' ? search.phoneNumber : '-'}}</td>
+                    <td>{{search.occupation != '' ? search.occupation : '-'}}</td>
+                    <td>{{search.age}}</td>
+                    <td>{{search.address}}</td>
+                  </tr>
+              </table>
+              
+              <div *ngIf="isLoaded">
+                <app-history></app-history>
+              </div>
+
+              <div *ngIf="patientSearchList.length === 0" class="col-md-10 mx-auto" style="width: 27%">
+                <img src="../../../assets/img/nodata.png" alt="No Data">
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

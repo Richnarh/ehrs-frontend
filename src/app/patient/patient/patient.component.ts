@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
+import { PatientVital } from 'src/app/payload/config';
 import { LookupItem } from 'src/app/payload/lookupItem';
 import { LookupService } from 'src/app/services/lookup.service';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
-import { Patient } from '../payload/adminstration';
-import { AdminService } from '../services/admin.service';
+import { AssignDr, Patient } from '../payload/patient';
+import { PatientService } from '../services/patient.service';
 
 @Component({
   selector: 'app-patient',
@@ -17,13 +18,18 @@ import { AdminService } from '../services/admin.service';
 export class PatientComponent implements OnInit {
   pageView:PageView = PageView.listView();
 
+  selectedPatient:Patient;
+  vitalList:PatientVital[];
+  patientList:Patient[];
+  assignDrList:AssignDr[];
+
   genderList:LookupItem[];
   patientCategoryList:LookupItem[];
-  patientList:Patient[];
   idTypeList:LookupItem[];
 
   patientForm:FormGroup;
-  constructor(private readonly adminService:AdminService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
+  
+  constructor(private readonly patientService:PatientService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
 
   ngOnInit(): void {
     this.setupPatientForm();
@@ -40,6 +46,7 @@ export class PatientComponent implements OnInit {
     const gender = await firstValueFrom(this.lookupService.gender());
     const pc = await firstValueFrom(this.lookupService.patientCategory());
     const idType = await firstValueFrom(this.lookupService.idType());
+    const empData = await firstValueFrom(this.lookupService.employee());
 
     this.genderList = gender.data;
     this.patientCategoryList = pc.data;
@@ -52,7 +59,7 @@ export class PatientComponent implements OnInit {
       return;
     }
     let patientData = this.patientForm.value;
-    const result = await firstValueFrom(this.adminService.savePatient(patientData));
+    const result = await firstValueFrom(this.patientService.savePatient(patientData));
     if(result){
       this.toast.success(result.message);
       this.pageView.resetToListView();
@@ -63,7 +70,7 @@ export class PatientComponent implements OnInit {
   }
   
   async fetchPatient(){
-    const result = await firstValueFrom(this.adminService.loadPatients());
+    const result = await firstValueFrom(this.patientService.loadPatients());
     this.patientList = result.data;
   }
 
@@ -76,7 +83,7 @@ export class PatientComponent implements OnInit {
   async deletePatient(patientId:string){
     const confirm = await SweetMessage.deleteConfirm();
     if (!confirm.value) return;
-    const result = await firstValueFrom(this.adminService.deletePatient(patientId));
+    const result = await firstValueFrom(this.patientService.deletePatient(patientId));
     if(result.success){
       this.toast.success(result.message);
       this.fetchPatient();
@@ -84,6 +91,20 @@ export class PatientComponent implements OnInit {
       this.toast.error(result.message);
     }
   }
+
+  async assignDr(patientData:Patient){
+    this.selectedPatient = patientData;
+    const result = await firstValueFrom(this.patientService.getAssignDr(patientData.id));
+    this.assignDrList = result.data;
+  }
+
+  async takeVitals(patientData:Patient){
+    this.pageView.resetToDetailView();
+    this.selectedPatient = patientData;
+    const result = await firstValueFrom(this.patientService.getVitals(patientData.id));
+    this.vitalList = result.data;
+  }
+
   setupPatientForm(){
     this.patientForm = this.fb.group({
       id:null,
@@ -96,6 +117,7 @@ export class PatientComponent implements OnInit {
       address:[null],
       idType:[null, Validators.required],
       idNumber: [null, Validators.required],
+      occupation: [null, Validators.required],
     });
   }
   

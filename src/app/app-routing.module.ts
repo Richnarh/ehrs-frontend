@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: '', loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule) },
   { path: '', loadChildren: () => import('./pharmacy/pharmacy.module').then(m => m.PharmacyModule) },
   { path: '', loadChildren: () => import('./leave/leave.module').then(m => m.LeaveModule) },
+  { path: '', loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule) },
 
   { path: '**', component: PageNotFoundComponent },
 ];
