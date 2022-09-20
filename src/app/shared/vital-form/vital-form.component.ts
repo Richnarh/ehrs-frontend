@@ -9,11 +9,11 @@ import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 
 @Component({
-  selector: 'app-patient-vital',
-  templateUrl: './patient-vital.component.html',
-  styleUrls: ['./patient-vital.component.scss']
+  selector: 'app-vital-form',
+  templateUrl: './vital-form.component.html',
+  styleUrls: ['./vital-form.component.scss']
 })
-export class PatientVitalComponent implements OnInit {
+export class VitalFormComponent implements OnInit {
   @Input() selectedPatient:Patient;
   @Input() vitalList :PatientVital[];
 
@@ -24,22 +24,27 @@ export class PatientVitalComponent implements OnInit {
   constructor(private readonly patientVitalService:PatientService, private readonly toast:ToastService,private readonly fb:FormBuilder) { }
 
   ngOnInit(): void {
-    // this.setupPatientVitalForm();
-    // this.fetchPatientVital();
-
-    console.log("vitals: "+this.selectedPatient)
-    console.log("vitalList: "+this.vitalList)
+    this.setupPatientVitalForm();
+    this.patientVitalForm.patchValue({});
   }
 
-  initiateLabTest(){
-    this.patientVitalForm.reset();
-    
-    this.pageView.resetToCreateView();
-  }
   
-  async fetchPatientVital(){
-    const result = await firstValueFrom(this.patientVitalService.loadPatientVital());
-    this.patientVitalList = result.data;
+  async savePatientVital(){
+    if(this.patientVitalForm.invalid){
+      this.toast.error('Some fields are required!');
+      return;
+    }
+    let vital = this.patientVitalForm.value;
+    console.log('vital: '+vital);
+    vital.patientId = this.selectedPatient.id;
+    const result = await firstValueFrom(this.patientVitalService.savePatientVital(vital));
+    if(result){
+      this.toast.success(result.message);
+      this.pageView.resetToListView();
+      // this.fetchPatientVital();
+    }else{
+      this.toast.error(result.message);
+    }
   }
 
   editPatientVital(patientVital:PatientVital){
@@ -54,10 +59,26 @@ export class PatientVitalComponent implements OnInit {
     const result = await firstValueFrom(this.patientVitalService.deletePatientVital(patientVitalId));
     if(result.success){
       this.toast.success(result.message);
-      this.fetchPatientVital();
+      // this.fetchPatientVital();
     }else{
       this.toast.error(result.message);
     }
   }
 
+  setupPatientVitalForm(){
+    this.patientVitalForm = this.fb.group({
+      id:null,
+      patientId:[null],
+      bp:[null, Validators.required],
+      temp:[null, Validators.required],
+      pulse:[null, Validators.required],
+      sp02:[null, Validators.required],
+      weight:[null, Validators.required],
+      comment:[null],
+    });
+  }
+  
+  get field(){
+    return this.patientVitalForm.controls;
+  }
 }

@@ -1,1 +1,17 @@
-<p>diagnosis works!</p>
+<div>
+    <a href="javascript:void(0)" title="Add New Vital" data-bs-toggle="modal" data-bs-target="#vitalForm"><i class="bi ri-add-circle-fill"></i></a>
+
+    <app-patient-vital></app-patient-vital>
+
+<div class="modal fade" id="vitalForm" tabindex="-1" data-bs-backdrop="false" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <app-vital-form></app-vital-form>
+      </div>
+    </div>
+  </div>
+</div>

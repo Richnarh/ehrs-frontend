@@ -38,49 +38,4 @@
                 </tr>
             </table>
           </div>
-       
-          <hr>
-      
-          <form class="row g-2" [formGroup]="patientVitalForm" (ngSubmit)="savePatientVital()">
-            <div class="col-md-4">
-              <label class="form-label">BP<span class="text-danger">*</span></label>
-              <input formControlName="bp" id="bp" type="text" class="form-control">
-              <small *ngIf="field.bp.invalid && field.bp.touched" class="text-danger font-weight-bold"> * This field is required</small>
-            </div>
-      
-            <div class="col-md-4">
-              <label class="form-label">Temperature<span class="text-danger">*</span></label>
-              <input formControlName="temp" id="temp" type="text" class="form-control">
-              <small *ngIf="field.temp.invalid && field.bp.touched" class="text-danger font-weight-bold"> * This field is required</small>
-            </div>
-      
-            <div class="col-md-4">
-              <label class="form-label">Pulse<span class="text-danger">*</span></label>
-              <input formControlName="pulse" id="pulse" type="text" class="form-control">
-              <small *ngIf="field.pulse.invalid && field.pulse.touched" class="text-danger font-weight-bold"> * This field is required</small>
-            </div>
-      
-            <div class="col-md-4">
-              <label class="form-label">SpO2<span class="text-danger">*</span></label>
-              <input formControlName="sp02" id="sp02" type="text" class="form-control">
-              <small *ngIf="field.sp02.invalid && field.sp02.touched" class="text-danger font-weight-bold"> * This field is required</small>
-            </div>
-
-            <div class="col-md-4">
-              <label class="form-label">Weight<span class="text-danger">*</span></label>
-              <input formControlName="weight" id="weight" type="text" class="form-control">
-              <small *ngIf="field.weight.invalid && field.weight.touched" class="text-danger font-weight-bold"> * This field is required</small>
-            </div>
-
-            <div class="col-md-4">
-              <label class="form-label">Comment</label>
-              <textarea formControlName="weight" id="weight" type="text" class="form-control"></textarea>
-            </div>
-      
-            <div class="justify-content-center">
-              <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
-            </div>
-  
-          </form>
-
   </div>

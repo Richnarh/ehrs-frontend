@@ -15,6 +15,7 @@ import { DispensaryComponent } from './dispensary/dispensary.component';
 import { IpdComponent } from './ipd/ipd.component';
 import { LabComponent } from './lab/lab.component';
 import { BillingComponent } from './billing/billing.component';
+import { VitalFormComponent } from './vital-form/vital-form.component';
 
 
 
@@ -33,6 +34,7 @@ import { BillingComponent } from './billing/billing.component';
     IpdComponent,
     LabComponent,
     BillingComponent,
+    VitalFormComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +50,7 @@ import { BillingComponent } from './billing/billing.component';
     CloseButtonComponent,
     PatientVitalComponent,
     PatientSearchComponent,
+    VitalFormComponent,
     FormsModule,
     ReactiveFormsModule
   ]
