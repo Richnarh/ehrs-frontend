@@ -10,7 +10,7 @@
             <div class="row mb-3">
               <label class="col-sm-4 col-form-label">Select Dr</label>
               <div class="col-sm-8">
-                <select class="form-select" aria-label="Dr Select" formControlName="hodId">
+                <select class="form-select" aria-label="Dr Select" formControlName="doctorId">
                   <option selected="" disabled="true">Choose...</option>
                   <option *ngFor="let emp of employeeList" value="{{emp?.id}}">{{emp?.itemName}}</option>
                 </select>

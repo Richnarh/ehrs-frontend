@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PatientVital } from 'src/app/payload/config';
 import { ApiResponse } from 'src/app/utils/apiResponse';
 import { environment as env } from "src/environments/environment";
-import { AssignDr, Patient, PatientAddmission } from '../payload/patient';
+import { AssignDr, Patient, PatientAddmission, PatientVital } from '../payload/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -46,21 +45,21 @@ export class PatientService {
   }
 
   // Patient Vital
-  savePatientVital(patientVital:PatientVital):Observable<any>{
+  savePatientVital(patientVital:PatientVital, patientId:string):Observable<any>{
     if(!patientVital.id)
-      return this.http.post<ApiResponse<any>>(`${env.endpoint}/patient-vital`, patientVital);
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/vital`, patientVital);
     else
-      return this.http.put<ApiResponse<any>>(`${env.endpoint}/patient-vital`, patientVital);
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/vital`, patientVital);
   }
-  loadPatientVital():Observable<any>{
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient-vital/list`,);
+  loadPatientVital(patientId:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/vital/list`,);
   }
-  deletePatientVital(patientVitalId:string):Observable<any>{
-    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient-vital/${patientVitalId}`);
+  deletePatientVital(vitalId:string, patientId:string):Observable<any>{
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/vital/${vitalId}`);
   }
   
-  getVitals(patientId:string){
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient-vital/patient/${patientId}`);
+  getVitals(patientId:string, vitalId:string){
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/vital/${vitalId}`);
   }
   
     // Assign Dr

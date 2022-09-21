@@ -152,8 +152,8 @@
     <div *ngIf="pageView.detailView">
       <div class="card card-height">
         <div class="card-body">
-          <app-patient-vital [selectedPatient]="selectedPatient" [vitalList]="vitalList"></app-patient-vital>
-          <app-vital-form></app-vital-form>
+          <app-patient-vital [vitalList]="vitalList"></app-patient-vital>
+          <app-vital-form [selectedPatient]="selectedPatient"></app-vital-form>
           <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
         </div>
       </div>

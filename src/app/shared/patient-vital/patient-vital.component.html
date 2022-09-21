@@ -1,41 +1,42 @@
 <div class="col-md-12">
-      
-          <div class="row py-2">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Date</th>
-                  <th scope="col">BP</th>
-                  <th scope="col">Temperature</th>
-                  <th scope="col">Spo2</th>
-                  <th scope="col">Weight</th>
-                  <th scope="col">Comment</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let vital of vitalList; let i = index">
-                  <td scope="row">{{i+1}}</td>
-                  <td>{{vital.vitalDate}}</td>
-                  <td>{{vital.bp}}</td>
-                  <td>{{vital.temp}}</td>
-                  <td>{{vital.pulse}}</td>
-                  <td>{{vital.sp02}}</td>
-                  <td>{{vital.weight}}</td>
-                  <td>{{vital.comment}}</td>
-                  <td>
-                    <div class="dropdown">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Choose...
-                      </button>
-                      <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" type="button" (click)="editPatientVital(vital)">Edit</a></li>
-                        <li><a class="dropdown-item text-danger" type="button" (click)="deletePatientVital(vital.id)">Delete</a></li>
-                      </ul>
-                    </div>
-                  </td>
-                </tr>
-            </table>
-          </div>
+  <div class="row py-2">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">BP</th>
+          <th scope="col">Temperature</th>
+          <th scope="col">Pulse</th>
+          <th scope="col">SpO2</th>
+          <th scope="col">Weight</th>
+          <th scope="col">Comment</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vital of vitalList; let i = index">
+          <td scope="row">{{i+1}}</td>
+          <td>{{vital.vitalDate}}</td>
+          <td>{{vital.bp}}</td>
+          <td>{{vital.temp}}</td>
+          <td>{{vital.pulse}}</td>
+          <td>{{vital.spTwo}}</td>
+          <td>{{vital.weight}}</td>
+          <td>{{vital.comment}}</td>
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Choose...
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" type="button" (click)="editPatientVital(vital)">Edit</a></li>
+                <li><a class="dropdown-item text-danger" type="button" (click)="deletePatientVital(vital.id)">Delete</a></li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+    </table>
   </div>
+</div>

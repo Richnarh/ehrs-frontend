@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
-import { PatientVital } from 'src/app/payload/config';
 import { LookupItem } from 'src/app/payload/lookupItem';
 import { LookupService } from 'src/app/services/lookup.service';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
-import { AssignDr, Patient } from '../payload/patient';
+import { AssignDr, Patient, PatientVital } from '../payload/patient';
 import { PatientService } from '../services/patient.service';
 
 @Component({
@@ -100,8 +99,9 @@ export class PatientComponent implements OnInit {
 
   async takeVitals(patientData:Patient){
     this.pageView.resetToDetailView();
+    this.vitalList = [];
     this.selectedPatient = patientData;
-    const result = await firstValueFrom(this.patientService.getVitals(patientData.id));
+    const result = await firstValueFrom(this.patientService.loadPatientVital(patientData.id));
     this.vitalList = result.data;
   }
 

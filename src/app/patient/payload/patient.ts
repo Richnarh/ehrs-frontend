@@ -29,3 +29,14 @@ export class AssignDr extends Base{
     patientId:string;
     note:string;
 }
+export class PatientVital extends Base{
+    patientName:string;
+    patientId:string;
+    vitalDate:string;
+    bp:string;
+    temp:string;
+    pulse:string;
+    spTwo:string;
+    weight:string;
+    comment:string; 
+}

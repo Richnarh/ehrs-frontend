@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
-import { Patient } from 'src/app/patient/payload/patient';
+import { Patient, PatientVital } from 'src/app/patient/payload/patient';
 import { PatientService } from 'src/app/patient/services/patient.service';
-import { PatientVital } from 'src/app/payload/config';
+import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
@@ -16,42 +15,36 @@ import { ToastService } from 'src/app/utils/toast-service';
 export class PatientVitalComponent implements OnInit {
   @Input() selectedPatient:Patient;
   @Input() vitalList :PatientVital[];
-
+  
   pageView:PageView = PageView.listView();
   patientVitalList:PatientVital[];
 
-  patientVitalForm:FormGroup;
-  constructor(private readonly patientVitalService:PatientService, private readonly toast:ToastService,private readonly fb:FormBuilder) { }
+  constructor(
+    private readonly patientVitalService:PatientService, 
+    private readonly toast:ToastService,
+    private readonly eventProxyService: EventProxyService) { }
 
   ngOnInit(): void {
-    // this.setupPatientVitalForm();
-    // this.fetchPatientVital();
-
-    console.log("vitals: "+this.selectedPatient)
-    console.log("vitalList: "+this.vitalList)
+    
   }
 
   initiateLabTest(){
-    this.patientVitalForm.reset();
-    
     this.pageView.resetToCreateView();
   }
   
   async fetchPatientVital(){
-    const result = await firstValueFrom(this.patientVitalService.loadPatientVital());
+    const result = await firstValueFrom(this.patientVitalService.loadPatientVital(this.selectedPatient.id));
     this.patientVitalList = result.data;
   }
 
   editPatientVital(patientVital:PatientVital){
-    this.patientVitalForm.patchValue({});
-    this.patientVitalForm.patchValue(patientVital);
-    this.pageView.resetToCreateView();
+    this.eventProxyService.sendEvent(patientVital);
   }
 
   async deletePatientVital(patientVitalId:string){
     const confirm = await SweetMessage.deleteConfirm();
     if (!confirm.value) return;
-    const result = await firstValueFrom(this.patientVitalService.deletePatientVital(patientVitalId));
+    const result = await firstValueFrom(this.patientVitalService.deletePatientVital(patientVitalId,this.selectedPatient.id));
     if(result.success){
       this.toast.success(result.message);
       this.fetchPatientVital();
