@@ -18,7 +18,6 @@ export class VitalFormComponent implements OnInit {
   @Input() vitalList: PatientVital[];
 
   pageView: PageView = PageView.listView();
-  patientVitalList: PatientVital[];
 
 
   patientVitalForm: FormGroup;
@@ -52,10 +51,15 @@ export class VitalFormComponent implements OnInit {
       this.toast.success(result.message);
       this.pageView.resetToListView();
       this.resetForm();
-      // this.fetchPatientVital();
     } else {
       this.toast.error(result.message);
     }
+  }
+
+  async fetchPatientVital(){
+    const result = await firstValueFrom(this.patientVitalService.loadPatientVital(this.selectedPatient.id));
+    console.log(result.data);
+    this.vitalList = result.data;
   }
 
   editPatientVital (patientVital: PatientVital) {
@@ -80,6 +84,7 @@ export class VitalFormComponent implements OnInit {
   resetForm () {
     this.patientVitalForm.reset();
     this.patientVitalForm.patchValue({});
+    this.fetchPatientVital();
   }
 
   setupPatientVitalForm () {
@@ -89,7 +94,7 @@ export class VitalFormComponent implements OnInit {
       bp: [null, Validators.required],
       temp: [null, Validators.required],
       pulse: [null, Validators.required],
-      sp02: [null, Validators.required],
+      spTwo: [null, Validators.required],
       weight: [null, Validators.required],
       comment: [null],
     });

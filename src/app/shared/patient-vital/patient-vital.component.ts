@@ -17,7 +17,6 @@ export class PatientVitalComponent implements OnInit {
   @Input() vitalList :PatientVital[];
   
   pageView:PageView = PageView.listView();
-  patientVitalList:PatientVital[];
 
   constructor(
     private readonly patientVitalService:PatientService, 
@@ -34,7 +33,7 @@ export class PatientVitalComponent implements OnInit {
   
   async fetchPatientVital(){
     const result = await firstValueFrom(this.patientVitalService.loadPatientVital(this.selectedPatient.id));
-    this.patientVitalList = result.data;
+    this.vitalList = result.data;
   }
 
   editPatientVital(patientVital:PatientVital){

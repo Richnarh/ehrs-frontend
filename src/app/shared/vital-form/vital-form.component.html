@@ -19,8 +19,8 @@
 
     <div class="col-md-4">
       <label class="form-label">SpO2<span class="text-danger">*</span></label>
-      <input formControlName="sp02" id="sp02" type="text" class="form-control">
-      <small *ngIf="field.sp02.invalid && field.sp02.touched" class="text-danger font-weight-bold"> * This field is required</small>
+      <input formControlName="spTwo" id="spTwo" type="text" class="form-control">
+      <small *ngIf="field.spTwo.invalid && field.spTwo.touched" class="text-danger font-weight-bold"> * This field is required</small>
     </div>
 
     <div class="col-md-4">
@@ -31,11 +31,12 @@
 
     <div class="col-md-4">
       <label class="form-label">Comment</label>
-      <textarea formControlName="weight" id="weight" type="text" class="form-control"></textarea>
+      <textarea formControlName="comment" id="comment" type="text" class="form-control"></textarea>
     </div>
 
     <div class="justify-content-center">
       <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+      <button style="margin-left: 1em;" type="button" class="btn btn-light btn-sm" (click)="resetForm()">Clear & Reload</button>
     </div>
 
   </form>
