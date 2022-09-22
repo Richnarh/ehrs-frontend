@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   baseApi: 'api/v1',
-  endpoint: 'http://localhost:8080/ehrs/api/v1',
-  lookupEndpoint: 'http://localhost:8080/ehrs/api/v1/data'
+  endpoint: 'http://209.145.49.185:8080/ehrs/api/v1',
+  lookupEndpoint: 'http://209.145.49.185:8080/ehrs/api/v1/data'
 };
 
 /*

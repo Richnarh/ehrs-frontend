@@ -20,7 +20,6 @@ export class VitalFormComponent implements OnInit {
   pageView: PageView = PageView.listView();
   patientVitalList: PatientVital[];
 
-  selectedPatientVital: PatientVital;
 
   patientVitalForm: FormGroup;
   constructor(
@@ -79,6 +78,7 @@ export class VitalFormComponent implements OnInit {
   }
 
   resetForm () {
+    this.patientVitalForm.reset();
     this.patientVitalForm.patchValue({});
   }
 
