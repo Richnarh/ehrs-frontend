@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Patient } from 'src/app/patient/payload/patient';
 import { PatientService } from 'src/app/patient/services/patient.service';
+import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 
 @Component({
@@ -10,11 +11,11 @@ import { SweetMessage } from 'src/app/utils/sweet-message';
   styleUrls: ['./patient-search.component.scss']
 })
 export class PatientSearchComponent implements OnInit {
-
   patientSearchList:Patient[]=[];
   opdSearchField:any="00024423DA";
   isLoaded:boolean = false;
-  constructor(private readonly patientService:PatientService) { }
+
+  constructor(private readonly patientService:PatientService,private readonly eventProxyService: EventProxyService) { }
 
   ngOnInit(): void {
   }
@@ -30,7 +31,8 @@ export class PatientSearchComponent implements OnInit {
     this.patientSearchList.push(result.data);
   }
 
-  loadPatientData(searchData:Patient){
+  loadPatientData(patientData:Patient){
     this.isLoaded = true;
+    this.eventProxyService.sendEvent(patientData);
   }
 }

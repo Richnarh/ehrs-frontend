@@ -62,22 +62,22 @@ export class PatientService {
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/vital/${vitalId}`);
   }
   
-    // Assign Dr
-    saveAssignDr(assignDr:AssignDr):Observable<any>{
-      if(!assignDr.id)
-        return this.http.post<ApiResponse<any>>(`${env.endpoint}/assign-dr`, assignDr);
-      else
-        return this.http.put<ApiResponse<any>>(`${env.endpoint}/assign-dr`, assignDr);
-    }
-    loadAssignDr():Observable<any>{
-      return this.http.get<ApiResponse<any>>(`${env.endpoint}/assign-dr/list`,);
-    }
-    deleteAssignDr(assignDrId:string):Observable<any>{
-      return this.http.delete<ApiResponse<any>>(`${env.endpoint}/assign-dr/${assignDrId}`);
-    }
+  // Assign Dr
+  saveAssignDr(assignDr:AssignDr, patientId:string):Observable<any>{
+    if(!assignDr.id)
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/assign-dr`, assignDr);
+    else
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/assign-dr`, assignDr);
+  }
+  loadAssignDr(patientId:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/assign-dr/list`,);
+  }
+  deleteAssignDr(assignDrId:string, patientId:string):Observable<any>{
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/assign-dr/${assignDrId}`);
+  }
 
   getAssignDr(patientId:string){
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/assign-dr/dr/${patientId}`);
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/assign-dr/${patientId}`);
   }
 
 

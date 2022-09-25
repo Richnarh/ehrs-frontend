@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
+import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { LookupService } from 'src/app/services/lookup.service';
+import { VitalFormComponent } from 'src/app/shared/vital-form/vital-form.component';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
@@ -17,6 +19,9 @@ import { PatientService } from '../services/patient.service';
 export class PatientComponent implements OnInit {
   pageView:PageView = PageView.listView();
 
+  @ViewChild(VitalFormComponent, { static: false })
+  private vitalComponent:VitalFormComponent;
+
   selectedPatient:Patient;
   vitalList:PatientVital[];
   patientList:Patient[];
@@ -27,6 +32,7 @@ export class PatientComponent implements OnInit {
   idTypeList:LookupItem[];
 
   patientForm:FormGroup;
+  vitalForm:FormGroup;
   
   constructor(private readonly patientService:PatientService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
 
@@ -41,6 +47,11 @@ export class PatientComponent implements OnInit {
     this.patientForm.patchValue({});
     this.pageView.resetToCreateView();
   }
+
+  resetVitalForm(){
+    this.vitalComponent.resetForm();
+  }
+
   async initLookups(){
     const gender = await firstValueFrom(this.lookupService.gender());
     const pc = await firstValueFrom(this.lookupService.patientCategory());
@@ -93,7 +104,7 @@ export class PatientComponent implements OnInit {
 
   async assignDr(patientData:Patient){
     this.selectedPatient = patientData;
-    const result = await firstValueFrom(this.patientService.getAssignDr(patientData.id));
+    const result = await firstValueFrom(this.patientService.loadAssignDr(patientData.id));
     this.assignDrList = result.data;
   }
 

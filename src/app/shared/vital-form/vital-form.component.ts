@@ -44,7 +44,6 @@ export class VitalFormComponent implements OnInit {
       return;
     }
     let vital = this.patientVitalForm.value;
-    console.log('vital: ' + vital);
     vital.patientId = this.selectedPatient.id;
     const result = await firstValueFrom(this.patientVitalService.savePatientVital(vital, this.selectedPatient.id));
     if (result) {
@@ -63,10 +62,8 @@ export class VitalFormComponent implements OnInit {
   }
 
   editPatientVital (patientVital: PatientVital) {
-    console.log(patientVital);
     this.patientVitalForm.patchValue({});
     this.patientVitalForm.patchValue(patientVital);
-    this.pageView.resetToCreateView();
   }
 
   async deletePatientVital (patientVitalId: string) {
@@ -75,7 +72,7 @@ export class VitalFormComponent implements OnInit {
     const result = await firstValueFrom(this.patientVitalService.deletePatientVital(patientVitalId, this.selectedPatient.id));
     if (result.success) {
       this.toast.success(result.message);
-      // this.fetchPatientVital();
+      this.fetchPatientVital();
     } else {
       this.toast.error(result.message);
     }
@@ -84,7 +81,6 @@ export class VitalFormComponent implements OnInit {
   resetForm () {
     this.patientVitalForm.reset();
     this.patientVitalForm.patchValue({});
-    this.fetchPatientVital();
   }
 
   setupPatientVitalForm () {

@@ -5,7 +5,7 @@
           <h5 class="modal-title">Assign {{selectedPatient?.fullname}} to Dr</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form [formGroup]="assignDrForm">
+        <form [formGroup]="assignDrForm" (ngSubmit)="saveAssignDr()">
         <div class="modal-body">
             <div class="row mb-3">
               <label class="col-sm-4 col-form-label">Select Dr</label>
@@ -23,7 +23,7 @@
               </div>
             </div>
           </div>
-          <button type="button" class="btn btn-success mx-3">Save Changes</button>
+          <button type="submit" class="btn btn-success mx-3">Save Changes</button>
         </form>
         <hr>
         <table class="table pt-3">

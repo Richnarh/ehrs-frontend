@@ -28,14 +28,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr (click)="loadPatientData(search)" class="table-row" *ngFor="let search of patientSearchList; let i = index">
+                  <tr (click)="loadPatientData(patient)" class="table-row" *ngFor="let patient of patientSearchList; let i = index">
                     <td scope="row">{{i+1}}</td>
-                    <td>{{search.valueDate}}</td>
-                    <td>{{search.fullname  != '' ? search.fullname : '-'}}</td>
-                    <td>{{search.phoneNumber != '' ? search.phoneNumber : '-'}}</td>
-                    <td>{{search.occupation != '' ? search.occupation : '-'}}</td>
-                    <td>{{search.age}}</td>
-                    <td>{{search.address}}</td>
+                    <td>{{patient.valueDate}}</td>
+                    <td>{{patient.fullname  != '' ? patient.fullname : '-'}}</td>
+                    <td>{{patient.phoneNumber != '' ? patient.phoneNumber : '-'}}</td>
+                    <td>{{patient.occupation != '' ? patient.occupation : '-'}}</td>
+                    <td>{{patient.age}}</td>
+                    <td>{{patient.address}}</td>
                   </tr>
               </table>
               

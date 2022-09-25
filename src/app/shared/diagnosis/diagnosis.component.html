@@ -1,11 +1,11 @@
 <div *ngIf="pageView.listView">
     <a href="javascript:void(0)" title="Add New Vital" (click)="initVital()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
-    <app-patient-vital></app-patient-vital>
+    <app-patient-vital [vitalList]="vitalList"></app-patient-vital>
 </div>
 <div *ngIf="pageView.createView">
   <div class="card">
     <div class="card-body p-5">
-      <app-vital-form></app-vital-form>
+      <app-vital-form [selectedPatient]="selectedPatient"></app-vital-form>
       <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
       </div>
     </div>

@@ -35,14 +35,13 @@ export class AssignDrComponent implements OnInit {
   }
 
   async saveAssignDr(){
+    let assignDrData = this.assignDrForm.value;
+    assignDrData.patientId = this.selectedPatient.id;
     if(this.assignDrForm.invalid){
       this.toast.error('Some fields are required!');
       return;
     }
-    let assignDrData = this.assignDrForm.value;
-    console.log('assignDrData: '+assignDrData);
-    assignDrData.patientId = this.selectedPatient.id;
-    const result = await firstValueFrom(this.patientService.saveAssignDr(assignDrData));
+    const result = await firstValueFrom(this.patientService.saveAssignDr(assignDrData,this.selectedPatient.id));
     if(result){
       this.toast.success(result.message);
       this.fetchAssignDr();
@@ -55,7 +54,7 @@ export class AssignDrComponent implements OnInit {
   }
 
   async fetchAssignDr(){
-    const result = await firstValueFrom(this.patientService.loadAssignDr());
+    const result = await firstValueFrom(this.patientService.loadAssignDr(this.selectedPatient.id));
     this.assignDrList = result.data;
   }
 
@@ -67,7 +66,7 @@ export class AssignDrComponent implements OnInit {
   async deleteAssignDr(assignDrId:string){
     const confirm = await SweetMessage.deleteConfirm();
     if (!confirm.value) return;
-    const result = await firstValueFrom(this.patientService.deleteAssignDr(assignDrId));
+    const result = await firstValueFrom(this.patientService.deleteAssignDr(assignDrId,this.selectedPatient.id));
     if(result.success){
       this.toast.success(result.message);
       this.fetchAssignDr();
@@ -79,8 +78,8 @@ export class AssignDrComponent implements OnInit {
   setupAssignDrForm(){
     this.assignDrForm = this.fb.group({
       id:null,
-      doctorId:[null, Validators.required],
-      patientId:[null, Validators.required],
+      doctorId:[null],
+      patientId:[null],
       note:null,
     });
   }

@@ -15,6 +15,7 @@ import { ToastService } from 'src/app/utils/toast-service';
 export class PatientVitalComponent implements OnInit {
   @Input() selectedPatient:Patient;
   @Input() vitalList :PatientVital[];
+  @Input() selectedVital: PatientVital;
   
   pageView:PageView = PageView.listView();
 
@@ -24,7 +25,6 @@ export class PatientVitalComponent implements OnInit {
     private readonly eventProxyService: EventProxyService) { }
 
   ngOnInit(): void {
-    
   }
 
   initiateLabTest(){
