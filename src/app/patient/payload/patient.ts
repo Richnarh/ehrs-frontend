@@ -28,6 +28,9 @@ export class AssignDr extends Base{
     patientName:string;
     patientId:string;
     note:string;
+    opdNumber:string;
+    assignTime:string;
+    assignDrStatus:string;
 }
 export class PatientVital extends Base{
     patientName:string;
@@ -51,4 +54,8 @@ export class Prescription extends Base{
     frequencyId:string;
     dose:string;
     notes:string;
+}
+export class DrReport extends Base{
+    comment:string;
+    assignPatient:string;
 }

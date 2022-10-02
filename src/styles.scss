@@ -2,6 +2,11 @@
     font-size: 12px;
 }
 
+.table-row:hover{
+    background-color: #f9f9ff;
+    cursor: pointer;
+}
+
 .dropdown-menu .dropdown-item {
     font-size: 14px;
     padding-top: 3px !important;

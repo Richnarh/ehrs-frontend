@@ -15,10 +15,36 @@
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i style="font-size: 20px;" class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">{{assignDrList?.length !== 0 ? assignDrList?.length : 0}}</span>
           </a>
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              <span class="badge rounded-pill bg-primary p-2 ms-2">You have {{assignDrList?.length !== 0 ? assignDrList?.length : 0}} patient assigned</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <div *ngFor="let assign of assignDrList">
+            <li class="notification-item">
+              <i class="bi bi-info-circle text-primary"></i>
+              <div>
+                <h4>{{assign.opdNumber}}</h4>
+                <p>{{assign.patientName}}</p>
+                <p>{{assign.assignTime}}</p>
+                <p>{{assign.assignDrStatus}}</p>
+              </div>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+          </div>
+          </ul>
+
         </li>
 
         <li class="nav-item dropdown pe-3">

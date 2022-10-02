@@ -2,24 +2,24 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Assign {{selectedPatient?.fullname}} to Dr</h5>
+          <h5 class="modal-title">Report on {{selectedPatient?.fullname}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form [formGroup]="assignDrForm" (ngSubmit)="saveAssignDr()">
+        <form [formGroup]="drReportForm" (ngSubmit)="saveDrReport()">
         <div class="modal-body">
             <div class="row mb-3">
-              <label class="col-sm-4 col-form-label">Select Dr</label>
+              <label class="col-sm-4 col-form-label">....</label>
               <div class="col-sm-8">
-                <select class="form-select" aria-label="Dr Select" formControlName="doctorId">
+                <select class="form-select" aria-label="assignPatient Select" formControlName="assignPatient">
                   <option selected="" disabled="true">Choose...</option>
-                  <option *ngFor="let emp of employeeList" value="{{emp?.id}}">{{emp?.itemName}}</option>
+                  <option *ngFor="let emp of assignPatientList" value="{{emp?.id}}">{{emp?.itemName}}</option>
                 </select>
               </div>
             </div>
             <div class="row mb-3">
               <label class="col-sm-4 col-form-label">Notes</label>
               <div class="col-sm-8">
-                <textarea formControlName="note" id="note" type="text" class="form-control"></textarea>
+                <textarea formControlName="notes" id="notes" type="text" class="form-control"></textarea>
               </div>
             </div>
           </div>
@@ -36,14 +36,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dr of assignDrList; let i = index">
+            <tr *ngFor="let drReport of drReportList; let i = index">
               <td scope="row">{{i+1}}</td>
-              <td>{{dr.valueDate}}</td>
-              <td>{{dr.doctor}}</td>
-              <td>{{dr.note}}</td>
+              <td>{{drReport.valueDate}}</td>
+              <td>{{drReport.assignPatient}}</td>
+              <td>{{drReport.comment}}</td>
               <td>
-                <button class="btn btn-primary btn-sm mx-2" (click)="editAssignDr(dr)">Edit</button>
-                <button type="button" class="btn btn-danger btn-sm" (click)="deleteAssignDr(dr.id)">Delete</button>
+                <button class="btn btn-primary btn-sm mx-2" (click)="editDrReport(drReport)">Edit</button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="deleteDrReport(drReport.id)">Delete</button>
               </td>
             </tr>
         </table>

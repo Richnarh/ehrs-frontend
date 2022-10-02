@@ -1,0 +1,45 @@
+<div class="col-md-12">
+    <div class="pb-3 col-md-4">
+        <div class="search-bar">
+            <div class="search-form d-flex align-items-center">
+              <input type="text" [(ngModel)]="opdSearchField" name="query" placeholder="Search OPD Number">
+              <button type="button" (click)="searchPatient()" title="Search"><i class="bi bi-search"></i></button>
+            </div>
+          </div>
+    </div>
+    <table class="table pt-3" *ngIf="patientSearchList.length > 0">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Occupation</th>
+            <th scope="col">Age</th>
+            <th scope="col">Address</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr (click)="loadPatientData(patient)" class="table-row" *ngFor="let patient of patientSearchList; let i = index">
+            <td scope="row">{{i+1}}</td>
+            <td>{{patient.valueDate}}</td>
+            <td>{{patient?.fullname  !== '' ? patient.fullname : '-'}}</td>
+            <td>{{patient?.phoneNumber !== '' ? patient.phoneNumber : '-'}}</td>
+            <td>{{patient?.occupation !== '' ? patient.occupation : '-'}}</td>
+            <td>{{patient.age}}</td>
+            <td>{{patient.address}}</td>
+            <td>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Choose...
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="assignPatient(patient)">Assign</a></li>
+                    <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button">Delete</a></li>
+                  </ul>
+                </div>
+              </td>
+          </tr>
+      </table>
+</div>

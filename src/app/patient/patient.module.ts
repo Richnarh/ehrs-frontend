@@ -7,6 +7,8 @@ import { PatientLayoutComponent } from '../layouts/patient-layout/patient-layout
 import { PatientComponent } from './patient/patient.component';
 import { PatientAdmissionComponent } from './patient-admission/patient-admission.component';
 import { AssignDrComponent } from './assign-dr/assign-dr.component';
+import { DrReportComponent } from './dr-report/dr-report.component';
+import { DoctorActivityComponent } from './doctor-activity/doctor-activity.component';
 
 
 @NgModule({
@@ -15,6 +17,8 @@ import { AssignDrComponent } from './assign-dr/assign-dr.component';
     PatientComponent,
     PatientAdmissionComponent,
     AssignDrComponent,
+    DrReportComponent,
+    DoctorActivityComponent,
     
   ],
   imports: [

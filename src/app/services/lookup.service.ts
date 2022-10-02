@@ -66,4 +66,7 @@ export class LookupService {
   leaveStatus():Observable<any>{
     return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/leave-status`,);
   }
+  assignPatient():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/assign-patient`,);
+  }
 }
