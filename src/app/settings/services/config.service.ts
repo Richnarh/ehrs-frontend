@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Department, JobRole, Lab, LeaveType, Room, RoomType } from 'src/app/payload/config';
+import { Department, Frequency, JobRole, Lab, LeaveType, Room, RoomType } from 'src/app/payload/config';
 import { ApiResponse } from 'src/app/utils/apiResponse';
 import { environment as env } from 'src/environments/environment';
 
@@ -94,5 +94,19 @@ export class ConfigService {
   }
   deleteRoom(roomId:string):Observable<any>{
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/room-type/${roomId}`)
+  }
+
+  // Frequency
+  saveFrequency(frequency: Frequency): Observable<any> {
+    if(!frequency.id)
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/frequency`,frequency);
+    else
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/frequency`,frequency);
+  }
+  loadFrequency (): Observable<any> {
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/frequency/list`);
+  }
+  deleteFrequency (frequencytId: any): Observable<any> {
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/frequency/${frequencytId}`)
   }
 }

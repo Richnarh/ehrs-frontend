@@ -12,6 +12,7 @@ import { SweetMessage } from 'src/app/utils/sweet-message';
 })
 export class PatientSearchComponent implements OnInit {
   patientSearchList:Patient[]=[];
+  selectedPatient:Patient;
   opdSearchField:any="00024423DA";
   isLoaded:boolean = false;
 
@@ -33,6 +34,7 @@ export class PatientSearchComponent implements OnInit {
 
   loadPatientData(patientData:Patient){
     this.isLoaded = true;
+    this.selectedPatient = patientData;
     this.eventProxyService.sendEvent(patientData);
   }
 }

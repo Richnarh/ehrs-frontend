@@ -29,3 +29,6 @@ export class LeaveType extends Base{
     leaveName:string;
     description:string;
 }
+export class Frequency extends Base{
+    frequencyName:string;
+}

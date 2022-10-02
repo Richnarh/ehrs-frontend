@@ -11,6 +11,7 @@ import { SettingsLayoutComponent } from '../layouts/settings-layout/settings-lay
 import { SharedModule } from '../shared/shared.module';
 import { ConfigComponent } from './config/config.component';
 import { LeaveTypeComponent } from './leave-type/leave-type.component';
+import { FrequencyComponent } from './frequency/frequency.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { LeaveTypeComponent } from './leave-type/leave-type.component';
     RoomComponent,
     SettingsLayoutComponent,
     LeaveTypeComponent,
-    ConfigComponent
+    ConfigComponent,
+    FrequencyComponent
   ],
   imports: [
     CommonModule,

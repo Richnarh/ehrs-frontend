@@ -40,3 +40,15 @@ export class PatientVital extends Base{
     weight:string;
     comment:string; 
 }
+export class Prescription extends Base{
+    drReport:string;
+    drReportId:string;
+    patient:string;
+    patientId:string;
+    stockReceiptItem:string;
+    stockReceiptItemId:string;
+    frequency:string;
+    frequencyId:string;
+    dose:string;
+    notes:string;
+}

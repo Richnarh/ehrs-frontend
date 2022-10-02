@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/utils/apiResponse';
 import { environment as env } from "src/environments/environment";
-import { AssignDr, Patient, PatientAddmission, PatientVital } from '../payload/patient';
+import { AssignDr, Patient, PatientAddmission, PatientVital, Prescription } from '../payload/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -80,5 +80,17 @@ export class PatientService {
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/assign-dr/${patientId}`);
   }
 
-
+  // Precription
+  savePrescription(prescription:Prescription, patientId:string):Observable<any>{
+    if(!prescription.id)
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/prescription`, prescription);
+    else
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/prescription`, prescription);
+  }
+  loadPrescription(patientId:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/prescription/list`,);
+  }
+  deletePrescription(prescriptionId:string, patientId:string):Observable<any>{
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/prescription/${prescriptionId}`);
+  }
 }

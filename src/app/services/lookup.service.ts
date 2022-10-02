@@ -43,6 +43,12 @@ export class LookupService {
   leaveType():Observable<any>{
     return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/leave-type`,);
   }
+  frequency():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/frequency`,);
+  }
+  drReport():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/dr-report`,);
+  }
 
   // ENUMS
   title():Observable<any>{
