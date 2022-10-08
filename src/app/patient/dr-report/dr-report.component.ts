@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
 import { LookupService } from 'src/app/services/lookup.service';
-import { StorageService } from 'src/app/services/storage.service';
-import { LocalKeys } from 'src/app/utils/LocalKeys';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 import { DrReport, Patient } from '../payload/patient';
@@ -23,7 +21,7 @@ export class DrReportComponent implements OnInit {
 
   drReportForm:FormGroup;
 
-  constructor(private storage:StorageService, private patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
+  constructor(private patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
 
   ngOnInit(): void {
     this.setupDrReportForm();
