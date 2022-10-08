@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
+import { DrReportComponent } from '../dr-report/dr-report.component';
 import { Patient } from '../payload/patient';
 import { PatientService } from '../services/patient.service';
 
@@ -10,10 +12,15 @@ import { PatientService } from '../services/patient.service';
   styleUrls: ['./doctor-activity.component.scss']
 })
 export class DoctorActivityComponent implements OnInit {
+  @ViewChild(DrReportComponent, { static: false })
+  private drComponent:DrReportComponent;
+  
   selectedPatient:Patient;
   patientSearchList:Patient[]=[];
   opdSearchField:any="00024423DA";
   isLoaded:boolean = false;
+
+  pageView:PageView = PageView.listView();
 
   constructor(private readonly patientService:PatientService,) { }
 
@@ -28,13 +35,15 @@ export class DoctorActivityComponent implements OnInit {
     }
     const result = await firstValueFrom(this.patientService.findPatient(this.opdSearchField));
     this.patientSearchList.push(result.data);
-  }
-
-  loadPatientData(patientData:Patient){
-    this.selectedPatient = patientData;
+    this.selectedPatient= result.data;
   }
 
   assignPatient(patientData:Patient){
-    
+    this.pageView.resetToCreateView();
+    this.selectedPatient = patientData;
+  }
+
+  loadDrReport(){
+    this.drComponent.loadDrReport(this.selectedPatient);
   }
 }

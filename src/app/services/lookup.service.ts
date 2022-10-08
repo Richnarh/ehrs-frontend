@@ -49,6 +49,9 @@ export class LookupService {
   drReport():Observable<any>{
     return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/dr-report`,);
   }
+  stock():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/stock`,);
+  }
 
   // ENUMS
   title():Observable<any>{
@@ -68,5 +71,8 @@ export class LookupService {
   }
   assignPatient():Observable<any>{
     return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/assign-patient`,);
+  }
+  source():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/source`,);
   }
 }

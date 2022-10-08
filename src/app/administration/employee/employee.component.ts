@@ -105,7 +105,8 @@ export class EmployeeComponent implements OnInit {
       idType:[null, Validators.required],
       idNumber: [null, Validators.required],
       ssnitNo: [null],
-      departmentId: [null, Validators.required]
+      departmentId: [null, Validators.required],
+      canLogin: [null, Validators.required],
     });
   }
   

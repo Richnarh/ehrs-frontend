@@ -1,1 +1,101 @@
-<p>ipd works!</p>
+<!-- <div class="col-md-12">
+    <div *ngIf="pageView.listView">
+      <div class="card card-height">
+  
+        <div class="card-body">
+            
+          <div class="clearfix">
+            <div class="float-end">
+                <a href="javascript:void(0)" title="Add IPD" (click)="initiateIPD()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
+            </div>
+          </div>
+  
+          <div class="row py-2">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Lab</th>
+                  <th scope="col">Days</th>
+                  <th scope="col">Ward</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let prescription of prescriptionList; let i = index">
+                  <td scope="row">{{i+1}}</td>
+                  <td>{{prescription.drReport}}</td>
+                  <td>{{prescription.stockReceiptItem}}</td>
+                  <td>{{prescription.frequency}}</td>
+                  <td>{{prescription.dose}}</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Choose...
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" type="button" (click)="editIPD(ipd)">Edit</a></li>
+                        <li><a class="dropdown-item text-danger" type="button" (click)="deleteIPD(ipd.id)">Delete</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="pageView.createView">
+      <div class="card">
+        <div class="card-body p-5">
+          <form class="row g-2" [formGroup]="prescriptionForm" (ngSubmit)="savePrescription()">
+            <div class="col-md-4">
+                <label for="drReportId">Dr Report<span class="text-danger">*</span></label>
+                <select class="form-control" formControlName="drReportId" id="drReportId">
+                  <option *ngFor="let dr of drReportList" value="{{dr?.id}}">{{dr?.itemName}}</option>
+                </select>
+                <small class="text-danger" *ngIf="field.drReportId.invalid && field.drReportId.touched">
+                   * This field is required
+                </small>
+              </div>
+      
+            <div class="col-md-4">
+              <label for="stockReceiptItemId">Patient<span class="text-danger">*</span></label>
+              <select class="form-control" formControlName="stockReceiptItemId" id="stockReceiptItemId">
+                <option *ngFor="let product of patientList" value="{{product?.id}}">{{product?.itemName}}</option>
+              </select>
+              <small class="text-danger" *ngIf="field.stockReceiptItemId.invalid && field.stockReceiptItemId.touched">
+                 * This field is required
+              </small>
+            </div>
+  
+            <div class="col-md-4">
+              <label for="frequencyId">Frequency</label>
+              <select class="form-control" formControlName="frequencyId" id="frequencyId">
+                <option *ngFor="let freq of frequencyList" value="{{freq?.id}}">{{freq?.itemName}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-4">
+              <label>Dose<span class="text-danger">*</span></label>
+              <input type="text" formControlName="dose" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label>Note<span class="text-danger">*</span></label>
+              <textarea formControlName="notes" class="form-control"></textarea>
+            </div>
+            <div class="justify-content-center">
+              <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+            </div>
+  
+          </form>
+  
+          <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
+        </div>
+      </div>
+  
+    </div>
+  
+  </div> -->

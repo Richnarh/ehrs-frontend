@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { Patient } from 'src/app/patient/payload/patient';
 import { PatientService } from 'src/app/patient/services/patient.service';

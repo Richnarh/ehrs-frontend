@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
@@ -6,7 +6,7 @@ import { LookupService } from 'src/app/services/lookup.service';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
-import { PatientAddmission } from '../payload/patient';
+import { Patient, PatientAddmission } from '../payload/patient';
 import { PatientService } from '../services/patient.service';
 @Component({
   selector: 'app-patient-admission',
@@ -15,10 +15,10 @@ import { PatientService } from '../services/patient.service';
 })
 export class PatientAdmissionComponent implements OnInit {
   pageView:PageView = PageView.listView();
-
+  @Input() patientAdmissionList:PatientAddmission[];
+  @Input() selectedPatient:Patient;
   roomList:LookupItem[];
   labList:LookupItem[];
-  patientAdmissionList:PatientAddmission[];
   patientList:LookupItem[];
 
   patientAddmissionForm:FormGroup;
@@ -27,7 +27,6 @@ export class PatientAdmissionComponent implements OnInit {
   ngOnInit(): void {
     this.setupAdmissionForm();
     this.initLookups();
-    this.fetchPatientAdmission();
   }
 
   initPatientAdmission(){
@@ -46,12 +45,13 @@ export class PatientAdmissionComponent implements OnInit {
   }
 
   async savePatientAdmission(){
+    let admissionData = this.patientAddmissionForm.value;
+    admissionData.patientId = this.selectedPatient.id;
     if(this.patientAddmissionForm.invalid){
       this.toast.error('Some fields are required!');
       return;
     }
-    let admissionData = this.patientAddmissionForm.value;
-    const result = await firstValueFrom(this.patientService.savePatientAdmission(admissionData));
+    const result = await firstValueFrom(this.patientService.savePatientAdmission(admissionData,this.selectedPatient.id));
     if(result){
       this.toast.success(result.message);
       this.pageView.resetToListView();
@@ -62,7 +62,7 @@ export class PatientAdmissionComponent implements OnInit {
   }
   
   async fetchPatientAdmission(){
-    const result = await firstValueFrom(this.patientService.loadPatientAdmissions());
+    const result = await firstValueFrom(this.patientService.loadPatientAdmissions(this.selectedPatient.id));
     this.patientAdmissionList = result.data;
   }
 
@@ -72,10 +72,10 @@ export class PatientAdmissionComponent implements OnInit {
     this.pageView.resetToCreateView();
   }
 
-  async deletePatientAdmission(patientId:string){
+  async deletePatientAdmission(admissionId:string){
     const confirm = await SweetMessage.deleteConfirm();
     if (!confirm.value) return;
-    const result = await firstValueFrom(this.patientService.deletePatientAdmission(patientId));
+    const result = await firstValueFrom(this.patientService.deletePatientAdmission(admissionId,this.selectedPatient.id));
     if(result.success){
       this.toast.success(result.message);
       this.fetchPatientAdmission();
@@ -86,7 +86,7 @@ export class PatientAdmissionComponent implements OnInit {
   setupAdmissionForm(){
     this.patientAddmissionForm = this.fb.group({
       id:null,
-      patientId:[null, Validators.required],
+      patientId:[null],
       labId:[null, Validators.required],
       admissionDate:[new Date()],
       noOfDays:[0, Validators.required],

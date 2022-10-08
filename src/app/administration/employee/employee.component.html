@@ -87,7 +87,7 @@
           </div>
 
           <div class="col-md-4">
-            <label>Job role <span class="text-danger">*</span></label>
+            <label>Job Role <span class="text-danger">*</span></label>
             <select class="form-control" formControlName='jobRoleId'>
               <option selected disabled>Choose...</option>
               <option *ngFor="let jobrole of jobRoleList " [value]="jobrole.id">{{jobrole.itemName}}</option>
@@ -117,7 +117,7 @@
             </small>
           </div>
           <div class="col-md-4">
-            <label>Id type<span class="text-danger">*</span></label>
+            <label>Id Type<span class="text-danger">*</span></label>
             <select class="form-control" formControlName="idType">
               <option *ngFor="let idType of idTypeList" value="{{idType?.id}}">{{idType?.itemName}}</option>
             </select>
@@ -153,6 +153,10 @@
           <div class="col-md-4">
             <label>SSNIT No.</label>
             <input formControlName="ssnitNo" type="text" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label>Can Login</label>
+            <input formControlName="canLogin" type="checkbox">
           </div>
           <div class="justify-content-center">
             <button type="submit" class="btn btn-success btn-sm">Save Changes</button>

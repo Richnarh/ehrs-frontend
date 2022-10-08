@@ -7,7 +7,9 @@
             </div>
           </div>
     </div>
-    <table class="table pt-3" *ngIf="patientSearchList.length > 0">
+<div *ngIf="patientSearchList.length > 0">
+  <button (click)="loadDrReport()" class="btn btn-sm btn-default" type="button" data-bs-toggle="modal" data-bs-target="#drReport">Add Notes</button>
+    <table class="table pt-3">
         <thead>
           <tr>
             <th scope="col">#</th>
@@ -21,7 +23,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr (click)="loadPatientData(patient)" class="table-row" *ngFor="let patient of patientSearchList; let i = index">
+          <tr  (click)="assignPatient(patient)" class="table-row" *ngFor="let patient of patientSearchList; let i = index">
             <td scope="row">{{i+1}}</td>
             <td>{{patient.valueDate}}</td>
             <td>{{patient?.fullname  !== '' ? patient.fullname : '-'}}</td>
@@ -29,17 +31,12 @@
             <td>{{patient?.occupation !== '' ? patient.occupation : '-'}}</td>
             <td>{{patient.age}}</td>
             <td>{{patient.address}}</td>
-            <td>
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Choose...
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="assignPatient(patient)">Assign</a></li>
-                    <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button">Delete</a></li>
-                  </ul>
-                </div>
-              </td>
           </tr>
-      </table>
+    </table>
+</div>
+      <app-dr-report [selectedPatient]="selectedPatient" (patientEvt)="loadDrReport()"></app-dr-report>
+
+      <div *ngIf="pageView.createView">
+        <app-activities [selectedPatient]="selectedPatient"></app-activities>
+      </div>
 </div>

@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { Patient, PatientVital } from 'src/app/patient/payload/patient';
 import { PatientService } from 'src/app/patient/services/patient.service';
+import { LookupItem } from 'src/app/payload/lookupItem';
 import { EventProxyService } from 'src/app/services/event-proxy.service';
+import { LookupService } from 'src/app/services/lookup.service';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
@@ -18,19 +20,21 @@ export class VitalFormComponent implements OnInit {
   @Input() vitalList: PatientVital[];
 
   pageView: PageView = PageView.listView();
-
+  sourceList:LookupItem[];
+  physicianList:LookupItem[];
 
   patientVitalForm: FormGroup;
   constructor(
     private readonly patientVitalService: PatientService,
     private readonly toast: ToastService,
     private readonly fb: FormBuilder,
+    private readonly lookupService: LookupService,
     private readonly eventProxyService: EventProxyService) { }
 
   ngOnInit (): void {
     this.setupPatientVitalForm();
     this.resetForm();
-
+    this.initLookups();
     this.eventProxyService.getEventSubject().subscribe((param: any) => {
       if (param !== undefined) {
         this.editPatientVital(param);
@@ -53,6 +57,13 @@ export class VitalFormComponent implements OnInit {
     } else {
       this.toast.error(result.message);
     }
+  }
+
+  async initLookups(){
+    const source = await firstValueFrom(this.lookupService.source());
+    const physician = await firstValueFrom(this.lookupService.employee());
+    this.sourceList = source.data;
+    this.physicianList = physician.data;
   }
 
   async fetchPatientVital(){

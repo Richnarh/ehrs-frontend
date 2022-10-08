@@ -15,6 +15,7 @@ export class Employee extends Base{
     ssnitNo:string;
     departmentName:string;
     departmentId:string;
+    canLogin:boolean;
 }
 export class LabTest extends Base{
     labName:string;

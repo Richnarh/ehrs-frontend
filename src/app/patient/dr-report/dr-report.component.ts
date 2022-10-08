@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
 import { LookupService } from 'src/app/services/lookup.service';
+import { StorageService } from 'src/app/services/storage.service';
+import { LocalKeys } from 'src/app/utils/LocalKeys';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 import { DrReport, Patient } from '../payload/patient';
@@ -21,7 +23,7 @@ export class DrReportComponent implements OnInit {
 
   drReportForm:FormGroup;
 
-  constructor(private readonly patientService:PatientService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
+  constructor(private storage:StorageService, private patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
 
   ngOnInit(): void {
     this.setupDrReportForm();
@@ -44,20 +46,14 @@ export class DrReportComponent implements OnInit {
     const result = await firstValueFrom(this.patientService.saveDrReport(drReportData,this.selectedPatient.id));
     if(result){
       this.toast.success(result.message);
-      this.fetchDrReport();
+      this.loadDrReport(this.selectedPatient);
 
-      this.drReportForm.reset();
-      this.drReportForm.patchValue({});
+      this.resetForm();
     }else{
       this.toast.error(result.message);
     }
   }
-
-  async fetchDrReport(){
-    const result = await firstValueFrom(this.patientService.loadDrReport(this.selectedPatient.id));
-    this.drReportList = result.data;
-  }
-
+  
   editDrReport(drReport:DrReport){
     this.drReportForm.patchValue({});
     this.drReportForm.patchValue(drReport);
@@ -69,18 +65,28 @@ export class DrReportComponent implements OnInit {
     const result = await firstValueFrom(this.patientService.deleteDrReport(drReportId,this.selectedPatient.id));
     if(result.success){
       this.toast.success(result.message);
-      this.fetchDrReport();
+      this.loadDrReport(this.selectedPatient);
     }else{
       this.toast.error(result.message);
     }
   }
 
+  async loadDrReport(selectedPatient:Patient){
+    const result = await firstValueFrom(this.patientService.loadDrReport(selectedPatient.id));
+    this.drReportList = result.data;
+  }
+
+  resetForm(){
+    this.drReportForm.reset();
+    this.drReportForm.patchValue({});
+  }
+
   setupDrReportForm(){
     this.drReportForm = this.fb.group({
       id:null,
-      doctorId:[null],
       patientId:[null],
-      note:null,
+      comment:null,
+      assignPatient:null,
     });
   }
 }

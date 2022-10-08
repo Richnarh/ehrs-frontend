@@ -9,7 +9,9 @@ import { PatientAdmissionComponent } from './patient-admission/patient-admission
 import { AssignDrComponent } from './assign-dr/assign-dr.component';
 import { DrReportComponent } from './dr-report/dr-report.component';
 import { DoctorActivityComponent } from './doctor-activity/doctor-activity.component';
-
+import { ActivitiesComponent } from './activities/activities.component';
+import { PrescriptionComponent } from './prescription/prescription.component';
+import { LabAssignmentComponent } from './lab-assignment/lab-assignment.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,9 @@ import { DoctorActivityComponent } from './doctor-activity/doctor-activity.compo
     AssignDrComponent,
     DrReportComponent,
     DoctorActivityComponent,
+    ActivitiesComponent,
+    PrescriptionComponent,
+    LabAssignmentComponent,
     
   ],
   imports: [

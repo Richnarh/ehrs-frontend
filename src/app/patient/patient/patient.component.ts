@@ -7,7 +7,7 @@ import { VitalFormComponent } from 'src/app/shared/vital-form/vital-form.compone
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
-import { AssignDr, Patient, PatientVital } from '../payload/patient';
+import { AssignDr, Patient, PatientAddmission, PatientVital } from '../payload/patient';
 import { PatientService } from '../services/patient.service';
 
 @Component({
@@ -25,6 +25,7 @@ export class PatientComponent implements OnInit {
   vitalList:PatientVital[];
   patientList:Patient[];
   assignDrList:AssignDr[];
+  patientAdmissionList:PatientAddmission[];
 
   genderList:LookupItem[];
   patientCategoryList:LookupItem[];
@@ -105,6 +106,9 @@ export class PatientComponent implements OnInit {
     this.selectedPatient = patientData;
     const result = await firstValueFrom(this.patientService.loadAssignDr(patientData.id));
     this.assignDrList = result.data;
+
+    const admission = await firstValueFrom(this.patientService.loadPatientAdmissions(patientData.id));
+    this.patientAdmissionList = admission.data;
   }
 
   async takeVitals(patientData:Patient){
@@ -113,6 +117,13 @@ export class PatientComponent implements OnInit {
     this.selectedPatient = patientData;
     const result = await firstValueFrom(this.patientService.loadPatientVital(patientData.id));
     this.vitalList = result.data;
+  }
+
+  async admission(patientData:Patient){
+    this.patientAdmissionList = [];
+    this.selectedPatient = patientData;
+    const result = await firstValueFrom(this.patientService.loadPatientAdmissions(patientData.id));
+    this.patientAdmissionList = result.data;
   }
 
   setupPatientForm(){

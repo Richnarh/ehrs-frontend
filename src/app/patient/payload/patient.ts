@@ -42,6 +42,8 @@ export class PatientVital extends Base{
     spTwo:string;
     weight:string;
     comment:string; 
+    source:string; 
+    physician:string; 
 }
 export class Prescription extends Base{
     drReport:string;
@@ -57,5 +59,6 @@ export class Prescription extends Base{
 }
 export class DrReport extends Base{
     comment:string;
+    patientId:string;
     assignPatient:string;
 }

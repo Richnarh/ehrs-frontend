@@ -30,6 +30,24 @@
     </div>
 
     <div class="col-md-4">
+      <label class="form-label">Source<span class="text-danger">*</span></label>
+      <select class="form-select" aria-label="source Select" formControlName="source">
+        <option selected="" disabled="true">Choose...</option>
+        <option *ngFor="let source of sourceList" value="{{source?.id}}">{{source?.itemName}}</option>
+      </select>
+      <small *ngIf="field.source.invalid && field.source.touched" class="text-danger font-weight-bold"> * This field is required</small>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Physician<span class="text-danger">*</span></label>
+      <select class="form-select" aria-label="physician Select" formControlName="physician">
+        <option selected="" disabled="true">Choose...</option>
+        <option *ngFor="let physician of physicianList" value="{{physician?.id}}">{{physician?.itemName}}</option>
+      </select>
+      <small *ngIf="field.physician.invalid && field.physician.touched" class="text-danger font-weight-bold"> * This field is required</small>
+    </div>
+
+    <div class="col-md-4">
       <label class="form-label">Comment</label>
       <textarea formControlName="comment" id="comment" type="text" class="form-control"></textarea>
     </div>

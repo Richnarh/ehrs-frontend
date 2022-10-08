@@ -1,0 +1,91 @@
+<div>
+<a href="javascript:void(0)" title="Add New Prescription" (click)="resetForm()" data-bs-toggle="modal" data-bs-target="#prescriptionModal"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Report</th>
+        <th scope="col">Drug</th>
+        <th scope="col">Frequency</th>
+        <th scope="col">Dose</th>
+        <th scope="col">Notes</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prescrib of prescriptionList; let i = index">
+        <td scope="row">{{i+1}}</td>
+        <td>{{prescrib.drReport}}</td>
+        <td>{{prescrib.stockReceiptItem}}</td>
+        <td>{{prescrib.frequency}}</td>
+        <td>{{prescrib.dose}}</td>
+        <td>{{prescrib.notes}}</td>
+        <td>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Choose...
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" type="button" (click)="editPrescription(prescrib)">Edit</a></li>
+              <li><a class="dropdown-item text-danger" type="button" (click)="deletePrescription(prescrib.id)">Delete</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+  </table>
+
+  <div class="modal fade" id="prescriptionModal" tabindex="-1" data-bs-backdrop="false" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Adding prescription for {{selectedPatient?.fullname}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <form class="row g-2" [formGroup]="prescriptionForm" (ngSubmit)="savePrescription()">
+                <div class="col-md-4">
+                    <label for="gender">Report<span class="text-danger">*</span></label>
+                    <select class="form-control" formControlName="drReportId" id="drReportId">
+                      <option *ngFor="let report of drReportList" value="{{report?.id}}">{{report?.itemName}}</option>
+                    </select>
+                  </div>
+      
+                <div class="col-md-4">
+                    <label for="gender">Drug<span class="text-danger">*</span></label>
+                    <select class="form-control" formControlName="stockReceiptItemId" id="stockReceiptItemId">
+                      <option *ngFor="let stock of stockReceiptItemList" value="{{stock?.id}}">{{stock?.itemName}}</option>
+                    </select>
+                    <small class="text-danger" *ngIf="field.stockReceiptItemId.invalid && field.stockReceiptItemId.touched">
+                       * This field is required
+                    </small>
+                  </div>
+        
+                <div class="col-md-4">
+                  <label for="gender">Frequency<span class="text-danger">*</span></label>
+                  <select class="form-control" formControlName="frequencyId" id="frequencyId">
+                    <option *ngFor="let freq of frequencyList" value="{{freq?.id}}">{{freq?.itemName}}</option>
+                  </select>
+                  <small class="text-danger" *ngIf="field.frequencyId.invalid && field.frequencyId.touched">
+                     * This field is required
+                  </small>
+                </div>
+    
+                <div class="col-md-4">
+                  <label>Dose</label>
+                  <input type="text" class="form-control" formControlName="dose">
+                </div>
+                <div class="col-md-4">
+                  <label>Notes</label>
+                  <textarea type="text" class="form-control" formControlName="notes"></textarea>
+                </div>
+                <div class="justify-content-center">
+                  <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+                </div>
+      
+              </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

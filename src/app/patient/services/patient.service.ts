@@ -31,17 +31,17 @@ export class PatientService {
   }
 
   // Patient Admissions
-  savePatientAdmission(patientAdmission:PatientAddmission):Observable<any>{
+  savePatientAdmission(patientAdmission:PatientAddmission, patientId:string):Observable<any>{
     if(!patientAdmission.id)
-      return this.http.post<ApiResponse<any>>(`${env.endpoint}/patient-admission`, patientAdmission);
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/admission`, patientAdmission);
     else
-      return this.http.put<ApiResponse<any>>(`${env.endpoint}/patient-admission`, patientAdmission);
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/admission`, patientAdmission);
   }
-  loadPatientAdmissions():Observable<any>{
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient-admission/list`,);
+  loadPatientAdmissions(patientId:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/admission/list`,);
   }
-  deletePatientAdmission(patientAdmissionId:string):Observable<any>{
-    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient-admission/${patientAdmissionId}`);
+  deletePatientAdmission(patientAdmissionId:string, patientId:string):Observable<any>{
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/admission/${patientAdmissionId}`);
   }
 
   // Patient Vital
