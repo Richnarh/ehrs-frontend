@@ -3,7 +3,7 @@ import { firstValueFrom } from 'rxjs';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { DrReportComponent } from '../dr-report/dr-report.component';
-import { Patient } from '../payload/patient';
+import { Patient, Prescription } from '../payload/patient';
 import { PatientService } from '../services/patient.service';
 
 @Component({
@@ -19,6 +19,8 @@ export class DoctorActivityComponent implements OnInit {
   patientSearchList:Patient[]=[];
   opdSearchField:any="00024423DA";
   isLoaded:boolean = false;
+
+  prescriptionList:Prescription[];
 
   pageView:PageView = PageView.listView();
 
@@ -38,9 +40,12 @@ export class DoctorActivityComponent implements OnInit {
     this.selectedPatient= result.data;
   }
 
-  assignPatient(patientData:Patient){
+   async assignPatient(patientData:Patient){
     this.pageView.resetToCreateView();
     this.selectedPatient = patientData;
+
+    const result = await firstValueFrom(this.patientService.loadPrescription(patientData.id));
+    this.prescriptionList = result.data;
   }
 
   loadDrReport(){

@@ -34,9 +34,9 @@
           </tr>
     </table>
 </div>
-      <app-dr-report [selectedPatient]="selectedPatient" (patientEvt)="loadDrReport()"></app-dr-report>
+      <app-dr-report [selectedPatient]="selectedPatient"></app-dr-report>
 
       <div *ngIf="pageView.createView">
-        <app-activities [selectedPatient]="selectedPatient"></app-activities>
+        <app-activities [selectedPatient]="selectedPatient" [prescriptionList]="prescriptionList"></app-activities>
       </div>
 </div>

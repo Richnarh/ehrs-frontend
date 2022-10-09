@@ -16,7 +16,7 @@
     <div class="tab-content pt-2" id="borderedTabJustifiedContent">
       <div class="tab-pane fade active show" id="bordered-justified-prescription" role="tabpanel"
         aria-labelledby="prescription-tab">
-        <app-prescription [selectedPatient]="selectedPatient"></app-prescription>
+        <app-prescription [selectedPatient]="selectedPatient" [prescriptionList]="prescriptionList"></app-prescription>
       </div>
       <div class="tab-pane fade" id="bordered-justified-labAssignment" role="tabpanel" aria-labelledby="labAssignment-tab">
         <app-lab-assignment [selectedPatient]="selectedPatient"></app-lab-assignment>

@@ -1,0 +1,116 @@
+<div class="col-md-12">
+    <div *ngIf="pageView.listView">
+      <div class="card card-height">
+  
+        <div class="card-body">
+  
+          <div class="clearfix">
+            <div class="float-end mb-2" style="padding: 5px; border: 1px solid;">
+              <add-new-button (click)="initInventory()" label="New Inventory"></add-new-button>
+            </div>
+          </div>
+  
+          <div class="row py-2">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Product</th>
+                  <th scope="col">Batch No.</th>
+                  <th scope="col">Qty</th>
+                  <th scope="col">Reorder Level</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Expiry Date</th>
+                  <th scope="col">Selling Price</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let inventory of inventoryList; let i = index">
+                  <td scope="row">{{i+1}}</td>
+                  <td>{{inventory.productName}}</td>
+                  <td>{{inventory.batchNo}}</td>
+                  <td>{{inventory.quantity}}</td>
+                  <td>{{inventory.reorderLevel}}</td>
+                  <td>{{inventory.amount}}</td>
+                  <td>{{inventory.expiryDate}}</td>
+                  <td>{{inventory.sellingPrice}}</td>
+                  <td>
+                    <div class="dropdown">
+                      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Choose...
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editInventory(inventory)">Edit</a></li>
+                        <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteInventory(inventory.id)">Delete</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div *ngIf="pageView.createView">
+      <div class="card">
+        <div class="card-body p-5">
+          <form class="row g-2" [formGroup]="inventoryForm" (ngSubmit)="save()">
+            <div class="col-md-4">
+              <label class="form-label">Product Name<span class="text-danger">*</span></label>
+              <input formControlName="productName" id="productName" type="text" class="form-control">
+              <small *ngIf="field.productName.invalid && field.productName.touched" class="text-danger font-weight-bold"> * This field is required</small>
+            </div>
+  
+            <div class="col-md-4">
+              <label>Batch No.<span class="text-danger">*</span></label>
+              <input formControlName="batchNo" type="text" class="form-control">
+              <small *ngIf="field.batchNo.invalid && field.batchNo.touched" class="text-danger font-weight-bold"> * This field is required</small>
+            </div>
+  
+            <div class="col-md-4">
+              <label>Quantity<span class="text-danger">*</span></label>
+              <input formControlName="quantity" id="quantity" type="text" class="form-control">
+              <small class="text-danger" *ngIf="field.quantity.invalid && field.quantity.touched">
+                 * This field is required
+              </small>
+            </div>
+  
+            <div class="col-md-4">
+              <label>Reorder Level<span class="text-danger">*</span></label>
+              <input formControlName="reorderLevel" id="reorderLevel" type="text" class="form-control">
+              <small class="text-danger" *ngIf="field.reorderLevel.invalid && field.reorderLevel.touched">
+                 * This field is required
+              </small>
+            </div>
+  
+            <div class="col-md-4">
+              <label>Amount<span class="text-danger">*</span></label>
+              <input formControlName="amount" type="text" class="form-control">
+              <small class="text-danger" *ngIf="field.amount.invalid && field.amount.touched">
+                * This field is required
+             </small>
+            </div>
+  
+            <div class="col-md-4">
+              <label>Expiry Date</label>
+              <input formControlName="expiryDate" type="date" class="form-control">
+            </div>
+            <div class="col-md-4">
+              <label>Selling Price</label>
+              <input formControlName="sellingPrice" type="text" class="form-control">
+            </div>
+
+            <div class="justify-content-center">
+              <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+            </div>
+  
+          </form>
+  
+          <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
+        </div>
+      </div>
+    </div>
+  </div>
+

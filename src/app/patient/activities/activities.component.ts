@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Patient } from '../payload/patient';
+import { Patient, Prescription } from '../payload/patient';
 
 @Component({
   selector: 'app-activities',
@@ -8,6 +8,7 @@ import { Patient } from '../payload/patient';
 })
 export class ActivitiesComponent implements OnInit {
  @Input() selectedPatient:Patient;
+ @Input() prescriptionList:Prescription[];
   
   constructor() { }
 

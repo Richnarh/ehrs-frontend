@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
 import { LookupService } from 'src/app/services/lookup.service';
+import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 import { Patient, Prescription } from '../payload/patient';
 import { PatientService } from '../services/patient.service';
@@ -14,11 +15,11 @@ import { PatientService } from '../services/patient.service';
 })
 export class PrescriptionComponent implements OnInit {
   @Input() selectedPatient:Patient;
-  prescriptionList: Prescription[];
+  @Input() prescriptionList: Prescription[];
   prescription:Prescription;
 
   drReportList:LookupItem[];
-  stockReceiptItemList:LookupItem[];
+  inventoryList:LookupItem[];
   frequencyList:LookupItem[];
 
   prescriptionForm: FormGroup;
@@ -35,7 +36,7 @@ export class PrescriptionComponent implements OnInit {
     this.drReportList = report.data;
 
     const stock = await firstValueFrom(this.lookupService.stock());
-    this.stockReceiptItemList = stock.data;
+    this.inventoryList = stock.data;
     const freq = await firstValueFrom(this.lookupService.frequency());
     this.frequencyList = freq.data;
   }
@@ -50,6 +51,7 @@ export class PrescriptionComponent implements OnInit {
     if(result){
       this.toast.success(result.message);
       this.fetchPrescription();
+      this.resetForm();
     }else{
       this.toast.error(result.message);
     }
@@ -63,6 +65,8 @@ export class PrescriptionComponent implements OnInit {
     this.prescriptionForm.patchValue(prescription);
   }
   async deletePrescription(prescriptionId:string){
+    const confirm = await SweetMessage.deleteConfirm();
+    if (!confirm.value) return;
     const result = await firstValueFrom(this.patientService.deletePrescription(prescriptionId,this.selectedPatient.id));
     if(result){
       this.toast.success(result.message);
@@ -79,7 +83,7 @@ export class PrescriptionComponent implements OnInit {
     id:null,
     patientId:[null],
     drReportId:[null],
-    stockReceiptItemId:[null, Validators.required],
+    inventoryId:[null, Validators.required],
     frequencyId:[0, Validators.required],
     dose:[null],
     notes:[null]

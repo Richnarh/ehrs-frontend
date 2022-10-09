@@ -16,7 +16,7 @@
       <tr *ngFor="let prescrib of prescriptionList; let i = index">
         <td scope="row">{{i+1}}</td>
         <td>{{prescrib.drReport}}</td>
-        <td>{{prescrib.stockReceiptItem}}</td>
+        <td>{{prescrib.inventory}}</td>
         <td>{{prescrib.frequency}}</td>
         <td>{{prescrib.dose}}</td>
         <td>{{prescrib.notes}}</td>
@@ -26,7 +26,7 @@
               Choose...
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" type="button" (click)="editPrescription(prescrib)">Edit</a></li>
+              <li><a class="dropdown-item" type="button" (click)="editPrescription(prescrib)" data-bs-toggle="modal" data-bs-target="#prescriptionModal">Edit</a></li>
               <li><a class="dropdown-item text-danger" type="button" (click)="deletePrescription(prescrib.id)">Delete</a></li>
             </ul>
           </div>
@@ -53,10 +53,10 @@
       
                 <div class="col-md-4">
                     <label for="gender">Drug<span class="text-danger">*</span></label>
-                    <select class="form-control" formControlName="stockReceiptItemId" id="stockReceiptItemId">
-                      <option *ngFor="let stock of stockReceiptItemList" value="{{stock?.id}}">{{stock?.itemName}}</option>
+                    <select class="form-control" formControlName="inventoryId" id="inventoryId">
+                      <option *ngFor="let stock of inventoryList" value="{{stock?.id}}">{{stock?.itemName}}</option>
                     </select>
-                    <small class="text-danger" *ngIf="field.stockReceiptItemId.invalid && field.stockReceiptItemId.touched">
+                    <small class="text-danger" *ngIf="field.inventoryId.invalid && field.inventoryId.touched">
                        * This field is required
                     </small>
                   </div>
@@ -80,7 +80,8 @@
                   <textarea type="text" class="form-control" formControlName="notes"></textarea>
                 </div>
                 <div class="justify-content-center">
-                  <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+                  <button type="submit" class="btn btn-success btn-sm mx-3">Save Changes</button>
+                  <button type="button" (click)="resetForm()" class="btn btn-light btn-sm">Clear</button>
                 </div>
       
               </form>

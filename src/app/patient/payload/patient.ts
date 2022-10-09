@@ -50,8 +50,8 @@ export class Prescription extends Base{
     drReportId:string;
     patient:string;
     patientId:string;
-    stockReceiptItem:string;
-    stockReceiptItemId:string;
+    inventory:string;
+    inventoryId:string;
     frequency:string;
     frequencyId:string;
     dose:string;

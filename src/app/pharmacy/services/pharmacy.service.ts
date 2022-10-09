@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/utils/apiResponse';
 import { environment as env } from "src/environments/environment";
-import { Customer } from '../payload/pharmacy';
+import { Inventory } from '../payload/pharmacy';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +12,17 @@ export class PharmacyService {
 
   constructor(private readonly http:HttpClient) { }
   
-  // Customer
-  saveCustomer(customer:Customer):Observable<any>{
-    if(!customer.id)
-      return this.http.post<ApiResponse<any>>(`${env.endpoint}/customer`, customer);
+  // Inventory
+  saveInventory(inventory:Inventory):Observable<any>{
+    if(!inventory.id)
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/inventory`, inventory);
     else
-      return this.http.put<ApiResponse<any>>(`${env.endpoint}/customer`, customer);
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/inventory`, inventory);
   }
-  loadCustomers():Observable<any>{
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/customer/list`,);
+  loadInventorys():Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/inventory/list`,);
   }
-  deleteCustomer(customerId:string):Observable<any>{
-    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/customer/${customerId}`);
+  deleteInventory(inventoryId:string):Observable<any>{
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/inventory/${inventoryId}`);
   }
 }

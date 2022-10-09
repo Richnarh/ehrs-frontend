@@ -8,3 +8,13 @@ export class Customer extends Base{
     address:string;
     description:string;
 }
+
+export class Inventory extends Base{
+    productName:string;
+    batchNo:string;
+    quantity:string;
+    reorderLevel:string;
+    amount:number
+    expiryDate:Date;
+    sellingPrice:string;
+}
