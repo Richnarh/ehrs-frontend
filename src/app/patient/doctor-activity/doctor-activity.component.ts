@@ -1,8 +1,8 @@
-import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
-import { DrReportComponent } from '../dr-report/dr-report.component';
+import { CompainsComponent } from '../compains/compains.component';
 import { Patient, Prescription } from '../payload/patient';
 import { PatientService } from '../services/patient.service';
 
@@ -12,8 +12,8 @@ import { PatientService } from '../services/patient.service';
   styleUrls: ['./doctor-activity.component.scss']
 })
 export class DoctorActivityComponent implements OnInit {
-  @ViewChild(DrReportComponent, { static: false })
-  private drComponent:DrReportComponent;
+  @ViewChild(CompainsComponent, { static: false })
+  private compainsComponent:CompainsComponent;
   
   selectedPatient:Patient;
   patientSearchList:Patient[]=[];
@@ -48,7 +48,7 @@ export class DoctorActivityComponent implements OnInit {
     this.prescriptionList = result.data;
   }
 
-  loadDrReport(){
-    this.drComponent.loadDrReport(this.selectedPatient);
+  loadComplains(){
+    this.compainsComponent.loadPatientComplains(this.selectedPatient);
   }
 }

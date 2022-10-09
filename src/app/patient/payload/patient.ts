@@ -61,4 +61,9 @@ export class DrReport extends Base{
     comment:string;
     patientId:string;
     assignPatient:string;
+    complain:string;
+    complainId:string;
+}
+export class Complain extends Base{
+    complains:string;
 }

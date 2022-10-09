@@ -1,4 +1,4 @@
-<div class="modal fade" id="admission" tabindex="-1" data-bs-backdrop="false" aria-hidden="true" style="display: none;">
+<div class="modal fade" id="admission" tabindex="-1" data-bs-backdrop="true" aria-hidden="true" style="display: none;">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,10 +8,6 @@
       <div class="modal-body">
         <div class="col-md-12">
           <div *ngIf="pageView.listView">
-            <div class="card">
-        
-              <div class="card-body">
-        
                 <div class="clearfix">
                   <div class="float-end mb-2" style="padding: 5px; border: 1px solid;">
                     <add-new-button (click)="initPatientAdmission()" label="New Admission"></add-new-button>
@@ -51,13 +47,9 @@
                       </tr>
                   </table>
                 </div>
-              </div>
-            </div>
           </div>
         
           <div *ngIf="pageView.createView">
-            <div class="card">
-              <div class="card-body p-5">
                 <form class="row g-2" [formGroup]="patientAddmissionForm" (ngSubmit)="savePatientAdmission()">
                   <div class="col-md-4">
                     <label class="form-label">Admission Date<span class="text-danger">*</span></label>
@@ -97,8 +89,7 @@
                 </form>
         
                 <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
-              </div>
-            </div>
+
         
           </div>
         

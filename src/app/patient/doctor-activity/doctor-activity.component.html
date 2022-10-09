@@ -8,7 +8,7 @@
           </div>
     </div>
 <div *ngIf="patientSearchList.length > 0">
-  <button (click)="loadDrReport()" class="btn btn-sm btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#drReport">Add Notes</button>
+  <button (click)="loadComplains()" class="btn btn-sm btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#complain">Patient Complains</button>
     <table class="table pt-3">
         <thead>
           <tr>
@@ -34,7 +34,7 @@
           </tr>
     </table>
 </div>
-      <app-dr-report [selectedPatient]="selectedPatient"></app-dr-report>
+      <app-compains [selectedPatient]="selectedPatient"></app-compains>
 
       <div *ngIf="pageView.createView">
         <app-activities [selectedPatient]="selectedPatient" [prescriptionList]="prescriptionList"></app-activities>

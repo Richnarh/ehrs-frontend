@@ -1,0 +1,71 @@
+<div class="modal fade" id="complain" tabindex="-1" data-bs-backdrop="true" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Complains for {{selectedPatient?.fullname}}</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="col-md-12">
+            <div *ngIf="pageView.listView">
+                  <div class="clearfix">
+                    <div class="float-end mb-2" style="padding: 5px; border: 1px solid;">
+                      <add-new-button (click)="initComplains()" label="New Complain"></add-new-button>
+                    </div>
+                  </div>
+          
+                  <div class="row py-2">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">complain</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let complain of complainList let i = index">
+                          <td scope="row">{{i+1}}</td>
+                          <td>{{complain.valueDate}}</td>
+                          <td>{{complain.complains}}</td>
+                          <td><a href="javascript:void(0)" (click)="addNotes(complain)">Add Notes</a></td>
+                          <td><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteComplain(complain.id)">Delete</a></td>
+                        </tr>
+                    </table>
+                  </div>
+            </div>
+          
+            <div *ngIf="pageView.createView">
+              <div class="card">
+                <div class="card-body p-5">
+                  <form class="row g-2" [formGroup]="complainForm" (ngSubmit)="saveComplains()">
+
+                    <div class="col-md-10">
+                      <label>Complains<span class="text-danger">*</span></label>
+                      <textarea formControlName="complains" rows="6" type="text" class="form-control"></textarea>
+                      <small *ngIf="field.complains.invalid && field.complains.touched" aria-placeholder="Type complains here!" class="text-danger font-weight-bold"> * This field is required</small>
+                    </div>
+
+                    <div class="justify-content-center">
+                      <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+                    </div>
+          
+                  </form>
+          
+                  <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
+                </div>
+              </div>
+            </div>
+          
+            <div *ngIf="pageView.detailView">
+                <app-dr-report [selectedPatient]="selectedPatient" [drReportList]="drReportList" [selectedComplain]="selectedComplain"></app-dr-report>
+                <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

@@ -12,6 +12,7 @@ import { DoctorActivityComponent } from './doctor-activity/doctor-activity.compo
 import { ActivitiesComponent } from './activities/activities.component';
 import { PrescriptionComponent } from './prescription/prescription.component';
 import { LabAssignmentComponent } from './lab-assignment/lab-assignment.component';
+import { CompainsComponent } from './compains/compains.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LabAssignmentComponent } from './lab-assignment/lab-assignment.componen
     ActivitiesComponent,
     PrescriptionComponent,
     LabAssignmentComponent,
+    CompainsComponent,
     
   ],
   imports: [

@@ -1,51 +1,41 @@
-<div class="modal fade" id="drReport" tabindex="-1" data-bs-backdrop="false" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Report on {{selectedPatient?.fullname}}</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <form [formGroup]="drReportForm" (ngSubmit)="saveDrReport()">
-        <div class="modal-body">
-            <div class="row mb-3">
-              <label class="col-sm-4 col-form-label">Assign</label>
-              <div class="col-sm-8">
-                <select class="form-select" aria-label="assignPatient Select" formControlName="assignPatient">
-                  <option selected="" disabled="true">Choose...</option>
-                  <option *ngFor="let emp of assignPatientList" value="{{emp?.id}}">{{emp?.itemName}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label class="col-sm-4 col-form-label">Notes</label>
-              <div class="col-sm-8">
-                <textarea formControlName="comment" id="comment" type="text" class="form-control"></textarea>
-              </div>
-            </div>
-          </div>
-          <button type="submit" class="btn btn-success mx-3">Save Changes</button>
-        </form>
-        <hr>
-        <table class="table pt-3">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Date</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let drReport of drReportList; let i = index">
-              <td scope="row">{{i+1}}</td>
-              <td>{{drReport.valueDate}}</td>
-              <td>{{drReport.assignPatient}}</td>
-              <td>{{drReport.comment}}</td>
-              <td>
-                <button class="btn btn-primary btn-sm mx-2" (click)="editDrReport(drReport)">Edit</button>
-                <button type="button" class="btn btn-danger btn-sm" (click)="deleteDrReport(drReport.id)">Delete</button>
-              </td>
-            </tr>
-        </table>
+<div>
+  <u>Add notes on {{selectedPatient?.fullname}}</u>
+  <br>
+  <form [formGroup]="drReportForm" (ngSubmit)="saveDrReport()">
+    <div class="row mb-3">
+      <label class="col-sm-4 col-form-label">Assign</label>
+      <div class="col-sm-8">
+        <select class="form-select" aria-label="assignPatient Select" formControlName="assignPatient">
+          <option selected="" disabled="true">Choose...</option>
+          <option *ngFor="let emp of assignPatientList" value="{{emp?.id}}">{{emp?.itemName}}</option>
+        </select>
       </div>
     </div>
+    <div class="row mb-3">
+      <label class="col-sm-4 col-form-label">Notes</label>
+      <div class="col-sm-8">
+        <textarea formControlName="comment" rows="6" id="comment" type="text" class="form-control"></textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success mx-3">Save Changes</button>
+  </form>
   </div>
+<hr>
+<table class="table table-bordered pt-3">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Date</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let drReport of drReportList; let i = index">
+      <td scope="row">{{i+1}}</td>
+      <td>{{drReport.valueDate}}</td>
+      <td>{{drReport.assignPatient}}</td>
+      <td>{{drReport.comment}}</td>
+      <td><a href="javascript:void(0)" (click)="editDrReport(drReport)">Edit</a></td>
+      <td><a href="javascript:void(0)" class="text-danger" (click)="deleteDrReport(drReport.id)">Delete</a></td>
+    </tr>
+</table>

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/utils/apiResponse';
 import { environment as env } from "src/environments/environment";
-import { AssignDr, DrReport, Patient, PatientAddmission, PatientVital, Prescription } from '../payload/patient';
+import { AssignDr, Complain, DrReport, Patient, PatientAddmission, PatientVital, Prescription } from '../payload/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -103,10 +103,24 @@ export class PatientService {
     else
       return this.http.put<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/drreport`, drReport);
   }
-  loadDrReport(patientId:string):Observable<any>{
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/drreport/list`,);
+  loadDrReport(patientId:string, complainId:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/drreport/${complainId}/list`,);
   }
   deleteDrReport(drReportId:string, patientId:string):Observable<any>{
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/drreport/${drReportId}`);
+  }
+
+  // Patient Complains
+  saveComplains(complain:Complain, patientId:string):Observable<any>{
+    if(!complain.id)
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/complain`, complain);
+    else
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/complain`, complain);
+  }
+  loadComplains(patientId:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/complain/list`,);
+  }
+  deleteComplains(complainId:string, patientId:string):Observable<any>{
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/complain/${complainId}`);
   }
 }

@@ -5,7 +5,7 @@ import { LookupItem } from 'src/app/payload/lookupItem';
 import { LookupService } from 'src/app/services/lookup.service';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
-import { DrReport, Patient } from '../payload/patient';
+import { Complain, DrReport, Patient } from '../payload/patient';
 import { PatientService } from '../services/patient.service';
 
 @Component({
@@ -15,6 +15,7 @@ import { PatientService } from '../services/patient.service';
 })
 export class DrReportComponent implements OnInit {
   @Input() selectedPatient:Patient;
+  @Input() selectedComplain:Complain;
   @Input() drReportList:DrReport[];
 
   assignPatientList:LookupItem[];
@@ -37,6 +38,7 @@ export class DrReportComponent implements OnInit {
   async saveDrReport(){
     let drReportData = this.drReportForm.value;
     drReportData.patientId = this.selectedPatient.id;
+    drReportData.complainId = this.selectedComplain.id;
     if(this.drReportForm.invalid){
       this.toast.error('Some fields are required!');
       return;
@@ -70,7 +72,7 @@ export class DrReportComponent implements OnInit {
   }
 
   async loadDrReport(selectedPatient:Patient){
-    const result = await firstValueFrom(this.patientService.loadDrReport(selectedPatient.id));
+    const result = await firstValueFrom(this.patientService.loadDrReport(selectedPatient.id, this.selectedComplain.id));
     this.drReportList = result.data;
   }
 
