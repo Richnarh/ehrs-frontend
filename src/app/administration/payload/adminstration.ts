@@ -17,15 +17,7 @@ export class Employee extends Base{
     departmentId:string;
     canLogin:boolean;
 }
-export class LabTest extends Base{
-    labName:string;
-    labId:string;
-    patientName:string;
-    patientId:string;
-    doctorName:string;
-    doctorId:string;
-    testDate:Date;  
-}
+
 export class LabResult extends Base{
     patientName:string;
     patientId:string;

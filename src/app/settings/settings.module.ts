@@ -12,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ConfigComponent } from './config/config.component';
 import { LeaveTypeComponent } from './leave-type/leave-type.component';
 import { FrequencyComponent } from './frequency/frequency.component';
+import { TestTypeComponent } from './test-type/test-type.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FrequencyComponent } from './frequency/frequency.component';
     SettingsLayoutComponent,
     LeaveTypeComponent,
     ConfigComponent,
-    FrequencyComponent
+    FrequencyComponent,
+    TestTypeComponent
   ],
   imports: [
     CommonModule,

@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { CompainsComponent } from '../compains/compains.component';
-import { Patient, Prescription } from '../payload/patient';
+import { Patient, PatientAddmission, Prescription } from '../payload/patient';
 import { PatientService } from '../services/patient.service';
 
 @Component({
@@ -21,10 +22,11 @@ export class DoctorActivityComponent implements OnInit {
   isLoaded:boolean = false;
 
   prescriptionList:Prescription[];
+  patientAdmissionList:PatientAddmission[];
 
   pageView:PageView = PageView.listView();
 
-  constructor(private readonly patientService:PatientService,) { }
+  constructor(private readonly patientService:PatientService,private eventProxyService: EventProxyService) { }
 
   ngOnInit(): void {
   }
@@ -43,9 +45,7 @@ export class DoctorActivityComponent implements OnInit {
    async assignPatient(patientData:Patient){
     this.pageView.resetToCreateView();
     this.selectedPatient = patientData;
-
-    const result = await firstValueFrom(this.patientService.loadPrescription(patientData.id));
-    this.prescriptionList = result.data;
+    this.eventProxyService.sendEvent(patientData);
   }
 
   loadComplains(){

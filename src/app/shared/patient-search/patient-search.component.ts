@@ -16,7 +16,7 @@ export class PatientSearchComponent implements OnInit {
   opdSearchField:any="00024423DA";
   isLoaded:boolean = false;
 
-  constructor(private readonly patientService:PatientService,private readonly eventProxyService: EventProxyService) { }
+  constructor(private patientService:PatientService,private eventProxyService: EventProxyService) { }
 
   ngOnInit(): void {
   }

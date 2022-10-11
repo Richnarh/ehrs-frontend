@@ -34,6 +34,9 @@ export class LookupService {
   labTest():Observable<any>{
     return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/labtest`,);
   }
+  testType():Observable<any>{
+    return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/testtype`,);
+  }
   patient():Observable<any>{
     return this.http.get<ApiResponse<LookupItem>>(`${env.lookupEndpoint}/patient`,);
   }

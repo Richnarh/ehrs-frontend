@@ -32,3 +32,7 @@ export class LeaveType extends Base{
 export class Frequency extends Base{
     frequencyName:string;
 }
+export class TestType extends Base{
+    testTypeName:string;
+    description:string;
+}

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { LabTest } from 'src/app/patient/payload/patient';
 import { ApiResponse } from 'src/app/utils/apiResponse';
 import { environment as env } from "src/environments/environment";
-import { Billing, Employee, LabResult, LabTest, } from '../payload/adminstration';
+import { Billing, Employee, LabResult} from '../payload/adminstration';
 
 @Injectable({
   providedIn: 'root'

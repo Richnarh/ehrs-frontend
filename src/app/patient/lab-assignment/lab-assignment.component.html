@@ -1,1 +1,78 @@
-<p>lab-assignment works!</p>
+<div class="col-md-12">
+    <div *ngIf="pageView.listView">
+          <div class="clearfix">
+            <div class="float-end mb-2">
+              <a href="javascript:void(0)" title="New Lab" (click)="initiateLabTest()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
+            </div>
+          </div>
+  
+          <div class="row py-2">
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Patient</th>
+                    <th scope="col">Doctor</th>
+                    <th scope="col">Lab</th>
+                    <th scope="col">Test Type</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let lab of labTestList; let i = index">
+                    <td scope="row">{{i+1}}</td>
+                    <td>{{lab.testDate}}</td>
+                    <td>{{lab.patientName}}</td>
+                    <td>{{lab.doctorName}}</td>
+                    <td>{{lab.doctorName}}</td>
+                    <td>{{lab.labName}}</td>
+                    <td>{{lab.testType}}</td>
+                    <td>
+                      <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Choose...
+                        </button>
+                        <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" type="button" (click)="editLabTest(lab)">Edit</a></li>
+                          <li><a class="dropdown-item text-danger" type="button" (click)="deleteLabTest(lab.id)">Delete</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+              </table>
+        </div>
+    </div>        
+    <div *ngIf="pageView.createView">   
+        <form class="row g-2" [formGroup]="labTestForm" (ngSubmit)="saveLabTest()">
+            <div class="col-md-4">
+            <label class="form-label">Test Date<span class="text-danger">*</span></label>
+            <input formControlName="testDate" id="testDate" type="date" class="form-control">
+            <small *ngIf="field.testDate.invalid && field.testDate.touched" class="text-danger font-weight-bold"> * This field is required</small>
+            </div>
+
+            <div class="col-md-4">
+            <label>Lab<span class="text-danger">*</span></label>
+            <select class="form-control" formControlName="labId">
+                <option *ngFor="let lab of labList" value="{{lab?.id}}">{{lab?.itemName}}</option>
+            </select>
+            <small class="text-danger" *ngIf="field.labId.invalid && field.labId.touched">
+                * This field is required
+            </small>
+            </div>
+            <div class="col-md-4">
+            <label>Test Type<span class="text-danger">*</span></label>
+            <select class="form-control" formControlName="testTypeId">
+                <option *ngFor="let testType of testTypeList" value="{{testType?.id}}">{{testType?.itemName}}</option>
+            </select>
+            <small class="text-danger" *ngIf="field.testTypeId.invalid && field.testTypeId.touched">
+                * This field is required
+            </small>
+            </div>
+            <div class="justify-content-center">
+            <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+            </div>
+
+        </form>
+    </div>
+</div>

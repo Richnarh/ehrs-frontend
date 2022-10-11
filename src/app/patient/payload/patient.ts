@@ -67,3 +67,14 @@ export class DrReport extends Base{
 export class Complain extends Base{
     complains:string;
 }
+export class LabTest extends Base{
+    labName:string;
+    labId:string;
+    testType:string;
+    testTypeId:string;
+    patientName:string;
+    patientId:string;
+    doctorName:string;
+    doctorId:string;
+    testDate:Date;  
+}
