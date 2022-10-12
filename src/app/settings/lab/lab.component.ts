@@ -9,7 +9,7 @@ import { ToastService } from 'src/app/utils/toast-service';
 import { ConfigService } from '../services/config.service';
 
 @Component({
-  selector: 'app-lab',
+  selector: 'app-lab-setting',
   templateUrl: './lab.component.html',
   styleUrls: ['./lab.component.scss']
 })

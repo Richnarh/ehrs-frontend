@@ -50,6 +50,7 @@ import { VitalFormComponent } from './vital-form/vital-form.component';
     CloseButtonComponent,
     PatientVitalComponent,
     PatientSearchComponent,
+    LabComponent,
     IpdComponent,
     VitalFormComponent,
     FormsModule,

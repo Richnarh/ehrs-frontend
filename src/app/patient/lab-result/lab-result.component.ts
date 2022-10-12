@@ -6,8 +6,9 @@ import { LookupService } from 'src/app/services/lookup.service';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
-import { LabResult } from '../payload/adminstration';
-import { AdminService } from '../services/admin.service';
+import { LabResult } from '../../administration/payload/adminstration';
+import { AdminService } from '../../administration/services/admin.service';
+import { LabTest } from '../payload/patient';
 
 @Component({
   selector: 'app-lab-result',
@@ -17,10 +18,15 @@ import { AdminService } from '../services/admin.service';
 export class LabResultComponent implements OnInit {
   pageView:PageView = PageView.listView();
 
-  labTestList:LookupItem[];
+  // labTestList:LookupItem[];
   labList:LookupItem[];
   labResultList:LabResult[];
   patientList:LookupItem[];
+
+  labTestList: LabTest[];
+
+  searchDate:Date;
+  textSearchField:string
 
   labResultForm:FormGroup;
   constructor(private readonly adminService:AdminService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
@@ -29,6 +35,10 @@ export class LabResultComponent implements OnInit {
     this.setupLabResultForm();
     this.initLookups();
     this.fetchLabResult();
+  }
+
+  searchData(){
+
   }
 
   initiateLabResult(){

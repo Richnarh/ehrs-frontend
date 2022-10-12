@@ -13,6 +13,7 @@ import { ActivitiesComponent } from './activities/activities.component';
 import { PrescriptionComponent } from './prescription/prescription.component';
 import { LabAssignmentComponent } from './lab-assignment/lab-assignment.component';
 import { CompainsComponent } from './compains/compains.component';
+import { LabResultComponent } from './lab-result/lab-result.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { CompainsComponent } from './compains/compains.component';
     PrescriptionComponent,
     LabAssignmentComponent,
     CompainsComponent,
-    
+    LabResultComponent
   ],
   imports: [
     CommonModule,

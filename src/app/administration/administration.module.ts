@@ -7,8 +7,6 @@ import { BillingComponent } from './billing/billing.component';
 import { SharedModule } from '../shared/shared.module';
 import { AdminLayoutComponent } from '../layouts/admin-layout/admin-layout.component';
 import { LabTestComponent } from './lab-test/lab-test.component';
-import { LabResultComponent } from './lab-result/lab-result.component';
-import { LabComponent } from './lab/lab.component';
 
 
 @NgModule({
@@ -16,9 +14,7 @@ import { LabComponent } from './lab/lab.component';
     AdminLayoutComponent,
     EmployeeComponent,
     BillingComponent,
-    LabComponent,
     LabTestComponent,
-    LabResultComponent
   ],
   imports: [
     CommonModule,
