@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { LabResult } from 'src/app/administration/payload/adminstration';
 import { ApiResponse } from 'src/app/utils/apiResponse';
 import { environment as env } from "src/environments/environment";
 import { AssignDr, Complain, DrReport, LabTest, Patient, PatientAddmission, PatientVital, Prescription } from '../payload/patient';
@@ -136,5 +137,23 @@ export class PatientService {
   }
   deleteComplains(complainId:string, patientId:string):Observable<any>{
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/complain/${complainId}`);
+  }
+
+    // Lab Result
+    saveLabResult(labResult:LabResult):Observable<any>{
+      if(!labResult.id)
+        return this.http.post<ApiResponse<any>>(`${env.endpoint}/lab-result`, labResult);
+      else
+        return this.http.put<ApiResponse<any>>(`${env.endpoint}/lab-result`, labResult);
+    }
+    loadLabResults():Observable<any>{
+      return this.http.get<ApiResponse<any>>(`${env.endpoint}/lab-result/list`,);
+    }
+    deleteLabResult(labTestId:string):Observable<any>{
+      return this.http.delete<ApiResponse<any>>(`${env.endpoint}/lab-result/${labTestId}`);
+    }
+
+  searchData(searchDate:string, opdSearchField:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/search/${searchDate}/${opdSearchField}`)
   }
 }

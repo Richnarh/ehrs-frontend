@@ -9,6 +9,7 @@ import { ToastService } from 'src/app/utils/toast-service';
 import { LabResult } from '../../administration/payload/adminstration';
 import { AdminService } from '../../administration/services/admin.service';
 import { LabTest } from '../payload/patient';
+import { PatientService } from '../services/patient.service';
 
 @Component({
   selector: 'app-lab-result',
@@ -25,11 +26,11 @@ export class LabResultComponent implements OnInit {
 
   labTestList: LabTest[];
 
-  searchDate:Date;
+  searchDate:string;
   textSearchField:string
 
   labResultForm:FormGroup;
-  constructor(private readonly adminService:AdminService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
+  constructor(private readonly patientService:PatientService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
 
   ngOnInit(): void {
     this.setupLabResultForm();
@@ -38,7 +39,9 @@ export class LabResultComponent implements OnInit {
   }
 
   searchData(){
-
+    console.log(this.searchDate, this.textSearchField);
+    const result = this.patientService.searchData(this.searchDate, this.textSearchField);
+    console.log(result);
   }
 
   initiateLabResult(){
@@ -62,7 +65,7 @@ export class LabResultComponent implements OnInit {
       return;
     }
     let labResultData = this.labResultForm.value;
-    const result = await firstValueFrom(this.adminService.saveLabResult(labResultData));
+    const result = await firstValueFrom(this.patientService.saveLabResult(labResultData));
     if(result){
       this.toast.success(result.message);
       this.pageView.resetToListView();
@@ -73,7 +76,7 @@ export class LabResultComponent implements OnInit {
   }
   
   async fetchLabResult(){
-    const result = await firstValueFrom(this.adminService.loadLabResults());
+    const result = await firstValueFrom(this.patientService.loadLabResults());
     this.labResultList = result.data;
   }
 
@@ -86,7 +89,7 @@ export class LabResultComponent implements OnInit {
   async deleteLabResult(labResultId:string){
     const confirm = await SweetMessage.deleteConfirm();
     if (!confirm.value) return;
-    const result = await firstValueFrom(this.adminService.deleteLabResult(labResultId));
+    const result = await firstValueFrom(this.patientService.deleteLabResult(labResultId));
     if(result.success){
       this.toast.success(result.message);
       this.fetchLabResult();

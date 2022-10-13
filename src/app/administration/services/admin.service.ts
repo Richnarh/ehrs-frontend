@@ -41,20 +41,6 @@ export class AdminService {
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/labtest/${labTestId}`);
   }
 
-  // Lab Result
-  saveLabResult(labResult:LabResult):Observable<any>{
-    if(!labResult.id)
-      return this.http.post<ApiResponse<any>>(`${env.endpoint}/lab-result`, labResult);
-    else
-      return this.http.put<ApiResponse<any>>(`${env.endpoint}/lab-result`, labResult);
-  }
-  loadLabResults():Observable<any>{
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/lab-result/list`,);
-  }
-  deleteLabResult(labTestId:string):Observable<any>{
-    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/lab-result/${labTestId}`);
-  }
-
   // Billing
   saveBilling(billing:Billing):Observable<any>{
     if(!billing.id)
