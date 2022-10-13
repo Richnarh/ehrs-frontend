@@ -26,8 +26,8 @@ export class LabResultComponent implements OnInit {
 
   labTestList: LabTest[];
 
-  searchDate:string;
-  textSearchField:string
+  searchDate:string = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+  textSearchField:any=null
 
   labResultForm:FormGroup;
   constructor(private readonly patientService:PatientService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
@@ -38,9 +38,9 @@ export class LabResultComponent implements OnInit {
     this.fetchLabResult();
   }
 
-  searchData(){
+  async searchData(){
     console.log(this.searchDate, this.textSearchField);
-    const result = this.patientService.searchData(this.searchDate, this.textSearchField);
+    const result = await firstValueFrom(this.patientService.searchData(this.searchDate, this.textSearchField));
     console.log(result);
   }
 
