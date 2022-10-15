@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
 import { LookupService } from 'src/app/services/lookup.service';
@@ -7,7 +7,7 @@ import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 import { LabResult } from '../../administration/payload/adminstration';
-import { LabTest, Patient } from '../payload/patient';
+import { LabTest } from '../payload/patient';
 import { PatientService } from '../services/patient.service';
 
 @Component({
