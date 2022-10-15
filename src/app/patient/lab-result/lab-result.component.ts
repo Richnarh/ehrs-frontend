@@ -7,8 +7,7 @@ import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 import { LabResult } from '../../administration/payload/adminstration';
-import { AdminService } from '../../administration/services/admin.service';
-import { LabTest } from '../payload/patient';
+import { LabTest, Patient } from '../payload/patient';
 import { PatientService } from '../services/patient.service';
 
 @Component({
@@ -19,29 +18,39 @@ import { PatientService } from '../services/patient.service';
 export class LabResultComponent implements OnInit {
   pageView:PageView = PageView.listView();
 
-  // labTestList:LookupItem[];
   labList:LookupItem[];
-  labResultList:LabResult[];
+  labResult:LabResult;
   patientList:LookupItem[];
+  patientName:string;
+  patientId:string;
+  labTestId:string;
 
-  labTestList: LabTest[];
+  labTestList: LabTest[]=[];
 
-  searchDate:string = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+  searchDate:string = new Date().toJSON().slice(0,10).replace(/-/g,'-');
   textSearchField:any=null
 
   labResultForm:FormGroup;
-  constructor(private readonly patientService:PatientService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
+  constructor(private readonly patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
 
   ngOnInit(): void {
     this.setupLabResultForm();
     this.initLookups();
-    this.fetchLabResult();
   }
 
   async searchData(){
-    console.log(this.searchDate, this.textSearchField);
     const result = await firstValueFrom(this.patientService.searchData(this.searchDate, this.textSearchField));
-    console.log(result);
+    this.labTestList = result.data;
+    this.patientName= result.data[0].patientName;
+    this.patientId = result.data[0].patientId;
+  }
+
+  async prepareLabResult(labTest:LabTest){
+    this.resetForm();
+    this.labTestId = labTest.id;
+    const result = await firstValueFrom(this.patientService.loadLabResults(labTest.id,this.patientId));
+    this.labResult = result.data;
+    this.labResultForm.patchValue(result.data);
   }
 
   initiateLabResult(){
@@ -50,11 +59,9 @@ export class LabResultComponent implements OnInit {
     this.pageView.resetToCreateView();
   }
   async initLookups(){
-    const labTest = await firstValueFrom(this.lookupService.labTest());
     const lab = await firstValueFrom(this.lookupService.lab());
     const patient = await firstValueFrom(this.lookupService.patient());
 
-    this.labTestList = labTest.data;
     this.labList = lab.data;
     this.patientList = patient.data;
   }
@@ -65,19 +72,14 @@ export class LabResultComponent implements OnInit {
       return;
     }
     let labResultData = this.labResultForm.value;
-    const result = await firstValueFrom(this.patientService.saveLabResult(labResultData));
+    labResultData.labTestId = this.labTestId
+    labResultData.patientId = this.patientId
+    const result = await firstValueFrom(this.patientService.saveLabResult(labResultData,this.patientId));
     if(result){
       this.toast.success(result.message);
-      this.pageView.resetToListView();
-      this.fetchLabResult();
     }else{
       this.toast.error(result.message);
     }
-  }
-  
-  async fetchLabResult(){
-    const result = await firstValueFrom(this.patientService.loadLabResults());
-    this.labResultList = result.data;
   }
 
   editLabResult(labResult:LabResult){
@@ -89,19 +91,24 @@ export class LabResultComponent implements OnInit {
   async deleteLabResult(labResultId:string){
     const confirm = await SweetMessage.deleteConfirm();
     if (!confirm.value) return;
-    const result = await firstValueFrom(this.patientService.deleteLabResult(labResultId));
+    const result = await firstValueFrom(this.patientService.deleteLabResult(labResultId,this.patientId));
     if(result.success){
       this.toast.success(result.message);
-      this.fetchLabResult();
+      this.labResultForm.reset();
     }else{
       this.toast.error(result.message);
     }
   }
+
+  resetForm(){
+    this.labResultForm.reset();
+    this.labResultForm.patchValue({});
+  }
   setupLabResultForm(){
     this.labResultForm = this.fb.group({
       id:null,
-      patientId:[null, Validators.required],
-      labTestId:[null, Validators.required],
+      patientId:[null],
+      labTestId:[null],
       testResult:[null]
     });
   }

@@ -139,21 +139,21 @@ export class PatientService {
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/complain/${complainId}`);
   }
 
-    // Lab Result
-    saveLabResult(labResult:LabResult):Observable<any>{
-      if(!labResult.id)
-        return this.http.post<ApiResponse<any>>(`${env.endpoint}/lab-result`, labResult);
-      else
-        return this.http.put<ApiResponse<any>>(`${env.endpoint}/lab-result`, labResult);
-    }
-    loadLabResults():Observable<any>{
-      return this.http.get<ApiResponse<any>>(`${env.endpoint}/lab-result/list`,);
-    }
-    deleteLabResult(labTestId:string):Observable<any>{
-      return this.http.delete<ApiResponse<any>>(`${env.endpoint}/lab-result/${labTestId}`);
-    }
+  // Lab Result
+  saveLabResult(labResult:LabResult,patientId:string):Observable<any>{
+    if(!labResult.id)
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/lab-result`, labResult);
+    else
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/lab-result`, labResult);
+  }
+  loadLabResults(labTestId:string,patientId:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/lab-result/${labTestId}/list`,);
+  }
+  deleteLabResult(labTestId:string,patientId:string):Observable<any>{
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/lab-result/${labTestId}`);
+  }
 
-  searchData(searchDate:string, opdSearchField:string):Observable<any>{
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/search/${searchDate}/${opdSearchField}`)
+  searchData(testDate:string, opdSearchField:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/search/${testDate}/${opdSearchField}`)
   }
 }
