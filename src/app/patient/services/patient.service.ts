@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { LabResult } from 'src/app/administration/payload/adminstration';
 import { ApiResponse } from 'src/app/utils/apiResponse';
 import { environment as env } from "src/environments/environment";
-import { AssignDr, Complain, DrReport, LabTest, Patient, PatientAddmission, PatientVital, Prescription } from '../payload/patient';
+import { AssignDr, Billing, Complain, DrReport, LabTest, Patient, PatientAddmission, PatientVital, Prescription } from '../payload/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,14 @@ export class PatientService {
   
   findPatient(opdSearchField:any):Observable<any>{
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/search/${opdSearchField}`,);
+  }
+
+  searchData(testDate:any, opdSearchField:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/search/${testDate}/${opdSearchField}`)
+  }
+
+  findBills(opdSearchField:any):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/search/${opdSearchField}`,);
   }
   
   // Patients
@@ -153,7 +161,18 @@ export class PatientService {
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/lab-result/${labTestId}`);
   }
 
-  searchData(testDate:string, opdSearchField:string):Observable<any>{
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/search/${testDate}/${opdSearchField}`)
+  // Billing
+  saveBilling(billing:Billing):Observable<any>{
+    if(!billing.id)
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/billing`, billing);
+    else
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/billing`, billing);
   }
+  loadBillings():Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/billing/list`,);
+  }
+  deleteBilling(billingId:string):Observable<any>{
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/billing/${billingId}`);
+  }
+  
 }

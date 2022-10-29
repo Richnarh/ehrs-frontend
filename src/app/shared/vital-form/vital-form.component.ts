@@ -25,11 +25,11 @@ export class VitalFormComponent implements OnInit {
 
   patientVitalForm: FormGroup;
   constructor(
-    private readonly patientVitalService: PatientService,
-    private readonly toast: ToastService,
-    private readonly fb: FormBuilder,
-    private readonly lookupService: LookupService,
-    private readonly eventProxyService: EventProxyService) { }
+    private patientVitalService: PatientService,
+    private toast: ToastService,
+    private fb: FormBuilder,
+    private lookupService: LookupService,
+    private eventProxyService: EventProxyService) { }
 
   ngOnInit (): void {
     this.setupPatientVitalForm();
@@ -103,7 +103,9 @@ export class VitalFormComponent implements OnInit {
       pulse: [null, Validators.required],
       spTwo: [null, Validators.required],
       weight: [null, Validators.required],
+      source:[null],
       comment: [null],
+      physicianId:[null,]
     });
   }
 

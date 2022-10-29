@@ -40,11 +40,11 @@
 
     <div class="col-md-4">
       <label class="form-label">Physician<span class="text-danger">*</span></label>
-      <select class="form-select" aria-label="physician Select" formControlName="physician">
+      <select class="form-select" aria-label="physician Select" formControlName="physicianId">
         <option selected="" disabled="true">Choose...</option>
         <option *ngFor="let physician of physicianList" value="{{physician?.id}}">{{physician?.itemName}}</option>
       </select>
-      <small *ngIf="field.physician.invalid && field.physician.touched" class="text-danger font-weight-bold"> * This field is required</small>
+      <small *ngIf="field.physicianId.invalid && field.physicianId.touched" class="text-danger font-weight-bold"> * This field is required</small>
     </div>
 
     <div class="col-md-4">

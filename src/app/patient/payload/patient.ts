@@ -44,6 +44,7 @@ export class PatientVital extends Base{
     comment:string; 
     source:string; 
     physician:string; 
+    physicianId:string; 
 }
 export class Prescription extends Base{
     drReport:string;
@@ -77,4 +78,17 @@ export class LabTest extends Base{
     doctorName:string;
     doctorId:string;
     testDate:Date;  
+}
+
+export class Billing extends Base{
+    billNo:string;
+    patientName:string;
+    patientId:string;
+    admissionBill:number;
+    admissionBillId:string;
+    labBill:number;
+    labBillId:string;
+    prescriptionBill:number;
+    prescriptionBillId:string;
+    otherBill:number;
 }

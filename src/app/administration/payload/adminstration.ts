@@ -25,11 +25,3 @@ export class LabResult extends Base{
     labTestId:string;
     testResult:string; 
 }
-export class Billing extends Base{
-    billNo:string;
-    patientName:string;
-    patientId:string;
-    doctorCharges:number;
-    labCharges:number;
-    roomCharges:number;
-}

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { LabTest } from 'src/app/patient/payload/patient';
 import { ApiResponse } from 'src/app/utils/apiResponse';
 import { environment as env } from "src/environments/environment";
-import { Billing, Employee, LabResult} from '../payload/adminstration';
+import { Employee } from "./../payload/adminstration";
 
 @Injectable({
   providedIn: 'root'
@@ -41,17 +41,4 @@ export class AdminService {
     return this.http.delete<ApiResponse<any>>(`${env.endpoint}/labtest/${labTestId}`);
   }
 
-  // Billing
-  saveBilling(billing:Billing):Observable<any>{
-    if(!billing.id)
-      return this.http.post<ApiResponse<any>>(`${env.endpoint}/billing`, billing);
-    else
-      return this.http.put<ApiResponse<any>>(`${env.endpoint}/billing`, billing);
-  }
-  loadBillings():Observable<any>{
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/billing/list`,);
-  }
-  deleteBilling(billingId:string):Observable<any>{
-    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/billing/${billingId}`);
-  }
 }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { EmployeeComponent } from './employee/employee.component';
-import { BillingComponent } from './billing/billing.component';
 import { SharedModule } from '../shared/shared.module';
 import { AdminLayoutComponent } from '../layouts/admin-layout/admin-layout.component';
 import { LabTestComponent } from './lab-test/lab-test.component';
@@ -13,7 +12,6 @@ import { LabTestComponent } from './lab-test/lab-test.component';
   declarations: [
     AdminLayoutComponent,
     EmployeeComponent,
-    BillingComponent,
     LabTestComponent,
   ],
   imports: [
