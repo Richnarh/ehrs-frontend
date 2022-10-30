@@ -27,7 +27,7 @@ import { LabResultComponent } from './lab-result/lab-result.component';
     PrescriptionComponent,
     LabAssignmentComponent,
     CompainsComponent,
-    LabResultComponent
+    LabResultComponent,
   ],
   imports: [
     CommonModule,

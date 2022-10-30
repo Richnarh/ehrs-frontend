@@ -9,8 +9,8 @@
         <div class="col-md-12">
           <div *ngIf="pageView.listView">
                 <div class="clearfix">
-                  <div class="float-end mb-2" style="padding: 5px; border: 1px solid;">
-                    <add-new-button (click)="initPatientAdmission()" label="New Admission"></add-new-button>
+                  <div class="float-end mb-2">
+                    <a href="javascript:void(0)" title="New Admission" (click)="initPatientAdmission()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
                   </div>
                 </div>
         
@@ -87,6 +87,7 @@
                   <div class="col-md-4">
                     <span>Bill</span>
                     <input type="text" class="form-control" formControlName="price">
+                    <small class="text-muted text-info">Enter price per day.</small>
                   </div> 
                   <div class="justify-content-center">
                     <button type="submit" class="btn btn-success btn-sm">Save Changes</button>

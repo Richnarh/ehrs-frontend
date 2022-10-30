@@ -32,7 +32,7 @@ export class LabResultComponent implements OnInit {
   textSearchField:any="00024423DA"
 
   labResultForm:FormGroup;
-  constructor(private readonly patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
+  constructor(private patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
 
   ngOnInit(): void {
     this.setupLabResultForm();

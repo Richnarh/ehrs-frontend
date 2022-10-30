@@ -20,9 +20,9 @@ export class PatientVitalComponent implements OnInit {
   pageView:PageView = PageView.listView();
 
   constructor(
-    private readonly patientVitalService:PatientService, 
-    private readonly toast:ToastService,
-    private readonly eventProxyService: EventProxyService) { }
+    private patientVitalService:PatientService, 
+    private toast:ToastService,
+    private eventProxyService: EventProxyService) { }
 
   ngOnInit(): void {
   }

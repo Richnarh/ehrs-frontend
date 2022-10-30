@@ -33,6 +33,7 @@
                           Choose...
                         </button>
                         <ul class="dropdown-menu">
+                          <li><a class="dropdown-item" type="button" (click)="loadTestResult(lab.id)" data-bs-toggle="modal" data-bs-target="#labResult">Test Result</a></li>
                           <li><a class="dropdown-item" type="button" (click)="editLabTest(lab)">Edit</a></li>
                           <li><a class="dropdown-item text-danger" type="button" (click)="deleteLabTest(lab.id)">Delete</a></li>
                         </ul>
@@ -42,6 +43,9 @@
               </table>
         </div>
     </div>        
+    <div>
+      <app-lab-result-info [selectedPatient]="selectedPatient" [testResult]="testResult"></app-lab-result-info>
+    </div>
     <div *ngIf="pageView.createView">   
         <form class="row g-2" [formGroup]="labTestForm" (ngSubmit)="saveLabTest()">
             <div class="col-md-4">

@@ -16,6 +16,7 @@ import { IpdComponent } from './ipd/ipd.component';
 import { LabComponent } from './lab/lab.component';
 import { BillingComponent } from './billing/billing.component';
 import { VitalFormComponent } from './vital-form/vital-form.component';
+import { LabResultInfoComponent } from "./lab-result-info/lab-result-info.component";
 
 
 
@@ -35,6 +36,7 @@ import { VitalFormComponent } from './vital-form/vital-form.component';
     LabComponent,
     BillingComponent,
     VitalFormComponent,
+    LabResultInfoComponent
   ],
   imports: [
     CommonModule,
@@ -54,7 +56,8 @@ import { VitalFormComponent } from './vital-form/vital-form.component';
     IpdComponent,
     VitalFormComponent,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LabResultInfoComponent
   ]
 })
 export class SharedModule { }
