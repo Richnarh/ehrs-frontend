@@ -16,13 +16,14 @@ export class PatientService {
   findPatient(opdSearchField:any):Observable<any>{
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/search/${opdSearchField}`,);
   }
-
   searchData(testDate:any, opdSearchField:string):Observable<any>{
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/search/${testDate}/${opdSearchField}`)
   }
-
   findBills(opdSearchField:any):Observable<any>{
     return this.http.get<ApiResponse<any>>(`${env.endpoint}/search/${opdSearchField}`,);
+  }
+  laodBills(patientId:any):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/billing/list`,);
   }
   
   // Patients
@@ -162,17 +163,17 @@ export class PatientService {
   }
 
   // Billing
-  saveBilling(billing:Billing):Observable<any>{
+  saveBilling(billing:Billing, patientId:string):Observable<any>{
     if(!billing.id)
-      return this.http.post<ApiResponse<any>>(`${env.endpoint}/billing`, billing);
+      return this.http.post<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/billing`, billing);
     else
-      return this.http.put<ApiResponse<any>>(`${env.endpoint}/billing`, billing);
+      return this.http.put<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/billing`, billing);
   }
-  loadBillings():Observable<any>{
-    return this.http.get<ApiResponse<any>>(`${env.endpoint}/billing/list`,);
+  loadBillings(patientId:string):Observable<any>{
+    return this.http.get<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/billing/list`,);
   }
-  deleteBilling(billingId:string):Observable<any>{
-    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/billing/${billingId}`);
+  deleteBilling(billingId:string,patientId:string):Observable<any>{
+    return this.http.delete<ApiResponse<any>>(`${env.endpoint}/patient/${patientId}/billing/${billingId}`);
   }
   
 }

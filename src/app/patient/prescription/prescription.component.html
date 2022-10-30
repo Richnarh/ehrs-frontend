@@ -11,6 +11,7 @@
         <th scope="col">Frequency</th>
         <th scope="col">Dose</th>
         <th scope="col">Notes</th>
+        <th scope="col">Bill</th>
         <th scope="col">Action</th>
       </tr>
     </thead>
@@ -22,6 +23,7 @@
         <td>{{prescrib.frequency}}</td>
         <td>{{prescrib.dose}}</td>
         <td>{{prescrib.notes}}</td>
+        <td>{{prescrib.price}}</td>
         <td>
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,6 +78,10 @@
                 <div class="col-md-4">
                   <label>Dose</label>
                   <input type="text" class="form-control" formControlName="dose">
+                </div>
+                <div class="col-md-4">
+                  <span>Bill</span>
+                  <input type="text" class="form-control" formControlName="price">
                 </div>
                 <div class="col-md-4">
                   <label>Notes</label>

@@ -7,11 +7,9 @@
             </div>
           </div>
     </div>
-    <div *ngIf="pageView.listView">
+    <div *ngIf="billingList.length > 0">
       <div class="card card-height">
-  
         <div class="card-body">
-   
           <div class="row py-2">
             <div class="col-md-4 mb-3">
                 <span>Other Bill</span>
@@ -21,25 +19,22 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Bill No.</th>
                   <th scope="col">Admission Bill</th>
                   <th scope="col">Lab Bill</th>
                   <th scope="col">Dispensary Bill</th>
-                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr (click)="initiateBilling(billing)" class="table-row" *ngFor="let billing of billingList; let i = index">
+                <tr (click)="loadBillings()" class="table-row" *ngFor="let billing of billingList; let i = index">
                   <td scope="row">{{i+1}}</td>
-                  <td>{{billing.billNo}}</td>
                   <td>{{billing.admissionBill}}</td>
                   <td>{{billing.labBill}}</td>
                   <td>{{billing.prescriptionBill}}</td>
-                  <td>{{billing.otherBill}}</td>
                 </tr>
             </table>
 
             <div class="justify-content-center">
+              <p>Bill: <span class="badge bg-primary badge-number">GHS: {{totalBill}}</span></p>
                 <button type="button" (click)="saveBilling()" class="btn btn-success btn-sm">Save Changes</button>
               </div>
           </div>
@@ -50,10 +45,29 @@
     <div *ngIf="pageView.createView">
       <div class="card">
         <div class="card-body p-5">
-          <button type="button" (click)="pageView.resetToListView()" class="btn btn-secondary btn-sm float-end">Close Page</button>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Bill No.</th>
+                <th scope="col">Admission Bill</th>
+                <th scope="col">Lab Bill</th>
+                <th scope="col">Dispensary Bill</th>
+                <th scope="col">Other Bill</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let billing of billings; let i = index">
+                <td scope="row">{{i+1}}</td>
+                <td>{{billing.billNo}}</td>
+                <td>{{billing.admissionBill}}</td>
+                <td>{{billing.labBill}}</td>
+                <td>{{billing.prescriptionBill}}</td>
+                <td>{{billing.otherBill}}</td>
+              </tr>
+          </table>
         </div>
       </div>
-  
     </div>
   
   </div>

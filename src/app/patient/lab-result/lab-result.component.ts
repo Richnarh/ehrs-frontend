@@ -29,7 +29,7 @@ export class LabResultComponent implements OnInit {
 
   searchDate:any = null;
   // searchDate:string = new Date().toJSON().slice(0,10).replace(/-/g,'-');
-  textSearchField:any=null
+  textSearchField:any="00024423DA"
 
   labResultForm:FormGroup;
   constructor(private readonly patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
@@ -111,7 +111,8 @@ export class LabResultComponent implements OnInit {
       id:null,
       patientId:[null],
       labTestId:[null],
-      testResult:[null]
+      testResult:[null],
+      price:[0.0]
     });
   }
   

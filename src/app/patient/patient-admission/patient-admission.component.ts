@@ -90,7 +90,8 @@ export class PatientAdmissionComponent implements OnInit {
       labId:[null, Validators.required],
       admissionDate:[new Date()],
       noOfDays:[0, Validators.required],
-      roomId:[null, Validators.required]
+      roomId:[null, Validators.required],
+      price:[0.0]
     });
   }
   

@@ -97,7 +97,8 @@ export class PrescriptionComponent implements OnInit {
     inventoryId:[null, Validators.required],
     frequencyId:[0, Validators.required],
     dose:[null],
-    notes:[null]
+    notes:[null],
+    price:[0.0]
   });
 }
 get field(){

@@ -21,6 +21,7 @@ export class PatientAddmission extends Base{
     noOfDays:number;
     roomName:string;
     roomId:string;
+    price:number;
 }
 export class AssignDr extends Base{
     doctor:string;
@@ -57,6 +58,7 @@ export class Prescription extends Base{
     frequencyId:string;
     dose:string;
     notes:string;
+    price:number;
 }
 export class DrReport extends Base{
     comment:string;
@@ -78,6 +80,7 @@ export class LabTest extends Base{
     doctorName:string;
     doctorId:string;
     testDate:Date;  
+    price:number;
 }
 
 export class Billing extends Base{
