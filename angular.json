@@ -122,5 +122,8 @@
       }
     }
   },
-  "defaultProject": "ehrs"
+  "defaultProject": "ehrs",
+  "cli": {
+    "analytics": false
+  }
 }

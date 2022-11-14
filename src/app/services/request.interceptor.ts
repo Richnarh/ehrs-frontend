@@ -24,7 +24,7 @@ export class RequestInterceptor implements HttpInterceptor{
             const employeeId = this.storage.getLocalObject(LocalKeys.EmployeeId);
 
             const user = (currentUser) ? JSON.parse(currentUser) : null;
-            const userEmpId = (employeeId) ? JSON.parse(employeeId) : null;
+            const userEmpId = employeeId != undefined ? JSON.parse(employeeId) : null;
             requestClone = req.clone({setHeaders: { token: `${atob(token)}`, userAccountId:user?.id, employeeId:userEmpId}});
         
             // console.log('intercepted Request => ', requestClone);

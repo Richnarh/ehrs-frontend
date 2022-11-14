@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
+import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { LookupService } from 'src/app/services/lookup.service';
 import { VitalFormComponent } from 'src/app/shared/vital-form/vital-form.component';
 import { PageView } from 'src/app/utils/page-view';
@@ -21,6 +22,14 @@ export class PatientComponent implements OnInit {
   @ViewChild(VitalFormComponent, { static: false })
   private vitalComponent:VitalFormComponent;
 
+  pages:any;
+  adp:string;adb:boolean;
+  drp:string;drb:boolean;
+  vp:string;vpb:boolean;
+  ep:string;epb:boolean;
+  adm:string;admb:boolean;
+  delp:string;delpb:boolean;
+
   selectedPatient:Patient;
   vitalList:PatientVital[];
   patientList:Patient[];
@@ -34,12 +43,43 @@ export class PatientComponent implements OnInit {
   patientForm:FormGroup;
   vitalForm:FormGroup;
   
-  constructor(private readonly patientService:PatientService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
+  constructor(private proxy:EventProxyService, private patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.setupPatientForm();
     this.initLookups();
     this.fetchPatient();
+
+    const result = await firstValueFrom(this.proxy.loadPages('Clinical'));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      console.log("pn: ",i.pageName, 'pv: ',i.userActivePage)
+      if(i.pageName === 'Add Patient'){
+        this.adp = i.pageName;
+        this.adb = i.userActivePage;
+      }
+      if(i.pageName === 'Assign Dr'){
+        this.drp = i.pageName;
+        this.drb = i.userActivePage;
+      }
+      if(i.pageName === 'Vitals'){
+        this.vp = i.pageName;
+        this.vpb = i.userActivePage;
+      }
+      if(i.pageName === 'Edit Patient'){
+        this.ep = i.pageName;
+        this.epb = i.userActivePage;
+      }
+      if(i.pageName === 'Admission'){
+        this.adm = i.pageName;
+        this.admb = i.userActivePage;
+      }
+      if(i.pageName === 'Delete Patient'){
+        this.delp = i.pageName;
+        this.delpb = i.userActivePage;
+      }
+        
+    }
   }
 
   initPatient(){
@@ -47,7 +87,7 @@ export class PatientComponent implements OnInit {
     this.patientForm.patchValue({});
     this.pageView.resetToCreateView();
   }
-
+  
   resetVitalForm(){
     this.vitalComponent.resetForm();
   }
@@ -56,7 +96,6 @@ export class PatientComponent implements OnInit {
     const gender = await firstValueFrom(this.lookupService.gender());
     const pc = await firstValueFrom(this.lookupService.patientCategory());
     const idType = await firstValueFrom(this.lookupService.idType());
-    const empData = await firstValueFrom(this.lookupService.employee());
 
     this.genderList = gender.data;
     this.patientCategoryList = pc.data;

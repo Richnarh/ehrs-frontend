@@ -6,7 +6,7 @@
   
           <div class="clearfix">
             <div class="float-end mb-2">
-              <a href="javascript:void(0)" title="New Patient" (click)="initPatient()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
+              <a *ngIf="adp === 'Add Patient' && adb" href="javascript:void(0)" title="New Patient" (click)="initPatient()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
             </div>
           </div>
   
@@ -45,11 +45,11 @@
                         Choose...
                       </button>
                       <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editPatient(patient)">Edit</a></li>
-                        <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="takeVitals(patient)">Take Vitals</a></li>
-                        <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="admission(patient)" data-bs-toggle="modal" data-bs-target="#admission">Admissions</a></li>
-                        <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="assignDr(patient)" data-bs-toggle="modal" data-bs-target="#assignDr">Assign to Dr</a></li>
-                        <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deletePatient(patient.id)">Delete</a></li>
+                        <li *ngIf="ep === 'Edit Patient' && epb"><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editPatient(patient)">Edit</a></li>
+                        <li *ngIf="vp === 'Vitals' && vpb"><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="takeVitals(patient)">Take Vitals</a></li>
+                        <li *ngIf="adm === 'Admission' && admb"><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="admission(patient)" data-bs-toggle="modal" data-bs-target="#admission">Admissions</a></li>
+                        <li *ngIf="drp === 'Assign Dr' && drb"><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="assignDr(patient)" data-bs-toggle="modal" data-bs-target="#assignDr">Assign to Dr</a></li>
+                        <li *ngIf="delp === 'Delete Patient' && delpb"><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deletePatient(patient.id)">Delete</a></li>
                       </ul>
                     </div>
                   </td>
