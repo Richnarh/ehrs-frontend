@@ -5,8 +5,8 @@
       <div class="card-body">
 
         <div class="clearfix">
-          <div class="float-end mb-2" style="padding: 5px; border: 1px solid;">
-            <add-new-button (click)="initEmployee()" label="New Employee"></add-new-button>
+          <div class="float-end mb-2">
+            <a *ngIf="ade === 'Add Employee' && adeb" href="javascript:void(0)" title="New Employee" (click)="initEmployee()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
           </div>
         </div>
 
@@ -51,8 +51,8 @@
                       Choose...
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" type="button" (click)="editEmployee(emp)">Edit</a></li>
-                      <li><a class="dropdown-item text-danger" type="button" (click)="deleteEmployee(emp.id)">Delete</a></li>
+                      <li *ngIf="edit === 'Edit Employee' && editb"><a class="dropdown-item" type="button" (click)="editEmployee(emp)">Edit</a></li>
+                      <li *ngIf="del === 'Delete Employee' && delb"><a class="dropdown-item text-danger" type="button" (click)="deleteEmployee(emp.id)">Delete</a></li>
                     </ul>
                   </div>
                 </td>

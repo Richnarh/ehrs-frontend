@@ -6,7 +6,7 @@
             
           <div class="clearfix">
             <div class="float-end">
-                <a href="javascript:void(0)" title="Add New Prescription" (click)="initiatePrecription()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
+                <a *ngIf="ad === 'Add Dispensary' && adb" href="javascript:void(0)" title="Add New Prescription" (click)="initiatePrecription()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
             </div>
           </div>
   
@@ -37,8 +37,8 @@
                         Choose...
                       </button>
                       <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" type="button" (click)="editPrescription(prescription)">Edit</a></li>
-                        <li><a class="dropdown-item text-danger" type="button" (click)="deletePrescription(prescription.id)">Delete</a></li>
+                        <li *ngIf="edit === 'Edit Dispensary' && editb"><a class="dropdown-item" type="button" (click)="editPrescription(prescription)">Edit</a></li>
+                        <li *ngIf="delv === 'Delete Dispensary' && delvb"><a class="dropdown-item text-danger" type="button" (click)="deletePrescription(prescription.id)">Delete</a></li>
                       </ul>
                     </div>
                   </td>

@@ -13,7 +13,7 @@ import { SweetMessage } from 'src/app/utils/sweet-message';
 export class PatientSearchComponent implements OnInit {
   patientSearchList:Patient[]=[];
   selectedPatient:Patient;
-  opdSearchField:any="00024423DA";
+  opdSearchField:any;
   isLoaded:boolean = false;
 
   constructor(private patientService:PatientService,private eventProxyService: EventProxyService) { }

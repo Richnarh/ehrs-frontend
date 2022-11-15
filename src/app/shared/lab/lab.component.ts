@@ -6,6 +6,7 @@ import { PatientService } from 'src/app/patient/services/patient.service';
 import { LookupItem } from 'src/app/payload/lookupItem';
 import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { LookupService } from 'src/app/services/lookup.service';
+import { AppModules } from 'src/app/services/modules';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
@@ -29,10 +30,15 @@ export class LabComponent implements OnInit {
   labList:LookupItem[];
   testResult:any;
 
+  pages:any;
+  edit:string;editb:boolean;
+  delv:string;delvb:boolean;
+  ad:string;adb:boolean;
+
   labTestForm: FormGroup;
   constructor(private fb:FormBuilder, private patientService:PatientService, private toast:ToastService, private lookupService:LookupService,private eventProxyService: EventProxyService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.formSetup();
     this.initLookups();
     this.eventProxyService.getEventSubject().subscribe((param: any) => {
@@ -40,6 +46,23 @@ export class LabComponent implements OnInit {
         this.setData(param);
       }
     });
+
+    const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.DR_ACTIVITY));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      if(i.pageName === 'Edit Lab'){
+        this.edit = i.pageName;
+        this.editb = i.userActivePage;
+      }
+      if(i.pageName === 'Add Lab'){
+        this.ad = i.pageName;
+        this.adb = i.userActivePage;
+      }
+      if(i.pageName === 'Delete Lab'){
+        this.delv = i.pageName;
+        this.delvb = i.userActivePage;
+      }
+    }
   }
   initiateLabTest(){
     this.labTestForm.reset();

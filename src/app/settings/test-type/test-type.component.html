@@ -12,7 +12,7 @@
             <textarea formControlName="description" type="text" class="form-control"></textarea>
         </div>
     </div>
-      <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+      <button *ngIf="ad === 'Add Test Type' && adb" type="submit" class="btn btn-success btn-sm">Save Changes</button>
       <button type="button" class="btn btn-light btn-sm" (click)="resetForm()">Clear Form</button>
 </form>
 <hr>
@@ -32,8 +32,8 @@
           <td>{{testType.testTypeName}}</td>
           <td>{{testType.description}}</td>
           <td>
-            <button class="btn btn-primary btn-sm mx-2" (click)="editTestType(testType)">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm" (click)="deleteTestType(testType.id)">Delete</button>
+            <button *ngIf="edit === 'Edit Test Type' && editb" class="btn btn-primary btn-sm mx-2" (click)="editTestType(testType)">Edit</button>
+            <button *ngIf="delv === 'Delete Test Type' && delvb"  type="button" class="btn btn-danger btn-sm" (click)="deleteTestType(testType.id)">Delete</button>
           </td>
         </tr>
     </table>

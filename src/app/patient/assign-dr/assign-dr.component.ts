@@ -2,7 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
+import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { LookupService } from 'src/app/services/lookup.service';
+import { AppModules } from 'src/app/services/modules';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 import { AssignDr, Patient } from '../payload/patient';
@@ -21,16 +23,32 @@ export class AssignDrComponent implements OnInit {
 
   assignDrForm:FormGroup;
 
-  constructor(private readonly patientService:PatientService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
+  pages:any;
+  edit:string;editb:boolean;
+  delv:string;delvb:boolean;
 
-  ngOnInit(): void {
+  constructor(private eventProxyService: EventProxyService, private patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
+
+  async ngOnInit(): Promise<void> {
     this.setupAssignDrForm();
     this.initLookups();
+
+    const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.CLINICAL));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      if(i.pageName === 'Edit Assign Dr'){
+        this.edit = i.pageName;
+        this.editb = i.userActivePage;
+      }
+      if(i.pageName === 'Delete Assign Dr'){
+        this.delv = i.pageName;
+        this.delvb = i.userActivePage;
+      }
+    }
   }
 
   async initLookups(){
     const empData = await firstValueFrom(this.lookupService.employee());
-
     this.employeeList = empData.data;
   }
 

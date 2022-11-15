@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
+import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { LookupService } from 'src/app/services/lookup.service';
+import { AppModules } from 'src/app/services/modules';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
@@ -29,14 +31,35 @@ export class LabResultComponent implements OnInit {
 
   searchDate:any = null;
   // searchDate:string = new Date().toJSON().slice(0,10).replace(/-/g,'-');
-  textSearchField:any="00024423DA"
+  textSearchField:any;
+  pages:any;
+  edit:string;editb:boolean;
+  delv:string;delvb:boolean;
+  ad:string;adb:boolean;
 
   labResultForm:FormGroup;
-  constructor(private patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
+  constructor(private eventProxyService: EventProxyService, private patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.setupLabResultForm();
     this.initLookups();
+
+    const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.DR_ACTIVITY));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      if(i.pageName === 'Edit Lab Result'){
+        this.edit = i.pageName;
+        this.editb = i.userActivePage;
+      }
+      if(i.pageName === 'Add Lab Result'){
+        this.ad = i.pageName;
+        this.adb = i.userActivePage;
+      }
+      if(i.pageName === 'Delete Lab Result'){
+        this.delv = i.pageName;
+        this.delvb = i.userActivePage;
+      }
+    }
   }
 
   async searchData(){

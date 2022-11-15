@@ -12,7 +12,7 @@
             <textarea formControlName="description" type="text" class="form-control"></textarea>
         </div>
     </div>
-      <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+      <button *ngIf="ad === 'Add Job Role' && adb" type="submit" class="btn btn-success btn-sm">Save Changes</button>
       <button type="button" class="btn btn-light btn-sm" (click)="resetForm()">Clear Form</button>
 </form>
 <hr>
@@ -32,8 +32,8 @@
           <td>{{jobRole.roleName}}</td>
           <td>{{jobRole.description}}</td>
           <td>
-            <button class="btn btn-primary btn-sm mx-2" (click)="editJobRole(jobRole)">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm" (click)="deleteJobRole(jobRole.id)">Delete</button>
+            <button *ngIf="edit === 'Edit Job Role' && editb" class="btn btn-primary btn-sm mx-2" (click)="editJobRole(jobRole)">Edit</button>
+            <button *ngIf="delv === 'Delete Job Role' && delvb" type="button" class="btn btn-danger btn-sm" (click)="deleteJobRole(jobRole.id)">Delete</button>
           </td>
         </tr>
     </table>

@@ -21,7 +21,7 @@
           </select>
         </div>
       </div>
-      <button type="submit" class="btn btn-success btn-sm mx-2">Save Changes</button>
+      <button *ngIf="ad === 'Add Department' && adb" type="submit" class="btn btn-success btn-sm mx-2">Save Changes</button>
       <button type="button" class="btn btn-light btn-sm" (click)="resetForm()">Clear Form</button>
 </form>
 <hr>
@@ -43,8 +43,8 @@
           <td>{{dept.departmentName}}</td>
           <td>{{dept.hodName}}</td>
           <td>
-            <button class="btn btn-primary btn-sm mx-2" (click)="editDepartment(dept)">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm" (click)="deleteDepartment(dept.id)">Delete</button>
+            <button *ngIf="edit === 'Edit Department' && editb" class="btn btn-primary btn-sm mx-2" (click)="editDepartment(dept)">Edit</button>
+            <button *ngIf="delv === 'Delete Department' && delvb" type="button" class="btn btn-danger btn-sm" (click)="deleteDepartment(dept.id)">Delete</button>
           </td>
         </tr>
     </table>

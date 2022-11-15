@@ -59,7 +59,7 @@
                     <textarea rows="7" formControlName="testResult" class="form-control"></textarea>
                 </div>
                 <div class="justify-content-center">
-                  <button type="submit" class="btn btn-success btn-sm">Save Changes</button>
+                  <button *ngIf="ad === 'Add Lab Result' && adb" type="submit" class="btn btn-success btn-sm">Save Changes</button>
                 </div>
               </form>
             </div>

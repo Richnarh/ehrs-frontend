@@ -5,8 +5,8 @@
         <div class="card-body">
   
           <div class="clearfix">
-            <div class="float-end mb-2" style="padding: 5px; border: 1px solid;">
-              <add-new-button (click)="initInventory()" label="New Inventory"></add-new-button>
+            <div class="float-end mb-2">
+              <a *ngIf="ad === 'Add Inventory' && adb" href="javascript:void(0)" title="New Inventory" (click)="initInventory()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
             </div>
           </div>
   
@@ -41,8 +41,8 @@
                         Choose...
                       </button>
                       <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editInventory(inventory)">Edit</a></li>
-                        <li><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteInventory(inventory.id)">Delete</a></li>
+                        <li *ngIf="edit === 'Edit Inventory' && editb"><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editInventory(inventory)">Edit</a></li>
+                        <li *ngIf="delv === 'Delete Inventory' && delvb"><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deleteInventory(inventory.id)">Delete</a></li>
                       </ul>
                     </div>
                   </td>

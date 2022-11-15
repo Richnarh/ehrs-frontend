@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { Frequency } from 'src/app/payload/config';
+import { EventProxyService } from 'src/app/services/event-proxy.service';
+import { AppModules } from 'src/app/services/modules';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 import { ConfigService } from '../services/config.service';
@@ -15,11 +17,34 @@ export class FrequencyComponent implements OnInit {
   frequencyForm:FormGroup;
   frequency:Frequency;
   frequencyList:Frequency[];
-  constructor(private readonly fb:FormBuilder, private readonly configService:ConfigService, private readonly toast:ToastService) { }
 
-  ngOnInit(): void {
+  pages:any;
+  edit:string;editb:boolean;
+  delv:string;delvb:boolean;
+  ad:string;adb:boolean;
+
+  constructor(private eventProxyService: EventProxyService, private fb:FormBuilder, private configService:ConfigService, private toast:ToastService) { }
+
+  async ngOnInit(): Promise<void> {
     this.setupFrequencyForm();
     this.fetchFrequency();
+    
+    const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.SETTINGS));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      if(i.pageName === 'Edit Frequency'){
+        this.edit = i.pageName;
+        this.editb = i.userActivePage;
+      }
+      if(i.pageName === 'Add Frequency'){
+        this.ad = i.pageName;
+        this.adb = i.userActivePage;
+      }
+      if(i.pageName === 'Delete Frequency'){
+        this.delv = i.pageName;
+        this.delvb = i.userActivePage;
+      }
+    }
   }
 
   async saveFrequency(){

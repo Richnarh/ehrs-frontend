@@ -8,6 +8,8 @@ import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 import { PatientService } from "./../../patient/services/patient.service";
 import { Billing } from "./../../patient/payload/patient";
+import { EventProxyService } from 'src/app/services/event-proxy.service';
+import { AppModules } from 'src/app/services/modules';
 
 @Component({
   selector: 'app-billing',
@@ -23,15 +25,37 @@ export class BillingComponent implements OnInit {
   billings:Billing[];
   patientList:LookupItem[];
   
-  opdSearchField:any="00024423DA";
+  opdSearchField:any;
   otherBill:number=0.0;
   totalBill:number=0.0;
   searchDate:string = new Date().toJSON().slice(0,10).replace(/-/g,'-');
 
-  constructor(private patientService:PatientService, private toast:ToastService,private lookupService:LookupService,) { }
+  pages:any;
+  edit:string;editb:boolean;
+  delv:string;delvb:boolean;
+  ad:string;adb:boolean;
 
-  ngOnInit(): void {
+  constructor( private eventProxyService: EventProxyService, private patientService:PatientService, private toast:ToastService,private lookupService:LookupService,) { }
+
+  async ngOnInit(): Promise<void> {
     this.initLookups();
+
+    const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.BILLING));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      if(i.pageName === 'Edit Billing'){
+        this.edit = i.pageName;
+        this.editb = i.userActivePage;
+      }
+      if(i.pageName === 'Add Billing'){
+        this.ad = i.pageName;
+        this.adb = i.userActivePage;
+      }
+      if(i.pageName === 'Delete Billing'){
+        this.delv = i.pageName;
+        this.delvb = i.userActivePage;
+      }
+    }
   }
 
   async loadBillings(){

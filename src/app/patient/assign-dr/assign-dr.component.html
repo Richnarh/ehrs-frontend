@@ -42,8 +42,8 @@
               <td>{{dr.doctor}}</td>
               <td>{{dr.note}}</td>
               <td>
-                <button class="btn btn-primary btn-sm mx-2" (click)="editAssignDr(dr)">Edit</button>
-                <button type="button" class="btn btn-danger btn-sm" (click)="deleteAssignDr(dr.id)">Delete</button>
+                <button *ngIf="edit === 'Edit Assign Dr' && editb" class="btn btn-primary btn-sm mx-2" (click)="editAssignDr(dr)">Edit</button>
+                <button *ngIf="delv === 'Delete Assign Dr' && delvb" type="button" class="btn btn-danger btn-sm" (click)="deleteAssignDr(dr.id)">Delete</button>
               </td>
             </tr>
         </table>

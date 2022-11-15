@@ -3,6 +3,7 @@ import { firstValueFrom } from 'rxjs';
 import { Patient, PatientVital } from 'src/app/patient/payload/patient';
 import { PatientService } from 'src/app/patient/services/patient.service';
 import { EventProxyService } from 'src/app/services/event-proxy.service';
+import { AppModules } from 'src/app/services/modules';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
@@ -19,12 +20,28 @@ export class PatientVitalComponent implements OnInit {
   
   pageView:PageView = PageView.listView();
 
+  pages:any;
+  ev:string;evb:boolean;
+  delv:string;delvb:boolean;
+
   constructor(
     private patientVitalService:PatientService, 
     private toast:ToastService,
     private eventProxyService: EventProxyService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.CLINICAL));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      if(i.pageName === '	Edit Vitals'){
+        this.ev = i.pageName;
+        this.evb = i.userActivePage;
+      }
+      if(i.pageName === 'Delete Vitals'){
+        this.delv = i.pageName;
+        this.delvb = i.userActivePage;
+      }
+    }
   }
 
   initiateLabTest(){

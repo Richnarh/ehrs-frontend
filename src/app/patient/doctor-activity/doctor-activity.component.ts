@@ -18,7 +18,7 @@ export class DoctorActivityComponent implements OnInit {
   
   selectedPatient:Patient;
   patientSearchList:Patient[]=[];
-  opdSearchField:any="00024423DA";
+  opdSearchField:any;
   isLoaded:boolean = false;
 
   prescriptionList:Prescription[];

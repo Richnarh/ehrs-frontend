@@ -5,7 +5,7 @@
             <input formControlName="wardName" type="text" class="form-control">
         </div>
     </div>
-      <button type="submit" class="btn btn-success btn-sm mx-2">Save Changes</button>
+      <button *ngIf="ad === 'Room Type' && adb" type="submit" class="btn btn-success btn-sm mx-2">Save Changes</button>
       <button type="button" class="btn btn-light btn-sm" (click)="resetForm()">Clear Form</button>
 </form>
 <hr>
@@ -23,8 +23,8 @@
           <td scope="row">{{i+1}}</td>
           <td>{{roomType.wardName}}</td>
           <td>
-            <button class="btn btn-primary btn-sm mx-2" (click)="editRoomType(roomType)">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm" (click)="deleteRoomType(roomType.id)">Delete</button>
+            <button *ngIf="edit === 'Edit Room Type' && editb" class="btn btn-primary btn-sm mx-2" (click)="editRoomType(roomType)">Edit</button>
+            <button *ngIf="delv === 'Delete Room Type' && delvb" type="button" class="btn btn-danger btn-sm" (click)="deleteRoomType(roomType.id)">Delete</button>
           </td>
         </tr>
     </table>

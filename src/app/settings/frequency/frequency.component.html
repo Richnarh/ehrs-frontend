@@ -6,7 +6,7 @@
             <small *ngIf="field.frequencyName.invalid && field.frequencyName.touched" class="text-danger font-weight-bold"> * This field is required</small>
         </div>
     </div>
-      <button type="submit" class="btn btn-success btn-sm mx-2">Save Changes</button>
+      <button *ngIf="ad === 'Add Frequency' && adb" type="submit" class="btn btn-success btn-sm mx-2">Save Changes</button>
       <button type="button" class="btn btn-light btn-sm" (click)="resetForm()">Clear Form</button>
 </form>
 <hr>
@@ -24,8 +24,8 @@
           <td scope="row">{{i+1}}</td>
           <td>{{frequency.frequencyName}}</td>
           <td>
-            <button class="btn btn-primary btn-sm mx-2" (click)="editFrequency(frequency)">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm" (click)="deleteFrequency(frequency.id)">Delete</button>
+            <button *ngIf="edit === 'Edit Frequency' && editb" class="btn btn-primary btn-sm mx-2" (click)="editFrequency(frequency)">Edit</button>
+            <button *ngIf="delv === 'Delete Frequency' && delvb" type="button" class="btn btn-danger btn-sm" (click)="deleteFrequency(frequency.id)">Delete</button>
           </td>
         </tr>
     </table>

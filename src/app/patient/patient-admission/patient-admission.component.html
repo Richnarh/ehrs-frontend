@@ -41,8 +41,8 @@
                               Choose...
                             </button>
                             <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" type="button" (click)="editPatientAdmission(admission)">Edit</a></li>
-                              <li><a class="dropdown-item text-danger" type="button" (click)="deletePatientAdmission(admission.id)">Delete</a></li>
+                              <li *ngIf="edit === 'Edit Admission' && editb"><a class="dropdown-item" type="button" (click)="editPatientAdmission(admission)">Edit</a></li>
+                              <li *ngIf="delv === 'DeleteAdmission' && delvb"><a class="dropdown-item text-danger" type="button" (click)="deletePatientAdmission(admission.id)">Delete</a></li>
                             </ul>
                           </div>
                         </td>

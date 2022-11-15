@@ -3,6 +3,7 @@ import { firstValueFrom } from 'rxjs';
 import { Patient, PatientVital } from 'src/app/patient/payload/patient';
 import { PatientService } from 'src/app/patient/services/patient.service';
 import { EventProxyService } from 'src/app/services/event-proxy.service';
+import { AppModules } from 'src/app/services/modules';
 import { PageView } from 'src/app/utils/page-view';
 
 @Component({
@@ -14,15 +15,28 @@ export class DiagnosisComponent implements OnInit {
   vitalList:PatientVital[];
   selectedPatient: Patient;
 
+  pages:any;
+  vp:string;vpb:boolean;
+
   pageView:PageView = PageView.listView();
   constructor(private readonly patientService:PatientService, private readonly eventProxyService: EventProxyService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.eventProxyService.getEventSubject().subscribe((param: any) => {
       if (param !== undefined) {
         this.setData(param);
       }
     });
+
+    const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.CLINICAL));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      if(i.pageName === 'Add Vital'){
+        this.vp = i.pageName;
+        this.vpb = i.userActivePage;
+      }
+        
+    }
   }
 
   initVital(){

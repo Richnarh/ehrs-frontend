@@ -36,8 +36,8 @@
                 Choose...
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" type="button" (click)="editPatientVital(vital)" data-bs-toggle="modal" data-bs-target="#vitalModal">Edit</a></li>
-                <li><a class="dropdown-item text-danger" type="button" (click)="deletePatientVital(vital.id)">Delete</a></li>
+                <li *ngIf="ev === 'Edit Vitals' && evb"><a class="dropdown-item" type="button" (click)="editPatientVital(vital)" data-bs-toggle="modal" data-bs-target="#vitalModal">Edit</a></li>
+                <li *ngIf="delv === 'Delete Vitals' && delvb"><a class="dropdown-item text-danger" type="button" (click)="deletePatientVital(vital.id)">Delete</a></li>
               </ul>
             </div>
           </td>

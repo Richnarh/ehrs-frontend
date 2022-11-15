@@ -21,7 +21,7 @@
           </select>
         </div>
       </div>
-      <button type="submit" class="btn btn-success btn-sm mx-2">Save Changes</button>
+      <button *ngIf="ad === 'Add Lab' && adb" type="submit" class="btn btn-success btn-sm mx-2">Save Changes</button>
       <button type="button" class="btn btn-light btn-sm" (click)="resetForm()">Clear Form</button>
 </form>
 <hr>
@@ -43,8 +43,8 @@
           <td>{{lab.unitName}}</td>
           <td>{{lab.unitHeadName}}</td>
           <td>
-            <button class="btn btn-primary btn-sm mx-2" (click)="editLab(lab)">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm" (click)="deleteLab(lab.id)">Delete</button>
+            <button *ngIf="edit === 'Edit Lab' && editb" class="btn btn-primary btn-sm mx-2" (click)="editLab(lab)">Edit</button>
+            <button *ngIf="delv === 'Delete Lab' && delvb" type="button" class="btn btn-danger btn-sm" (click)="deleteLab(lab.id)">Delete</button>
           </td>
         </tr>
     </table>

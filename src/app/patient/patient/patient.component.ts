@@ -4,6 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
 import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { LookupService } from 'src/app/services/lookup.service';
+import { AppModules } from 'src/app/services/modules';
 import { VitalFormComponent } from 'src/app/shared/vital-form/vital-form.component';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
@@ -50,10 +51,9 @@ export class PatientComponent implements OnInit {
     this.initLookups();
     this.fetchPatient();
 
-    const result = await firstValueFrom(this.proxy.loadPages('Clinical'));
+    const result = await firstValueFrom(this.proxy.loadPages(AppModules.CLINICAL));
     this.pages = result.data[0]["userPageData"];
     for(let i of this.pages){
-      console.log("pn: ",i.pageName, 'pv: ',i.userActivePage)
       if(i.pageName === 'Add Patient'){
         this.adp = i.pageName;
         this.adb = i.userActivePage;
@@ -62,7 +62,7 @@ export class PatientComponent implements OnInit {
         this.drp = i.pageName;
         this.drb = i.userActivePage;
       }
-      if(i.pageName === 'Vitals'){
+      if(i.pageName === 'Add Vital'){
         this.vp = i.pageName;
         this.vpb = i.userActivePage;
       }

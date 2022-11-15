@@ -9,7 +9,7 @@
     </div>
     <div class="search-bar">
       <div class="search-form d-flex align-items-center" >
-        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#patient-search">Search Patient</a>
+        <a *ngIf="search === 'Patient Search' && searchb" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#patient-search">Search Patient</a>
       </div>
     </div>
     <nav class="header-nav ms-auto">

@@ -2,7 +2,7 @@
     
     <div class="clearfix">
       <div class="float-end">
-        <a href="javascript:void(0)" title="Add New Vital" (click)="initVital()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
+        <a *ngIf="vp === 'Add Vital' && vpb" href="javascript:void(0)" title="Add New Vital" (click)="initVital()"><i style="font-size: 25px;" class="bi ri-add-circle-fill"></i></a>
       </div>
     </div>
     <app-patient-vital [vitalList]="vitalList"></app-patient-vital>

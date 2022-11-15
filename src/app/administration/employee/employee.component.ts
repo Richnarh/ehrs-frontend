@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
+import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { LookupService } from 'src/app/services/lookup.service';
+import { AppModules } from 'src/app/services/modules';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
@@ -17,7 +19,7 @@ import { AdminService } from '../services/admin.service';
 export class EmployeeComponent implements OnInit {
   pageView:PageView = PageView.listView();
 
-  constructor(private readonly adminService:AdminService, private readonly toast:ToastService,private readonly fb:FormBuilder,private lookupService:LookupService,) { }
+  constructor(private eventProxyService: EventProxyService, private adminService:AdminService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
 
   employeeForm:FormGroup;
   employee:Employee;
@@ -29,10 +31,32 @@ export class EmployeeComponent implements OnInit {
   titleList:LookupItem[];
   errorMessage="This field is required";
 
-  ngOnInit(): void {
+  pages:any;
+  ade:string;adeb:boolean;
+  edit:string;editb:boolean;
+  del:string;delb:boolean;
+
+  async ngOnInit(): Promise<void> {
     this.setupEmployeeForm();
     this.initLookups();
     this.fetEmployees();
+
+    const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.EMPLOYEE));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      if(i.pageName === 'Add Employee'){
+        this.ade = i.pageName;
+        this.adeb = i.userActivePage;
+      }
+      if(i.pageName === 'Edit Employee'){
+        this.edit = i.pageName;
+        this.editb = i.userActivePage;
+      }
+      if(i.pageName === 'Delete Employee'){
+        this.del = i.pageName;
+        this.delb = i.userActivePage;
+      }
+    }
   }
 
   initEmployee(){

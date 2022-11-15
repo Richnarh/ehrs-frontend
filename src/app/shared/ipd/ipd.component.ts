@@ -6,6 +6,7 @@ import { PatientService } from 'src/app/patient/services/patient.service';
 import { LookupItem } from 'src/app/payload/lookupItem';
 import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { LookupService } from 'src/app/services/lookup.service';
+import { AppModules } from 'src/app/services/modules';
 import { PageView } from 'src/app/utils/page-view';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
@@ -22,10 +23,15 @@ export class IpdComponent implements OnInit {
   labList:LookupItem[];
   patientList:LookupItem[];
 
-  patientAddmissionForm:FormGroup;
-  constructor(private patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService, private readonly eventProxyService: EventProxyService) { }
+  pages:any;
+  edit:string;editb:boolean;
+  delv:string;delvb:boolean;
+  ad:string;adb:boolean;
 
-  ngOnInit(): void {
+  patientAddmissionForm:FormGroup;
+  constructor(private patientService:PatientService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService, private eventProxyService: EventProxyService) { }
+
+  async ngOnInit(): Promise<void> {
     this.setupAdmissionForm();
     this.initLookups();
 
@@ -34,6 +40,23 @@ export class IpdComponent implements OnInit {
         this.setData(param);
       }
     });
+
+    const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.DR_ACTIVITY));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      if(i.pageName === 'Edit IPD'){
+        this.edit = i.pageName;
+        this.editb = i.userActivePage;
+      }
+      if(i.pageName === 'Add IPD'){
+        this.ad = i.pageName;
+        this.adb = i.userActivePage;
+      }
+      if(i.pageName === 'Delete IPD'){
+        this.delv = i.pageName;
+        this.delvb = i.userActivePage;
+      }
+    }
   }
 
   async setData(patientData:Patient){

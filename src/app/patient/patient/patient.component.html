@@ -46,7 +46,7 @@
                       </button>
                       <ul class="dropdown-menu">
                         <li *ngIf="ep === 'Edit Patient' && epb"><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="editPatient(patient)">Edit</a></li>
-                        <li *ngIf="vp === 'Vitals' && vpb"><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="takeVitals(patient)">Take Vitals</a></li>
+                        <li *ngIf="vp === 'Add Vital' && vpb"><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="takeVitals(patient)">Take Vitals</a></li>
                         <li *ngIf="adm === 'Admission' && admb"><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="admission(patient)" data-bs-toggle="modal" data-bs-target="#admission">Admissions</a></li>
                         <li *ngIf="drp === 'Assign Dr' && drb"><a href="javascript:void(0)" class="dropdown-item" type="button" (click)="assignDr(patient)" data-bs-toggle="modal" data-bs-target="#assignDr">Assign to Dr</a></li>
                         <li *ngIf="delp === 'Delete Patient' && delpb"><a href="javascript:void(0)" class="dropdown-item text-danger" type="button" (click)="deletePatient(patient.id)">Delete</a></li>

@@ -4,6 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { LookupItem } from 'src/app/payload/lookupItem';
 import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { LookupService } from 'src/app/services/lookup.service';
+import { AppModules } from 'src/app/services/modules';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 import { Patient, Prescription } from '../payload/patient';
@@ -23,10 +24,15 @@ export class PrescriptionComponent implements OnInit {
   inventoryList:LookupItem[];
   frequencyList:LookupItem[];
 
+  pages:any;
+  edit:string;editb:boolean;
+  delv:string;delvb:boolean;
+  ad:string;adb:boolean;
+
   prescriptionForm: FormGroup;
   constructor(private fb:FormBuilder, private patientService:PatientService, private toast:ToastService, private lookupService:LookupService,private eventProxyService: EventProxyService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.formSetup();
     this.initLookups();
     this.eventProxyService.getEventSubject().subscribe((param: any) => {
@@ -34,6 +40,23 @@ export class PrescriptionComponent implements OnInit {
         this.setData(param);
       }
     });
+
+    const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.DR_ACTIVITY));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      if(i.pageName === 'Edit Prescription'){
+        this.edit = i.pageName;
+        this.editb = i.userActivePage;
+      }
+      if(i.pageName === 'Add Prescription'){
+        this.ad = i.pageName;
+        this.adb = i.userActivePage;
+      }
+      if(i.pageName === 'Delete Prescription'){
+        this.delv = i.pageName;
+        this.delvb = i.userActivePage;
+      }
+    }
   }
   async setData(patientData:Patient){
     this.prescriptionList = [];

@@ -35,7 +35,7 @@
 
             <div class="justify-content-center">
               <p>Bill: <span class="badge bg-primary badge-number">GHS: {{totalBill}}</span></p>
-                <button type="button" (click)="saveBilling()" class="btn btn-success btn-sm">Save Changes</button>
+                <button *ngIf="ad === 'Add Billing' && adb" type="button" (click)="saveBilling()" class="btn btn-success btn-sm">Save Changes</button>
               </div>
           </div>
         </div>
