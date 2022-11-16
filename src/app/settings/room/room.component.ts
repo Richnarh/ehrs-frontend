@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { Room } from 'src/app/payload/config';
 import { LookupItem } from 'src/app/payload/lookupItem';
+import { EventProxyService } from 'src/app/services/event-proxy.service';
 import { LookupService } from 'src/app/services/lookup.service';
+import { AppModules } from 'src/app/services/modules';
 import { SweetMessage } from 'src/app/utils/sweet-message';
 import { ToastService } from 'src/app/utils/toast-service';
 import { ConfigService } from '../services/config.service';
@@ -17,13 +19,37 @@ export class RoomComponent implements OnInit {
   roomForm:FormGroup;
   roomTypeList:LookupItem[];
   roomList:Room[];
-  constructor(private readonly fb:FormBuilder, private readonly configService:ConfigService, private readonly lookupService:LookupService, private readonly toast:ToastService) { }
 
-  ngOnInit(): void {
+  pages:any;
+  edit:string;editb:boolean;
+  delv:string;delvb:boolean;
+  ad:string;adb:boolean;
+
+  constructor(private eventProxyService: EventProxyService,private readonly fb:FormBuilder, private readonly configService:ConfigService, private readonly lookupService:LookupService, private readonly toast:ToastService) { }
+
+  async ngOnInit(): Promise<void> {
     this.setupDeptForm();
     this.initLookups();
 
     this.fetchRoom();
+
+    
+    const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.SETTINGS));
+    this.pages = result.data[0]["userPageData"];
+    for(let i of this.pages){
+      if(i.pageName === 'Edit Ward'){
+        this.edit = i.pageName;
+        this.editb = i.userActivePage;
+      }
+      if(i.pageName === 'Add Ward'){
+        this.ad = i.pageName;
+        this.adb = i.userActivePage;
+      }
+      if(i.pageName === 'Delete Ward'){
+        this.delv = i.pageName;
+        this.delvb = i.userActivePage;
+      }
+    }
   }
 
   async initLookups(){

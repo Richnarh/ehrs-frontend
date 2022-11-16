@@ -23,7 +23,7 @@
             <textarea formControlName="description" type="text" class="form-control"></textarea>
         </div>
     </div>
-      <button type="submit" class="btn btn-success btn-sm mx-2">Save Changes</button>
+      <button *ngIf="ad === 'Add Ward' && adb" type="submit" class="btn btn-success btn-sm mx-2">Save Changes</button>
       <button type="button" class="btn btn-light btn-sm" (click)="resetForm()">Clear Form</button>
 </form>
 <hr>
@@ -45,8 +45,8 @@
           <td>{{room.wardTypeName}}</td>
           <td>{{room.description}}</td>
           <td>
-            <button class="btn btn-primary btn-sm mx-2" (click)="editRoom(room)">Edit</button>
-            <button type="button" class="btn btn-danger btn-sm" (click)="deleteRoom(room.id)">Delete</button>
+            <button *ngIf="edit === 'Edit Ward' && editb" class="btn btn-primary btn-sm mx-2" (click)="editRoom(room)">Edit</button>
+            <button *ngIf="delv === 'Delete Ward' && delvb" type="button" class="btn btn-danger btn-sm" (click)="deleteRoom(room.id)">Delete</button>
           </td>
         </tr>
     </table>

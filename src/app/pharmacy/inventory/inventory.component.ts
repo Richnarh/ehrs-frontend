@@ -28,7 +28,7 @@ export class InventoryComponent implements OnInit {
   delv:string;delvb:boolean;
   ad:string;adb:boolean;
   
-  constructor( private eventProxyService: EventProxyService, private pharmacyService:PharmacyService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
+  constructor(private eventProxyService: EventProxyService, private pharmacyService:PharmacyService, private toast:ToastService,private fb:FormBuilder,private lookupService:LookupService,) { }
 
   async ngOnInit(): Promise<void> {
     this.setupinventoryForm();
