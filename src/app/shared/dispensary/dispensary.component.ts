@@ -52,7 +52,7 @@ export class DispensaryComponent implements OnInit {
         this.edit = i.pageName;
         this.editb = i.userActivePage;
       }
-      if(i.pageName === 'Add Complanin'){
+      if(i.pageName === 'Add Complain'){
         this.ad = i.pageName;
         this.adb = i.userActivePage;
       }

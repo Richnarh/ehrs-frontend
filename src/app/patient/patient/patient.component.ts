@@ -70,7 +70,7 @@ export class PatientComponent implements OnInit {
         this.ep = i.pageName;
         this.epb = i.userActivePage;
       }
-      if(i.pageName === 'Admission'){
+      if(i.pageName === 'Add Admission'){
         this.adm = i.pageName;
         this.admb = i.userActivePage;
       }

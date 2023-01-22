@@ -33,7 +33,7 @@ export class PatientVitalComponent implements OnInit {
     const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.CLINICAL));
     this.pages = result.data[0]["userPageData"];
     for(let i of this.pages){
-      if(i.pageName === '	Edit Vitals'){
+      if(i.pageName === 'Edit Vitals'){
         this.ev = i.pageName;
         this.evb = i.userActivePage;
       }

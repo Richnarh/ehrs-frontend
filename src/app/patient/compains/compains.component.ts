@@ -37,11 +37,11 @@ export class CompainsComponent implements OnInit {
     const result = await firstValueFrom(this.eventProxyService.loadPages(AppModules.CLINICAL));
     this.pages = result.data[0]["userPageData"];
     for(let i of this.pages){
-      if(i.pageName === 'Edit Complanin'){
+      if(i.pageName === 'Edit Complain'){
         this.edit = i.pageName;
         this.editb = i.userActivePage;
       }
-      if(i.pageName === 'Add Complanin'){
+      if(i.pageName === 'Add Complain'){
         this.ad = i.pageName;
         this.adb = i.userActivePage;
       }
